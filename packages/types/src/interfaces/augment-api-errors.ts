@@ -701,11 +701,13 @@ declare module '@polkadot/api-base/types/errors' {
       BlockedByMaintenanceMode: AugmentedError<ApiType>;
       CancelRightsExhausted: AugmentedError<ApiType>;
       EmptyUpdate: AugmentedError<ApiType>;
+      InvalidRange: AugmentedError<ApiType>;
       InvalidUpdate: AugmentedError<ApiType>;
       L1AssetCreationFailed: AugmentedError<ApiType>;
       L1AssetNotFound: AugmentedError<ApiType>;
       MathOverflow: AugmentedError<ApiType>;
       MultipleUpdatesInSingleBlock: AugmentedError<ApiType>;
+      NonExistingRequestId: AugmentedError<ApiType>;
       NotEnoughAssets: AugmentedError<ApiType>;
       OnlySelectedSequencerisAllowedToUpdate: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
@@ -714,6 +716,7 @@ declare module '@polkadot/api-base/types/errors' {
       SequencerAwaitingCancelResolution: AugmentedError<ApiType>;
       SequencerLastUpdateStillInDisputePeriod: AugmentedError<ApiType>;
       TooManyRequests: AugmentedError<ApiType>;
+      UnknownAliasAccount: AugmentedError<ApiType>;
       UnsupportedAsset: AugmentedError<ApiType>;
       WrongRequestId: AugmentedError<ApiType>;
       /**
@@ -722,12 +725,15 @@ declare module '@polkadot/api-base/types/errors' {
       [key: string]: AugmentedError<ApiType>;
     };
     sequencerStaking: {
+      AddressInUse: AugmentedError<ApiType>;
+      AliasAccountIsActiveSequencer: AugmentedError<ApiType>;
       CantUnstakeWhileInActiveSet: AugmentedError<ApiType>;
       MathOverflow: AugmentedError<ApiType>;
       MaxSequencersLimitReached: AugmentedError<ApiType>;
       NoStakeToUnStake: AugmentedError<ApiType>;
       NotEnoughSequencerStake: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
+      SequencerAccountIsActiveSequencerAlias: AugmentedError<ApiType>;
       SequencerAlreadyInActiveSet: AugmentedError<ApiType>;
       SequencerIsNotInActiveSet: AugmentedError<ApiType>;
       TestUnstakingError: AugmentedError<ApiType>;

@@ -9,7 +9,7 @@ import type { ApiTypes, AugmentedEvent } from '@polkadot/api-base/types';
 import type { Bytes, Null, Option, Result, Struct, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 import type { H256, Perbill } from '@polkadot/types/interfaces/runtime';
-import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletRolldownMessagesChain, PalletRolldownMessagesRequestId, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
+import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletRolldownBatchSource, PalletRolldownMessagesChain, PalletRolldownMessagesRequestId, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
 
 export type __AugmentedEvent<ApiType extends ApiTypes> = AugmentedEvent<ApiType>;
 
@@ -452,12 +452,14 @@ declare module '@polkadot/api-base/types/events' {
       [key: string]: AugmentedEvent<ApiType>;
     };
     rolldown: {
-      L1ReadCanceled: AugmentedEvent<ApiType, [canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId], { canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId }>;
+      L1ReadCanceled: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId], { chain: PalletRolldownMessagesChain, canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId }>;
       L1ReadStored: AugmentedEvent<ApiType, [ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20, u128, {
     readonly start: u128;
     readonly end: u128;
   } & Struct, H256]>]>;
       RequestProcessedOnL2: AugmentedEvent<ApiType, [PalletRolldownMessagesChain, u128]>;
+      TxBatchCreated: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, source: PalletRolldownBatchSource, assignee: SpRuntimeAccountAccountId20, batchId: u128, range: ITuple<[u128, u128]>], { chain: PalletRolldownMessagesChain, source: PalletRolldownBatchSource, assignee: SpRuntimeAccountAccountId20, batchId: u128, range: ITuple<[u128, u128]> }>;
+      WithdrawlRequestCreated: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, requestId: PalletRolldownMessagesRequestId, recipient: U8aFixed, tokenAddress: U8aFixed, amount: u128, hash_: H256], { chain: PalletRolldownMessagesChain, requestId: PalletRolldownMessagesRequestId, recipient: U8aFixed, tokenAddress: U8aFixed, amount: u128, hash_: H256 }>;
       /**
        * Generic event
        **/
