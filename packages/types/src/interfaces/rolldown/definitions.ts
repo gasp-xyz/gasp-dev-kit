@@ -68,6 +68,51 @@ export default {
         }
       ],
       type: "Option<L1Update>"
+    },
+    get_merkle_root: {
+      description: "",
+      params: [
+        {
+          name: "chain",
+          type: "Chain",
+        },
+        {
+          name: 'range',
+          type: '(u128, u128)',
+        }
+      ],
+      type: "Vec<u8>"
+    },
+    get_merkle_proof: {
+      description: "",
+      params: [
+        {
+          name: "chain",
+          type: "Chain",
+        },
+        {
+          name: 'range',
+          type: '(u128, u128)',
+        },{
+          name: 'tx_id',
+          type: 'u128',
+        }
+      ],
+      type: "Vec<Vec<u8>>"
+    },
+    get_abi_encoded_l2_request: {
+      description: "",
+      params: [
+        {
+          name: "chain",
+          type: "Chain",
+        },
+        {
+          name: 'request_id',
+          type: 'u128',
+        }
+      ],
+      type: "Vec<u8>"
     }
   }
 }
