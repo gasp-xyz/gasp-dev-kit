@@ -548,6 +548,10 @@ declare module '@polkadot/api-base/types/submittable' {
        **/
       forceUpdateL2FromL1: AugmentedSubmittable<(update: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
       /**
+       * See [`Pallet::set_manual_batch_extra_fee`].
+       **/
+      setManualBatchExtraFee: AugmentedSubmittable<(balance: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128]>;
+      /**
        * See [`Pallet::update_l2_from_l1`].
        **/
       updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
