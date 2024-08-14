@@ -450,6 +450,18 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * 
        **/
+      get_abi_encoded_l2_request: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, request_id: u128 | AnyNumber | Uint8Array) => Observable<Bytes>>;
+      /**
+       * 
+       **/
+      get_merkle_proof: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, range: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array], tx_id: u128 | AnyNumber | Uint8Array) => Observable<Vec<Bytes>>>;
+      /**
+       * 
+       **/
+      get_merkle_root: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, range: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array]) => Observable<Bytes>>;
+      /**
+       * 
+       **/
       get_native_sequencer_update: AugmentedRpc<(hex_payload: Text | string, at?: Hash | string | Uint8Array) => Observable<Option<L1Update>>>;
       /**
        * 
