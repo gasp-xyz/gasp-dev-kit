@@ -284,7 +284,9 @@ declare module '@polkadot/types/lookup' {
       readonly amount: u128;
       readonly hash_: H256;
     } & Struct;
-    readonly type: 'L1ReadStored' | 'RequestProcessedOnL2' | 'L1ReadCanceled' | 'TxBatchCreated' | 'WithdrawlRequestCreated';
+    readonly isManualBatchExtraFeeSet: boolean;
+    readonly asManualBatchExtraFeeSet: u128;
+    readonly type: 'L1ReadStored' | 'RequestProcessedOnL2' | 'L1ReadCanceled' | 'TxBatchCreated' | 'WithdrawlRequestCreated' | 'ManualBatchExtraFeeSet';
   }
 
   /** @name PalletRolldownMessagesChain (45) */
@@ -1508,7 +1510,11 @@ declare module '@polkadot/types/lookup' {
       readonly range: ITuple<[u128, u128]>;
       readonly sequencerAccount: Option<SpRuntimeAccountAccountId20>;
     } & Struct;
-    readonly type: 'UpdateL2FromL1' | 'ForceUpdateL2FromL1' | 'CancelRequestsFromL1' | 'ForceCancelRequestsFromL1' | 'Withdraw' | 'CreateBatch';
+    readonly isSetManualBatchExtraFee: boolean;
+    readonly asSetManualBatchExtraFee: {
+      readonly balance: u128;
+    } & Struct;
+    readonly type: 'UpdateL2FromL1' | 'ForceUpdateL2FromL1' | 'CancelRequestsFromL1' | 'ForceCancelRequestsFromL1' | 'Withdraw' | 'CreateBatch' | 'SetManualBatchExtraFee';
   }
 
   /** @name PalletRolldownMessagesL1Update (151) */

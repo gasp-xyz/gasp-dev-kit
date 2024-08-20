@@ -258,8 +258,9 @@ export default {
         recipient: '[u8;20]',
         tokenAddress: '[u8;20]',
         amount: 'u128',
-        hash_: 'H256'
-      }
+        hash_: 'H256',
+      },
+      ManualBatchExtraFeeSet: 'u128'
     }
   },
   /**
@@ -1354,7 +1355,10 @@ export default {
       create_batch: {
         chain: 'PalletRolldownMessagesChain',
         range: '(u128,u128)',
-        sequencerAccount: 'Option<SpRuntimeAccountAccountId20>'
+        sequencerAccount: 'Option<SpRuntimeAccountAccountId20>',
+      },
+      set_manual_batch_extra_fee: {
+        balance: 'u128'
       }
     }
   },

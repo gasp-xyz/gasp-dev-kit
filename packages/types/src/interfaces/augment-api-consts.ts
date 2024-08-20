@@ -331,7 +331,6 @@ declare module '@polkadot/api-base/types/consts' {
     };
     rolldown: {
       disputePeriodLength: u128 & AugmentedConst<ApiType>;
-      manualBatchExtraFee: u128 & AugmentedConst<ApiType>;
       merkleRootAutomaticBatchPeriod: u128 & AugmentedConst<ApiType>;
       merkleRootAutomaticBatchSize: u128 & AugmentedConst<ApiType>;
       requestsPerBlock: u128 & AugmentedConst<ApiType>;
