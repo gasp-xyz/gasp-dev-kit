@@ -260,7 +260,7 @@ declare module '@polkadot/types/lookup' {
       readonly end: u128;
     } & Struct, H256]>;
     readonly isRequestProcessedOnL2: boolean;
-    readonly asRequestProcessedOnL2: ITuple<[PalletRolldownMessagesChain, u128]>;
+    readonly asRequestProcessedOnL2: ITuple<[PalletRolldownMessagesChain, u128, bool]>;
     readonly isL1ReadCanceled: boolean;
     readonly asL1ReadCanceled: {
       readonly chain: PalletRolldownMessagesChain;

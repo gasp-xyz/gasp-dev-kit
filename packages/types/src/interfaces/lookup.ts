@@ -236,7 +236,7 @@ export default {
   PalletRolldownEvent: {
     _enum: {
       L1ReadStored: '(PalletRolldownMessagesChain,SpRuntimeAccountAccountId20,u128,{"start":"u128","end":"u128"},H256)',
-      RequestProcessedOnL2: '(PalletRolldownMessagesChain,u128)',
+      RequestProcessedOnL2: '(PalletRolldownMessagesChain,u128,bool)',
       L1ReadCanceled: {
         chain: 'PalletRolldownMessagesChain',
         canceledSequencerUpdate: 'u128',
