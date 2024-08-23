@@ -536,6 +536,10 @@ declare module '@polkadot/api-base/types/submittable' {
        **/
       cancelRequestsFromL1: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, requestsToCancel: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
       /**
+       * See [`Pallet::create_batch`].
+       **/
+      createBatch: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, range: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array], sequencerAccount: Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, ITuple<[u128, u128]>, Option<SpRuntimeAccountAccountId20>]>;
+      /**
        * See [`Pallet::force_cancel_requests_from_l1`].
        **/
       forceCancelRequestsFromL1: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, requestsToCancel: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
@@ -543,6 +547,10 @@ declare module '@polkadot/api-base/types/submittable' {
        * See [`Pallet::force_update_l2_from_l1`].
        **/
       forceUpdateL2FromL1: AugmentedSubmittable<(update: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
+      /**
+       * See [`Pallet::set_manual_batch_extra_fee`].
+       **/
+      setManualBatchExtraFee: AugmentedSubmittable<(balance: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128]>;
       /**
        * See [`Pallet::update_l2_from_l1`].
        **/
@@ -564,7 +572,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::provide_sequencer_stake`].
        **/
-      provideSequencerStake: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, stakeAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
+      provideSequencerStake: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, stakeAmount: u128 | AnyNumber | Uint8Array, aliasAccount: Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128, Option<SpRuntimeAccountAccountId20>]>;
       /**
        * See [`Pallet::rejoin_active_sequencers`].
        **/
@@ -573,6 +581,10 @@ declare module '@polkadot/api-base/types/submittable' {
        * See [`Pallet::set_sequencer_configuration`].
        **/
       setSequencerConfiguration: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, minimalStakeAmount: u128 | AnyNumber | Uint8Array, slashFineAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128, u128]>;
+      /**
+       * See [`Pallet::set_updater_account_for_sequencer`].
+       **/
+      setUpdaterAccountForSequencer: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, aliasAccount: Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, Option<SpRuntimeAccountAccountId20>]>;
       /**
        * See [`Pallet::unstake`].
        **/
