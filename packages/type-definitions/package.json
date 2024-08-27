@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-feat-multiarch-ci-image-build-MGX-1326.3",
+  "version": "0.0.2-feat-multiarch-ci-image-build-MGX-1326.4",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
