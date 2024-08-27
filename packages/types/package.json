@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-feat-multiarch-ci-image-build-MGX-1326.4",
+  "version": "0.0.2-feat-multiarch-ci-image-build-MGX-1326.5",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
