@@ -546,7 +546,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::force_update_l2_from_l1`].
        **/
-      forceUpdateL2FromL1: AugmentedSubmittable<(update: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
+      forceUpdateL2FromL1: AugmentedSubmittable<(update: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
+      /**
+       * See [`Pallet::refund_failed_deposit`].
+       **/
+      refundFailedDeposit: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, requestId: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
       /**
        * See [`Pallet::set_manual_batch_extra_fee`].
        **/
@@ -554,7 +558,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::update_l2_from_l1`].
        **/
-      updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any; pendingWithdrawalResolutions?: any; pendingL2UpdatesToRemove?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
+      updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
       /**
        * See [`Pallet::withdraw`].
        **/

@@ -439,6 +439,10 @@ declare module '@polkadot/api-base/types/storage' {
     };
     rolldown: {
       awaitingCancelResolution: AugmentedQuery<ApiType, (arg: ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]> | [PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, SpRuntimeAccountAccountId20 | string | Uint8Array]) => Observable<BTreeSet<ITuple<[u128, PalletRolldownDisputeRole]>>>, [ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>]> & QueryableStorageEntry<ApiType, [ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>]>;
+      /**
+       * stores id of the failed depoisit, so it can be  refunded using [`Pallet::refund_failed_deposit`]
+       **/
+      failedL1Deposits: AugmentedQuery<ApiType, (arg: ITuple<[PalletRolldownMessagesChain, u128]> | [PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, u128 | AnyNumber | Uint8Array]) => Observable<Option<Null>>, [ITuple<[PalletRolldownMessagesChain, u128]>]> & QueryableStorageEntry<ApiType, [ITuple<[PalletRolldownMessagesChain, u128]>]>;
       l2OriginRequestId: AugmentedQuery<ApiType, () => Observable<BTreeMap<PalletRolldownMessagesChain, u128>>, []> & QueryableStorageEntry<ApiType, []>;
       l2Requests: AugmentedQuery<ApiType, (arg1: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, arg2: PalletRolldownMessagesRequestId | { origin?: any; id?: any } | string | Uint8Array) => Observable<Option<ITuple<[PalletRolldownL2Request, H256]>>>, [PalletRolldownMessagesChain, PalletRolldownMessagesRequestId]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesChain, PalletRolldownMessagesRequestId]>;
       l2RequestsBatch: AugmentedQuery<ApiType, (arg: ITuple<[PalletRolldownMessagesChain, u128]> | [PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, u128 | AnyNumber | Uint8Array]) => Observable<Option<ITuple<[u32, ITuple<[u128, u128]>, SpRuntimeAccountAccountId20]>>>, [ITuple<[PalletRolldownMessagesChain, u128]>]> & QueryableStorageEntry<ApiType, [ITuple<[PalletRolldownMessagesChain, u128]>]>;

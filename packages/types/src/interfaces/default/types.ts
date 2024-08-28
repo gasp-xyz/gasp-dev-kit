@@ -45,8 +45,6 @@ export interface L1Update extends Struct {
   readonly chain: Chain;
   readonly pendingDeposits: Vec<Deposit>;
   readonly pendingCancelResolutions: Vec<CancelResolution>;
-  readonly pendingWithdrawalResolutions: Vec<WithdrawalResolution>;
-  readonly pendingL2UpdatesToRemove: Vec<L2UpdatesToRemove>;
 }
 
 /** @name L2UpdatesToRemove */
