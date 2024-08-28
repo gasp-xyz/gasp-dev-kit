@@ -33,8 +33,6 @@ export const mTypes = {
     chain: "Chain",
     pendingDeposits: "Vec<Deposit>",
     pendingCancelResolutions: "Vec<CancelResolution>",
-    pendingWithdrawalResolutions: "Vec<WithdrawalResolution>",
-    pendingL2UpdatesToRemove: "Vec<L2UpdatesToRemove>",
   },
   Deposit: {
     requestId: "RequestId",
