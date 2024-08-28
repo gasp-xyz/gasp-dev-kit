@@ -538,7 +538,7 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::create_batch`].
        **/
-      createBatch: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, range: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array], sequencerAccount: Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, ITuple<[u128, u128]>, Option<SpRuntimeAccountAccountId20>]>;
+      createBatch: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, sequencerAccount: Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, Option<SpRuntimeAccountAccountId20>]>;
       /**
        * See [`Pallet::force_cancel_requests_from_l1`].
        **/
