@@ -452,6 +452,7 @@ declare module '@polkadot/api-base/types/storage' {
        * - range of the reqeusts in last batch
        **/
       l2RequestsBatchLast: AugmentedQuery<ApiType, () => Observable<BTreeMap<PalletRolldownMessagesChain, ITuple<[u32, u128, ITuple<[u128, u128]>]>>>, []> & QueryableStorageEntry<ApiType, []>;
+      lastMaintananceMode: AugmentedQuery<ApiType, () => Observable<Option<u128>>, []> & QueryableStorageEntry<ApiType, []>;
       lastProcessedRequestOnL2: AugmentedQuery<ApiType, (arg: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array) => Observable<u128>, [PalletRolldownMessagesChain]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesChain]>;
       lastScheduledUpdateIdInExecutionQueue: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
       lastUpdateBySequencer: AugmentedQuery<ApiType, (arg: ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]> | [PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, SpRuntimeAccountAccountId20 | string | Uint8Array]) => Observable<u128>, [ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>]> & QueryableStorageEntry<ApiType, [ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>]>;
