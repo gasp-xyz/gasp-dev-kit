@@ -458,6 +458,8 @@ declare module '@polkadot/api-base/types/events' {
     rolldown: {
       DepositRefundCreated: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, refundedRequestId: PalletRolldownMessagesRequestId], { chain: PalletRolldownMessagesChain, refundedRequestId: PalletRolldownMessagesRequestId }>;
       L1ReadCanceled: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId], { chain: PalletRolldownMessagesChain, canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId }>;
+      L1ReadIgnoredBecauseOfMaintenanceMode: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, hash_: H256], { chain: PalletRolldownMessagesChain, hash_: H256 }>;
+      L1ReadScheduledForExecution: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, hash_: H256], { chain: PalletRolldownMessagesChain, hash_: H256 }>;
       L1ReadStored: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, sequencer: SpRuntimeAccountAccountId20, disputePeriodEnd: u128, range: {
     readonly start: u128;
     readonly end: u128;

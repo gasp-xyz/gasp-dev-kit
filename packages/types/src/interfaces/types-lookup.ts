@@ -302,7 +302,17 @@ declare module '@polkadot/types/lookup' {
       readonly chain: PalletRolldownMessagesChain;
       readonly refundedRequestId: PalletRolldownMessagesRequestId;
     } & Struct;
-    readonly type: 'L1ReadStored' | 'RequestProcessedOnL2' | 'L1ReadCanceled' | 'TxBatchCreated' | 'WithdrawalRequestCreated' | 'ManualBatchExtraFeeSet' | 'DepositRefundCreated';
+    readonly isL1ReadScheduledForExecution: boolean;
+    readonly asL1ReadScheduledForExecution: {
+      readonly chain: PalletRolldownMessagesChain;
+      readonly hash_: H256;
+    } & Struct;
+    readonly isL1ReadIgnoredBecauseOfMaintenanceMode: boolean;
+    readonly asL1ReadIgnoredBecauseOfMaintenanceMode: {
+      readonly chain: PalletRolldownMessagesChain;
+      readonly hash_: H256;
+    } & Struct;
+    readonly type: 'L1ReadStored' | 'RequestProcessedOnL2' | 'L1ReadCanceled' | 'TxBatchCreated' | 'WithdrawalRequestCreated' | 'ManualBatchExtraFeeSet' | 'DepositRefundCreated' | 'L1ReadScheduledForExecution' | 'L1ReadIgnoredBecauseOfMaintenanceMode';
   }
 
   /** @name PalletRolldownMessagesChain (44) */

@@ -280,7 +280,21 @@ export default {
       ManualBatchExtraFeeSet: 'u128',
       DepositRefundCreated: {
         chain: 'PalletRolldownMessagesChain',
-        refundedRequestId: 'PalletRolldownMessagesRequestId'
+        refundedRequestId: 'PalletRolldownMessagesRequestId',
+      },
+      L1ReadScheduledForExecution: {
+        _alias: {
+          hash_: 'hash',
+        },
+        chain: 'PalletRolldownMessagesChain',
+        hash_: 'H256',
+      },
+      L1ReadIgnoredBecauseOfMaintenanceMode: {
+        _alias: {
+          hash_: 'hash',
+        },
+        chain: 'PalletRolldownMessagesChain',
+        hash_: 'H256'
       }
     }
   },
