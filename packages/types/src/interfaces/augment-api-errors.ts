@@ -700,7 +700,9 @@ declare module '@polkadot/api-base/types/errors' {
       BalanceOverflow: AugmentedError<ApiType>;
       BlockedByMaintenanceMode: AugmentedError<ApiType>;
       CancelRightsExhausted: AugmentedError<ApiType>;
+      EmptyBatch: AugmentedError<ApiType>;
       EmptyUpdate: AugmentedError<ApiType>;
+      FailedDepositDoesExists: AugmentedError<ApiType>;
       InvalidRange: AugmentedError<ApiType>;
       InvalidUpdate: AugmentedError<ApiType>;
       L1AssetCreationFailed: AugmentedError<ApiType>;
