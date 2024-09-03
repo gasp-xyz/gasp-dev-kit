@@ -2669,7 +2669,8 @@ declare module '@polkadot/types/lookup' {
     readonly isUnknownAliasAccount: boolean;
     readonly isFailedDepositDoesExists: boolean;
     readonly isEmptyBatch: boolean;
-    readonly type: 'OperationFailed' | 'ReadRightsExhausted' | 'CancelRightsExhausted' | 'EmptyUpdate' | 'AddressDeserializationFailure' | 'RequestDoesNotExist' | 'NotEnoughAssets' | 'BalanceOverflow' | 'L1AssetCreationFailed' | 'MathOverflow' | 'TooManyRequests' | 'InvalidUpdate' | 'L1AssetNotFound' | 'WrongRequestId' | 'OnlySelectedSequencerisAllowedToUpdate' | 'SequencerLastUpdateStillInDisputePeriod' | 'SequencerAwaitingCancelResolution' | 'MultipleUpdatesInSingleBlock' | 'BlockedByMaintenanceMode' | 'UnsupportedAsset' | 'InvalidRange' | 'NonExistingRequestId' | 'UnknownAliasAccount' | 'FailedDepositDoesExists' | 'EmptyBatch';
+    readonly isTokenDoestNotExist: boolean;
+    readonly type: 'OperationFailed' | 'ReadRightsExhausted' | 'CancelRightsExhausted' | 'EmptyUpdate' | 'AddressDeserializationFailure' | 'RequestDoesNotExist' | 'NotEnoughAssets' | 'BalanceOverflow' | 'L1AssetCreationFailed' | 'MathOverflow' | 'TooManyRequests' | 'InvalidUpdate' | 'L1AssetNotFound' | 'WrongRequestId' | 'OnlySelectedSequencerisAllowedToUpdate' | 'SequencerLastUpdateStillInDisputePeriod' | 'SequencerAwaitingCancelResolution' | 'MultipleUpdatesInSingleBlock' | 'BlockedByMaintenanceMode' | 'UnsupportedAsset' | 'InvalidRange' | 'NonExistingRequestId' | 'UnknownAliasAccount' | 'FailedDepositDoesExists' | 'EmptyBatch' | 'TokenDoestNotExist';
   }
 
   /** @name PalletMetamaskSignatureError (304) */
