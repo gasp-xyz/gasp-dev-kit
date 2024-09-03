@@ -717,6 +717,7 @@ declare module '@polkadot/api-base/types/errors' {
       RequestDoesNotExist: AugmentedError<ApiType>;
       SequencerAwaitingCancelResolution: AugmentedError<ApiType>;
       SequencerLastUpdateStillInDisputePeriod: AugmentedError<ApiType>;
+      TokenDoestNotExist: AugmentedError<ApiType>;
       TooManyRequests: AugmentedError<ApiType>;
       UnknownAliasAccount: AugmentedError<ApiType>;
       UnsupportedAsset: AugmentedError<ApiType>;
