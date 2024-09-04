@@ -1402,7 +1402,12 @@ export default {
       },
       refund_failed_deposit: {
         chain: 'PalletRolldownMessagesChain',
-        requestId: 'u128'
+        requestId: 'u128',
+      },
+      force_create_batch: {
+        chain: 'PalletRolldownMessagesChain',
+        range: '(u128,u128)',
+        sequencerAccount: 'SpRuntimeAccountAccountId20'
       }
     }
   },
