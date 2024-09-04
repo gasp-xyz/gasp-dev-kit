@@ -1555,7 +1555,13 @@ declare module '@polkadot/types/lookup' {
       readonly chain: PalletRolldownMessagesChain;
       readonly requestId: u128;
     } & Struct;
-    readonly type: 'UpdateL2FromL1' | 'ForceUpdateL2FromL1' | 'CancelRequestsFromL1' | 'ForceCancelRequestsFromL1' | 'Withdraw' | 'CreateBatch' | 'SetManualBatchExtraFee' | 'RefundFailedDeposit';
+    readonly isForceCreateBatch: boolean;
+    readonly asForceCreateBatch: {
+      readonly chain: PalletRolldownMessagesChain;
+      readonly range: ITuple<[u128, u128]>;
+      readonly sequencerAccount: SpRuntimeAccountAccountId20;
+    } & Struct;
+    readonly type: 'UpdateL2FromL1' | 'ForceUpdateL2FromL1' | 'CancelRequestsFromL1' | 'ForceCancelRequestsFromL1' | 'Withdraw' | 'CreateBatch' | 'SetManualBatchExtraFee' | 'RefundFailedDeposit' | 'ForceCreateBatch';
   }
 
   /** @name PalletRolldownMessagesL1Update (152) */
