@@ -710,6 +710,7 @@ declare module '@polkadot/api-base/types/errors' {
       MathOverflow: AugmentedError<ApiType>;
       MultipleUpdatesInSingleBlock: AugmentedError<ApiType>;
       NonExistingRequestId: AugmentedError<ApiType>;
+      NotDepositRecipient: AugmentedError<ApiType>;
       NotEnoughAssets: AugmentedError<ApiType>;
       OnlySelectedSequencerisAllowedToUpdate: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
