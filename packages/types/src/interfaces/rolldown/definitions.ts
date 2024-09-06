@@ -1,7 +1,7 @@
 export default {
   types: {},
   rpc: {
-    pending_l2_requests_hash: {
+    get_abi_encoded_l2_request: {
       description: "",
       params: [
         {
@@ -9,19 +9,8 @@ export default {
           type: "Chain",
         },
         {
-          name: "at",
-          type: "Hash",
-          isOptional: true
-        }
-      ],
-      type: "H256"
-    },
-    pending_l2_requests: {
-      description: "",
-      params: [
-        {
-          name: "chain",
-          type: "Chain",
+          name: 'request_id',
+          type: 'u128',
         },
         {
           name: 'at',
@@ -30,6 +19,21 @@ export default {
         }
       ],
       type: "Vec<u8>"
+    },
+    get_native_sequencer_update: {
+      description: "",
+      params: [
+        {
+          name: "hex_payload",
+          type: "String"
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
+        }
+      ],
+      type: "Option<L1Update>"
     },
     verify_sequencer_update: {
       description: "",
@@ -54,21 +58,6 @@ export default {
       ],
       type: "bool"
     },
-    get_native_sequencer_update: {
-      description: "",
-      params: [
-        {
-          name: "hex_payload",
-          type: "String"
-        },
-        {
-          name: 'at',
-          type: 'Hash',
-          isOptional: true
-        }
-      ],
-      type: "Option<L1Update>"
-    },
     get_merkle_root: {
       description: "",
       params: [
@@ -79,6 +68,11 @@ export default {
         {
           name: 'range',
           type: '(u128, u128)',
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
         }
       ],
       type: "Vec<u8>"
@@ -96,11 +90,16 @@ export default {
         },{
           name: 'tx_id',
           type: 'u128',
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
         }
       ],
       type: "Vec<Vec<u8>>"
     },
-    get_abi_encoded_l2_request: {
+    verify_merkle_proof: {
       description: "",
       params: [
         {
@@ -108,11 +107,27 @@ export default {
           type: "Chain",
         },
         {
-          name: 'request_id',
+          name: 'range',
+          type: '(u128, u128)',
+        },
+        {
+          name: 'tx_id',
           type: 'u128',
+        },
+        {
+          name: 'root',
+          type: 'H256',
+        },
+        {
+          name: 'proof',
+          type: 'Vec<H256>',
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
         }
       ],
-      type: "Vec<u8>"
-    }
-  }
-}
+      type: "bool"
+    },
+  }}
