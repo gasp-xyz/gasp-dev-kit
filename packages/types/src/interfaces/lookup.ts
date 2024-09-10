@@ -684,7 +684,12 @@ export default {
   PalletSequencerStakingEvent: {
     _enum: {
       SequencersRemovedFromActiveSet: '(PalletRolldownMessagesChain,Vec<SpRuntimeAccountAccountId20>)',
-      SequencerJoinedActiveSet: '(PalletRolldownMessagesChain,SpRuntimeAccountAccountId20)'
+      SequencerJoinedActiveSet: '(PalletRolldownMessagesChain,SpRuntimeAccountAccountId20)',
+      StakeProvided: {
+        chain: 'PalletRolldownMessagesChain',
+        addedStake: 'u128',
+        totalStake: 'u128'
+      }
     }
   },
   /**
