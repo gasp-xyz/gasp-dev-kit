@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-features-mgx-1220.1",
+  "version": "0.0.2-features-mgx-1220.2",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
