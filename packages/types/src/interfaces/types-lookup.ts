@@ -777,7 +777,13 @@ declare module '@polkadot/types/lookup' {
     readonly asSequencersRemovedFromActiveSet: ITuple<[PalletRolldownMessagesChain, Vec<SpRuntimeAccountAccountId20>]>;
     readonly isSequencerJoinedActiveSet: boolean;
     readonly asSequencerJoinedActiveSet: ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>;
-    readonly type: 'SequencersRemovedFromActiveSet' | 'SequencerJoinedActiveSet';
+    readonly isStakeProvided: boolean;
+    readonly asStakeProvided: {
+      readonly chain: PalletRolldownMessagesChain;
+      readonly addedStake: u128;
+      readonly totalStake: u128;
+    } & Struct;
+    readonly type: 'SequencersRemovedFromActiveSet' | 'SequencerJoinedActiveSet' | 'StakeProvided';
   }
 
   /** @name PalletSessionEvent (85) */
