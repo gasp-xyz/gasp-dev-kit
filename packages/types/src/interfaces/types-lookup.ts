@@ -783,7 +783,12 @@ declare module '@polkadot/types/lookup' {
       readonly addedStake: u128;
       readonly totalStake: u128;
     } & Struct;
-    readonly type: 'SequencersRemovedFromActiveSet' | 'SequencerJoinedActiveSet' | 'StakeProvided';
+    readonly isStakeRemoved: boolean;
+    readonly asStakeRemoved: {
+      readonly chain: PalletRolldownMessagesChain;
+      readonly removedStake: u128;
+    } & Struct;
+    readonly type: 'SequencersRemovedFromActiveSet' | 'SequencerJoinedActiveSet' | 'StakeProvided' | 'StakeRemoved';
   }
 
   /** @name PalletSessionEvent (85) */
