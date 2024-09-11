@@ -688,7 +688,11 @@ export default {
       StakeProvided: {
         chain: 'PalletRolldownMessagesChain',
         addedStake: 'u128',
-        totalStake: 'u128'
+        totalStake: 'u128',
+      },
+      StakeRemoved: {
+        chain: 'PalletRolldownMessagesChain',
+        removedStake: 'u128'
       }
     }
   },

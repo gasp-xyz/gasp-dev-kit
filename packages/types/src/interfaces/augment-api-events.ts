@@ -480,6 +480,7 @@ declare module '@polkadot/api-base/types/events' {
       SequencerJoinedActiveSet: AugmentedEvent<ApiType, [PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>;
       SequencersRemovedFromActiveSet: AugmentedEvent<ApiType, [PalletRolldownMessagesChain, Vec<SpRuntimeAccountAccountId20>]>;
       StakeProvided: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, addedStake: u128, totalStake: u128], { chain: PalletRolldownMessagesChain, addedStake: u128, totalStake: u128 }>;
+      StakeRemoved: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, removedStake: u128], { chain: PalletRolldownMessagesChain, removedStake: u128 }>;
       /**
        * Generic event
        **/
