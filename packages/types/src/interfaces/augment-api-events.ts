@@ -9,7 +9,7 @@ import type { ApiTypes, AugmentedEvent } from '@polkadot/api-base/types';
 import type { Bytes, Null, Option, Result, Struct, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 import type { H256, Perbill } from '@polkadot/types/interfaces/runtime';
-import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletRolldownBatchSource, PalletRolldownL1RequestProcessingError, PalletRolldownMessagesChain, PalletRolldownMessagesRequestId, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
+import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletRolldownBatchSource, PalletRolldownL1RequestProcessingError, PalletRolldownMessagesChain, PalletRolldownMessagesRequestId, PalletSequencerStakingPayoutRounds, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
 
 export type __AugmentedEvent<ApiType extends ApiTypes> = AugmentedEvent<ApiType>;
 
@@ -219,11 +219,11 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * Issuance for upcoming session issued
        **/
-      SessionIssuanceIssued: AugmentedEvent<ApiType, [u32, u128, u128]>;
+      SessionIssuanceIssued: AugmentedEvent<ApiType, [u32, u128, u128, u128]>;
       /**
        * Issuance for upcoming session calculated and recorded
        **/
-      SessionIssuanceRecorded: AugmentedEvent<ApiType, [u32, u128, u128]>;
+      SessionIssuanceRecorded: AugmentedEvent<ApiType, [u32, u128, u128, u128]>;
       /**
        * TGE has been finalized
        **/
@@ -477,7 +477,15 @@ declare module '@polkadot/api-base/types/events' {
       [key: string]: AugmentedEvent<ApiType>;
     };
     sequencerStaking: {
+      /**
+       * Paid the account the balance as liquid rewards
+       **/
+      Rewarded: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20, u128]>;
       SequencerJoinedActiveSet: AugmentedEvent<ApiType, [PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>;
+      /**
+       * Notify about reward periods that has been paid (sequencer, payout rounds, any rewards left)
+       **/
+      SequencerRewardsDistributed: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, PalletSequencerStakingPayoutRounds]>;
       SequencersRemovedFromActiveSet: AugmentedEvent<ApiType, [PalletRolldownMessagesChain, Vec<SpRuntimeAccountAccountId20>]>;
       StakeProvided: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, addedStake: u128, totalStake: u128], { chain: PalletRolldownMessagesChain, addedStake: u128, totalStake: u128 }>;
       StakeRemoved: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, removedStake: u128], { chain: PalletRolldownMessagesChain, removedStake: u128 }>;

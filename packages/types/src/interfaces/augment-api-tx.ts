@@ -578,6 +578,10 @@ declare module '@polkadot/api-base/types/submittable' {
        **/
       leaveActiveSequencers: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain]>;
       /**
+       * See [`Pallet::payout_sequencer_rewards`].
+       **/
+      payoutSequencerRewards: AugmentedSubmittable<(sequencer: SpRuntimeAccountAccountId20 | string | Uint8Array, numberOfSessions: Option<u32> | null | Uint8Array | u32 | AnyNumber) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, Option<u32>]>;
+      /**
        * See [`Pallet::provide_sequencer_stake`].
        **/
       provideSequencerStake: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, stakeAmount: u128 | AnyNumber | Uint8Array, aliasAccount: Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string, stakeAction: PalletSequencerStakingStakeAction | 'StakeOnly' | 'StakeAndJoinActiveSet' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128, Option<SpRuntimeAccountAccountId20>, PalletSequencerStakingStakeAction]>;

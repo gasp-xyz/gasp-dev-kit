@@ -712,6 +712,7 @@ declare module '@polkadot/api-base/types/errors' {
       NonExistingRequestId: AugmentedError<ApiType>;
       NotDepositRecipient: AugmentedError<ApiType>;
       NotEnoughAssets: AugmentedError<ApiType>;
+      NotEnoughAssetsForFee: AugmentedError<ApiType>;
       OnlySelectedSequencerisAllowedToUpdate: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
       ReadRightsExhausted: AugmentedError<ApiType>;
@@ -740,6 +741,7 @@ declare module '@polkadot/api-base/types/errors' {
       SequencerAccountIsActiveSequencerAlias: AugmentedError<ApiType>;
       SequencerAlreadyInActiveSet: AugmentedError<ApiType>;
       SequencerIsNotInActiveSet: AugmentedError<ApiType>;
+      SequencerRoundRewardsDNE: AugmentedError<ApiType>;
       TestUnstakingError: AugmentedError<ApiType>;
       UnknownChainId: AugmentedError<ApiType>;
       /**
