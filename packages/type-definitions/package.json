@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-eth-rollup-develop.41",
+  "version": "0.0.2-ci-add-multiplatform-build-for-fast-runtime-image.0",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
