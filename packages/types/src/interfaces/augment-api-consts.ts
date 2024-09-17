@@ -164,6 +164,14 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       liquidityMiningSplit: Perbill & AugmentedConst<ApiType>;
       /**
+       * The account id that holds the sequencers issuance
+       **/
+      sequencersIssuanceVault: SpRuntimeAccountAccountId20 & AugmentedConst<ApiType>;
+      /**
+       * The split of issuance for sequencers rewards
+       **/
+      sequencersSplit: Perbill & AugmentedConst<ApiType>;
+      /**
        * The account id that holds the staking issuance
        **/
       stakingIssuanceVault: SpRuntimeAccountAccountId20 & AugmentedConst<ApiType>;
@@ -336,6 +344,10 @@ declare module '@polkadot/api-base/types/consts' {
       requestsPerBlock: u128 & AugmentedConst<ApiType>;
       rightsMultiplier: u128 & AugmentedConst<ApiType>;
       /**
+       * Withdrawals flat fee
+       **/
+      withdrawFee: u128 & AugmentedConst<ApiType>;
+      /**
        * Generic const
        **/
       [key: string]: Codec;
@@ -343,9 +355,14 @@ declare module '@polkadot/api-base/types/consts' {
     sequencerStaking: {
       blocksForSequencerUpdate: u32 & AugmentedConst<ApiType>;
       cancellerRewardPercentage: Permill & AugmentedConst<ApiType>;
+      defaultPayoutLimit: u32 & AugmentedConst<ApiType>;
       maxSequencers: u32 & AugmentedConst<ApiType>;
       minimumSequencers: u32 & AugmentedConst<ApiType>;
       noOfPastSessionsForEligibility: u32 & AugmentedConst<ApiType>;
+      /**
+       * Number of rounds after which block authors are rewarded
+       **/
+      rewardPaymentDelay: u32 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/

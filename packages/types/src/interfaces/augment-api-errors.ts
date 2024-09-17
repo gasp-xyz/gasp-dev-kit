@@ -710,13 +710,16 @@ declare module '@polkadot/api-base/types/errors' {
       MathOverflow: AugmentedError<ApiType>;
       MultipleUpdatesInSingleBlock: AugmentedError<ApiType>;
       NonExistingRequestId: AugmentedError<ApiType>;
+      NotDepositRecipient: AugmentedError<ApiType>;
       NotEnoughAssets: AugmentedError<ApiType>;
+      NotEnoughAssetsForFee: AugmentedError<ApiType>;
       OnlySelectedSequencerisAllowedToUpdate: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
       ReadRightsExhausted: AugmentedError<ApiType>;
       RequestDoesNotExist: AugmentedError<ApiType>;
       SequencerAwaitingCancelResolution: AugmentedError<ApiType>;
       SequencerLastUpdateStillInDisputePeriod: AugmentedError<ApiType>;
+      TokenDoesNotExist: AugmentedError<ApiType>;
       TooManyRequests: AugmentedError<ApiType>;
       UnknownAliasAccount: AugmentedError<ApiType>;
       UnsupportedAsset: AugmentedError<ApiType>;
@@ -738,6 +741,7 @@ declare module '@polkadot/api-base/types/errors' {
       SequencerAccountIsActiveSequencerAlias: AugmentedError<ApiType>;
       SequencerAlreadyInActiveSet: AugmentedError<ApiType>;
       SequencerIsNotInActiveSet: AugmentedError<ApiType>;
+      SequencerRoundRewardsDNE: AugmentedError<ApiType>;
       TestUnstakingError: AugmentedError<ApiType>;
       UnknownChainId: AugmentedError<ApiType>;
       /**
