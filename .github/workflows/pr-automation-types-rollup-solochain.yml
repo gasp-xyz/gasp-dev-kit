@@ -226,10 +226,23 @@ jobs:
       - name: Show released versions
         run: |
           echo "Version of gasp-type-definitions:"
-          npm show gasp-type-definitions dist-tags."$(echo "${{ env.INPUTS_BRANCH }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
+          TYPE_DEF_VERSION=$(npm show gasp-type-definitions dist-tags."$(echo "${{ env.INPUTS_BRANCH }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
+          echo $TYPE_DEF_VERSION
+          echo "type-definitions-version=$TYPE_DEF_VERSION" >> $GITHUB_OUTPUT
           
           echo "Version of gasp-types:"
-          npm show gasp-types dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
+          TYPES_VERSION=$(npm show gasp-types dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
+          echo $TYPES_VERSION
+          echo "types-version=$TYPES_VERSION" >> $GITHUB_OUTPUT
           
           echo "Version of gasp-sdk:"
-          npm show gasp-sdk dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
+          SDK_VERSION=$(npm show gasp-sdk dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
+          echo $SDK_VERSION
+          echo "sdk-version=$SDK_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Add versions to workflow summary
+        run: |
+          echo "## Released Versions" >> $GITHUB_STEP_SUMMARY
+          echo "- gasp-type-definitions: ${{ steps.show-versions.outputs.type-definitions-version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- gasp-types: ${{ steps.show-versions.outputs.types-version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- gasp-sdk: ${{ steps.show-versions.outputs.sdk-version }}" >> $GITHUB_STEP_SUMMARY
