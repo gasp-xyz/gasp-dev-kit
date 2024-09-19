@@ -544,6 +544,10 @@ declare module '@polkadot/api-base/types/submittable' {
        **/
       ferryDeposit: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, requestId: PalletRolldownMessagesRequestId | { origin?: any; id?: any } | string | Uint8Array, depositRecipient: U8aFixed | string | Uint8Array, tokenAddress: U8aFixed | string | Uint8Array, amount: u128 | AnyNumber | Uint8Array, timestamp: u128 | AnyNumber | Uint8Array, ferryTip: u128 | AnyNumber | Uint8Array, depositHash: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, PalletRolldownMessagesRequestId, U8aFixed, U8aFixed, u128, u128, u128, H256]>;
       /**
+       * See [`Pallet::ferry_deposit_unsafe`].
+       **/
+      ferryDepositUnsafe: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, requestId: PalletRolldownMessagesRequestId | { origin?: any; id?: any } | string | Uint8Array, depositRecipient: U8aFixed | string | Uint8Array, tokenAddress: U8aFixed | string | Uint8Array, amount: u128 | AnyNumber | Uint8Array, timestamp: u128 | AnyNumber | Uint8Array, ferryTip: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, PalletRolldownMessagesRequestId, U8aFixed, U8aFixed, u128, u128, u128]>;
+      /**
        * See [`Pallet::force_cancel_requests_from_l1`].
        **/
       forceCancelRequestsFromL1: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | number | Uint8Array, requestsToCancel: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
@@ -566,7 +570,11 @@ declare module '@polkadot/api-base/types/submittable' {
       /**
        * See [`Pallet::update_l2_from_l1`].
        **/
-      updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
+      updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any } | string | Uint8Array, updateHash: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update, H256]>;
+      /**
+       * See [`Pallet::update_l2_from_l1_unsafe`].
+       **/
+      updateL2FromL1Unsafe: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
       /**
        * See [`Pallet::withdraw`].
        **/

@@ -1561,6 +1561,7 @@ declare module '@polkadot/types/lookup' {
     readonly isUpdateL2FromL1: boolean;
     readonly asUpdateL2FromL1: {
       readonly requests: PalletRolldownMessagesL1Update;
+      readonly updateHash: H256;
     } & Struct;
     readonly isForceUpdateL2FromL1: boolean;
     readonly asForceUpdateL2FromL1: {
@@ -1615,7 +1616,21 @@ declare module '@polkadot/types/lookup' {
       readonly ferryTip: u128;
       readonly depositHash: H256;
     } & Struct;
-    readonly type: 'UpdateL2FromL1' | 'ForceUpdateL2FromL1' | 'CancelRequestsFromL1' | 'ForceCancelRequestsFromL1' | 'Withdraw' | 'CreateBatch' | 'SetManualBatchExtraFee' | 'RefundFailedDeposit' | 'ForceCreateBatch' | 'FerryDeposit';
+    readonly isFerryDepositUnsafe: boolean;
+    readonly asFerryDepositUnsafe: {
+      readonly chain: PalletRolldownMessagesChain;
+      readonly requestId: PalletRolldownMessagesRequestId;
+      readonly depositRecipient: U8aFixed;
+      readonly tokenAddress: U8aFixed;
+      readonly amount: u128;
+      readonly timestamp: u128;
+      readonly ferryTip: u128;
+    } & Struct;
+    readonly isUpdateL2FromL1Unsafe: boolean;
+    readonly asUpdateL2FromL1Unsafe: {
+      readonly requests: PalletRolldownMessagesL1Update;
+    } & Struct;
+    readonly type: 'UpdateL2FromL1' | 'ForceUpdateL2FromL1' | 'CancelRequestsFromL1' | 'ForceCancelRequestsFromL1' | 'Withdraw' | 'CreateBatch' | 'SetManualBatchExtraFee' | 'RefundFailedDeposit' | 'ForceCreateBatch' | 'FerryDeposit' | 'FerryDepositUnsafe' | 'UpdateL2FromL1Unsafe';
   }
 
   /** @name PalletRolldownMessagesL1Update (156) */

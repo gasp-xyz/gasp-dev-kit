@@ -1413,6 +1413,7 @@ export default {
     _enum: {
       update_l2_from_l1: {
         requests: 'PalletRolldownMessagesL1Update',
+        updateHash: 'H256',
       },
       __Unused1: 'Null',
       force_update_l2_from_l1: {
@@ -1457,7 +1458,19 @@ export default {
         amount: 'u128',
         timestamp: 'u128',
         ferryTip: 'u128',
-        depositHash: 'H256'
+        depositHash: 'H256',
+      },
+      ferry_deposit_unsafe: {
+        chain: 'PalletRolldownMessagesChain',
+        requestId: 'PalletRolldownMessagesRequestId',
+        depositRecipient: '[u8;20]',
+        tokenAddress: '[u8;20]',
+        amount: 'u128',
+        timestamp: 'u128',
+        ferryTip: 'u128',
+      },
+      update_l2_from_l1_unsafe: {
+        requests: 'PalletRolldownMessagesL1Update'
       }
     }
   },
