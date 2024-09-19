@@ -697,20 +697,23 @@ declare module '@polkadot/api-base/types/errors' {
     };
     rolldown: {
       AddressDeserializationFailure: AugmentedError<ApiType>;
+      AssetRegistrationProblem: AugmentedError<ApiType>;
       BalanceOverflow: AugmentedError<ApiType>;
       BlockedByMaintenanceMode: AugmentedError<ApiType>;
       CancelRightsExhausted: AugmentedError<ApiType>;
       EmptyBatch: AugmentedError<ApiType>;
       EmptyUpdate: AugmentedError<ApiType>;
-      FailedDepositDoesExists: AugmentedError<ApiType>;
+      FailedDepositDoesNotExist: AugmentedError<ApiType>;
+      FerryHashMismatch: AugmentedError<ApiType>;
       InvalidRange: AugmentedError<ApiType>;
       InvalidUpdate: AugmentedError<ApiType>;
       L1AssetCreationFailed: AugmentedError<ApiType>;
       L1AssetNotFound: AugmentedError<ApiType>;
       MathOverflow: AugmentedError<ApiType>;
+      MintError: AugmentedError<ApiType>;
       MultipleUpdatesInSingleBlock: AugmentedError<ApiType>;
       NonExistingRequestId: AugmentedError<ApiType>;
-      NotDepositRecipient: AugmentedError<ApiType>;
+      NotEligibleForRefund: AugmentedError<ApiType>;
       NotEnoughAssets: AugmentedError<ApiType>;
       NotEnoughAssetsForFee: AugmentedError<ApiType>;
       OnlySelectedSequencerisAllowedToUpdate: AugmentedError<ApiType>;
