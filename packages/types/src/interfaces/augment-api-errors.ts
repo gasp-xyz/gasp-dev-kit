@@ -726,6 +726,7 @@ declare module '@polkadot/api-base/types/errors' {
       TooManyRequests: AugmentedError<ApiType>;
       UnknownAliasAccount: AugmentedError<ApiType>;
       UnsupportedAsset: AugmentedError<ApiType>;
+      UpdateHashMishmatch: AugmentedError<ApiType>;
       WrongRequestId: AugmentedError<ApiType>;
       /**
        * Generic error

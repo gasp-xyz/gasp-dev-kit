@@ -2568,7 +2568,7 @@ export default {
    * Lookup307: pallet_rolldown::pallet::Error<T>
    **/
   PalletRolldownError: {
-    _enum: ['OperationFailed', 'ReadRightsExhausted', 'CancelRightsExhausted', 'EmptyUpdate', 'AddressDeserializationFailure', 'RequestDoesNotExist', 'NotEnoughAssets', 'NotEnoughAssetsForFee', 'BalanceOverflow', 'L1AssetCreationFailed', 'MathOverflow', 'TooManyRequests', 'InvalidUpdate', 'L1AssetNotFound', 'WrongRequestId', 'OnlySelectedSequencerisAllowedToUpdate', 'SequencerLastUpdateStillInDisputePeriod', 'SequencerAwaitingCancelResolution', 'MultipleUpdatesInSingleBlock', 'BlockedByMaintenanceMode', 'UnsupportedAsset', 'InvalidRange', 'NonExistingRequestId', 'UnknownAliasAccount', 'FailedDepositDoesNotExist', 'EmptyBatch', 'TokenDoesNotExist', 'NotEligibleForRefund', 'FerryHashMismatch', 'MintError', 'AssetRegistrationProblem']
+    _enum: ['OperationFailed', 'ReadRightsExhausted', 'CancelRightsExhausted', 'EmptyUpdate', 'AddressDeserializationFailure', 'RequestDoesNotExist', 'NotEnoughAssets', 'NotEnoughAssetsForFee', 'BalanceOverflow', 'L1AssetCreationFailed', 'MathOverflow', 'TooManyRequests', 'InvalidUpdate', 'L1AssetNotFound', 'WrongRequestId', 'OnlySelectedSequencerisAllowedToUpdate', 'SequencerLastUpdateStillInDisputePeriod', 'SequencerAwaitingCancelResolution', 'MultipleUpdatesInSingleBlock', 'BlockedByMaintenanceMode', 'UnsupportedAsset', 'InvalidRange', 'NonExistingRequestId', 'UnknownAliasAccount', 'FailedDepositDoesNotExist', 'EmptyBatch', 'TokenDoesNotExist', 'NotEligibleForRefund', 'FerryHashMismatch', 'MintError', 'AssetRegistrationProblem', 'UpdateHashMishmatch']
   },
   /**
    * Lookup308: pallet_metamask_signature::pallet::Error<T>
