@@ -1,6 +1,6 @@
 {
   "name": "gasp-sdk",
-  "version": "0.0.2-feature-ferries.2",
+  "version": "0.0.2-feature-ferries.3",
   "description": "GASP SDK",
   "type": "module",
   "module": "./index.js",
