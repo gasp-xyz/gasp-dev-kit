@@ -1,6 +1,6 @@
 {
   "name": "gasp-sdk",
-  "version": "0.0.2-feature-rolldownL2Requests.0",
+  "version": "0.0.2-feature-rolldownL2Requests.1",
   "description": "GASP SDK",
   "type": "module",
   "module": "./index.js",
