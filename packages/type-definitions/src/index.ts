@@ -39,7 +39,8 @@ export const mTypes = {
     depositRecipient: "[u8; 20]",
     tokenAddress: "[u8; 20]",
     amount: "U256",
-    timeStamp: "U256"
+    timeStamp: "U256",
+    ferryTip: "U256"
   },
   RequestId: {
     origin: "Origin",
