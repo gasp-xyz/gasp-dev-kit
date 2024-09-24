@@ -223,6 +223,22 @@ jobs:
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public
 
+  show-versions:
+    runs-on: ubuntu-latest
+    needs: [release-sdk, release-type-definitions, release-types]
+    outputs:
+      type-definitions-version: ${{ steps.show-versions.outputs.type-definitions-version }}
+      types-version: ${{ steps.show-versions.outputs.types-version }}
+      sdk-version: ${{ steps.show-versions.outputs.sdk-version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - name: Setup Node version and cache dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
       - name: Show released versions
         id: show-versions
         run: |
@@ -241,9 +257,7 @@ jobs:
           echo $SDK_VERSION
           echo "sdk-version=$SDK_VERSION" >> $GITHUB_OUTPUT
 
-      - name: Add versions to workflow summary
-        run: |
           echo "## Released Versions" >> $GITHUB_STEP_SUMMARY
-          echo "- gasp-type-definitions: ${{ steps.show-versions.outputs.type-definitions-version }}" >> $GITHUB_STEP_SUMMARY
-          echo "- gasp-types: ${{ steps.show-versions.outputs.types-version }}" >> $GITHUB_STEP_SUMMARY
-          echo "- gasp-sdk: ${{ steps.show-versions.outputs.sdk-version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- gasp-type-definitions: $TYPE_DEF_VERSION" >> $GITHUB_STEP_SUMMARY
+          echo "- gasp-types: $TYPES_VERSION" >> $GITHUB_STEP_SUMMARY
+          echo "- gasp-sdk: $SDK_VERSION" >> $GITHUB_STEP_SUMMARY
