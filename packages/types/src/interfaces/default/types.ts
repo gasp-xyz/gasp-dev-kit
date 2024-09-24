@@ -27,6 +27,7 @@ export interface Deposit extends Struct {
   readonly tokenAddress: U8aFixed;
   readonly amount: U256;
   readonly timeStamp: U256;
+  readonly ferryTip: U256;
 }
 
 /** @name Header */
