@@ -2716,7 +2716,7 @@ declare module '@polkadot/types/lookup' {
     readonly ferryTip: U256;
   }
 
-  /** @name PalletRolldownDisputeRole (300) */
+  /** @name PalletRolldownDisputeRole (299) */
   interface PalletRolldownDisputeRole extends Enum {
     readonly isCanceler: boolean;
     readonly isSubmitter: boolean;

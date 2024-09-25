@@ -2559,7 +2559,7 @@ export default {
     ferryTip: 'U256'
   },
   /**
-   * Lookup300: pallet_rolldown::pallet::DisputeRole
+   * Lookup299: pallet_rolldown::pallet::DisputeRole
    **/
   PalletRolldownDisputeRole: {
     _enum: ['Canceler', 'Submitter']
