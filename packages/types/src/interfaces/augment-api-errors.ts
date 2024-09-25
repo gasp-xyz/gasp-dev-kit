@@ -1025,7 +1025,7 @@ declare module '@polkadot/api-base/types/errors' {
       /**
        * Unexpected failure
        **/
-      NotMangataLiquidityAsset: AugmentedError<ApiType>;
+      NotPairedWithNativeAsset: AugmentedError<ApiType>;
       /**
        * Past time calculation
        **/
