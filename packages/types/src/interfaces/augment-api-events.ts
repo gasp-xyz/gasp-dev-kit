@@ -146,6 +146,36 @@ declare module '@polkadot/api-base/types/events' {
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
+    foundationMembers: {
+      /**
+       * Phantom member, never used.
+       **/
+      Dummy: AugmentedEvent<ApiType, []>;
+      /**
+       * One of the members' keys changed.
+       **/
+      KeyChanged: AugmentedEvent<ApiType, []>;
+      /**
+       * The given member was added; see the transaction for who.
+       **/
+      MemberAdded: AugmentedEvent<ApiType, []>;
+      /**
+       * The given member was removed; see the transaction for who.
+       **/
+      MemberRemoved: AugmentedEvent<ApiType, []>;
+      /**
+       * The membership was reset; see the transaction for who the new set is.
+       **/
+      MembersReset: AugmentedEvent<ApiType, []>;
+      /**
+       * Two members were swapped; see the transaction for who.
+       **/
+      MembersSwapped: AugmentedEvent<ApiType, []>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
     grandpa: {
       /**
        * New authority set has been applied.
@@ -165,6 +195,19 @@ declare module '@polkadot/api-base/types/events' {
       [key: string]: AugmentedEvent<ApiType>;
     };
     identity: {
+      /**
+       * A username authority was added.
+       **/
+      AuthorityAdded: AugmentedEvent<ApiType, [authority: SpRuntimeAccountAccountId20], { authority: SpRuntimeAccountAccountId20 }>;
+      /**
+       * A username authority was removed.
+       **/
+      AuthorityRemoved: AugmentedEvent<ApiType, [authority: SpRuntimeAccountAccountId20], { authority: SpRuntimeAccountAccountId20 }>;
+      /**
+       * A dangling username (as in, a username corresponding to an account that has removed its
+       * identity) has been removed.
+       **/
+      DanglingUsernameRemoved: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, username: Bytes], { who: SpRuntimeAccountAccountId20, username: Bytes }>;
       /**
        * A name was cleared, and the given balance returned.
        **/
@@ -190,6 +233,14 @@ declare module '@polkadot/api-base/types/events' {
        **/
       JudgementUnrequested: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, registrarIndex: u32], { who: SpRuntimeAccountAccountId20, registrarIndex: u32 }>;
       /**
+       * A queued username passed its expiration without being claimed and was removed.
+       **/
+      PreapprovalExpired: AugmentedEvent<ApiType, [whose: SpRuntimeAccountAccountId20], { whose: SpRuntimeAccountAccountId20 }>;
+      /**
+       * A username was set as a primary and can be looked up from `who`.
+       **/
+      PrimaryUsernameSet: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, username: Bytes], { who: SpRuntimeAccountAccountId20, username: Bytes }>;
+      /**
        * A registrar was added.
        **/
       RegistrarAdded: AugmentedEvent<ApiType, [registrarIndex: u32], { registrarIndex: u32 }>;
@@ -206,6 +257,14 @@ declare module '@polkadot/api-base/types/events' {
        * main identity account to the sub-identity account.
        **/
       SubIdentityRevoked: AugmentedEvent<ApiType, [sub: SpRuntimeAccountAccountId20, main: SpRuntimeAccountAccountId20, deposit: u128], { sub: SpRuntimeAccountAccountId20, main: SpRuntimeAccountAccountId20, deposit: u128 }>;
+      /**
+       * A username was queued, but `who` must accept it prior to `expiration`.
+       **/
+      UsernameQueued: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, username: Bytes, expiration: u32], { who: SpRuntimeAccountAccountId20, username: Bytes, expiration: u32 }>;
+      /**
+       * A username was set for `who`.
+       **/
+      UsernameSet: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, username: Bytes], { who: SpRuntimeAccountAccountId20, username: Bytes }>;
       /**
        * Generic event
        **/
@@ -508,15 +567,19 @@ declare module '@polkadot/api-base/types/events' {
     };
     sudo: {
       /**
-       * The \[sudoer\] just switched identity; the old key is supplied if one existed.
+       * The sudo key has been updated.
        **/
-      KeyChanged: AugmentedEvent<ApiType, [oldSudoer: Option<SpRuntimeAccountAccountId20>], { oldSudoer: Option<SpRuntimeAccountAccountId20> }>;
+      KeyChanged: AugmentedEvent<ApiType, [old: Option<SpRuntimeAccountAccountId20>, new_: SpRuntimeAccountAccountId20], { old: Option<SpRuntimeAccountAccountId20>, new_: SpRuntimeAccountAccountId20 }>;
       /**
-       * A sudo just took place. \[result\]
+       * The key was permanently removed.
+       **/
+      KeyRemoved: AugmentedEvent<ApiType, []>;
+      /**
+       * A sudo call just took place.
        **/
       Sudid: AugmentedEvent<ApiType, [sudoResult: Result<Null, SpRuntimeDispatchError>], { sudoResult: Result<Null, SpRuntimeDispatchError> }>;
       /**
-       * A sudo just took place. \[result\]
+       * A [sudo_as](Pallet::sudo_as) call just took place.
        **/
       SudoAsDone: AugmentedEvent<ApiType, [sudoResult: Result<Null, SpRuntimeDispatchError>], { sudoResult: Result<Null, SpRuntimeDispatchError> }>;
       /**
@@ -567,6 +630,10 @@ declare module '@polkadot/api-base/types/events' {
        * On stored txs
        **/
       TxsEnqueued: AugmentedEvent<ApiType, [count: u64], { count: u64 }>;
+      /**
+       * An upgrade was authorized.
+       **/
+      UpgradeAuthorized: AugmentedEvent<ApiType, [codeHash: H256, checkVersion: bool], { codeHash: H256, checkVersion: bool }>;
       /**
        * Generic event
        **/
@@ -663,6 +730,14 @@ declare module '@polkadot/api-base/types/events' {
     };
     treasury: {
       /**
+       * A new asset spend proposal has been approved.
+       **/
+      AssetSpendApproved: AugmentedEvent<ApiType, [index: u32, assetKind: Null, amount: u128, beneficiary: SpRuntimeAccountAccountId20, validFrom: u32, expireAt: u32], { index: u32, assetKind: Null, amount: u128, beneficiary: SpRuntimeAccountAccountId20, validFrom: u32, expireAt: u32 }>;
+      /**
+       * An approved spend was voided.
+       **/
+      AssetSpendVoided: AugmentedEvent<ApiType, [index: u32], { index: u32 }>;
+      /**
        * Some funds have been allocated.
        **/
       Awarded: AugmentedEvent<ApiType, [proposalIndex: u32, award: u128, account: SpRuntimeAccountAccountId20], { proposalIndex: u32, award: u128, account: SpRuntimeAccountAccountId20 }>;
@@ -674,6 +749,14 @@ declare module '@polkadot/api-base/types/events' {
        * Some funds have been deposited.
        **/
       Deposit: AugmentedEvent<ApiType, [value: u128], { value: u128 }>;
+      /**
+       * A payment happened.
+       **/
+      Paid: AugmentedEvent<ApiType, [index: u32, paymentId: Null], { index: u32, paymentId: Null }>;
+      /**
+       * A payment failed and can be retried.
+       **/
+      PaymentFailed: AugmentedEvent<ApiType, [index: u32, paymentId: Null], { index: u32, paymentId: Null }>;
       /**
        * New proposal.
        **/
@@ -694,6 +777,11 @@ declare module '@polkadot/api-base/types/events' {
        * We have ended a spend period and will now allocate funds.
        **/
       Spending: AugmentedEvent<ApiType, [budgetRemaining: u128], { budgetRemaining: u128 }>;
+      /**
+       * A spend was processed and removed from the storage. It might have been successfully
+       * paid or it may have expired.
+       **/
+      SpendProcessed: AugmentedEvent<ApiType, [index: u32], { index: u32 }>;
       /**
        * The inactive funds of the pallet have been updated.
        **/
