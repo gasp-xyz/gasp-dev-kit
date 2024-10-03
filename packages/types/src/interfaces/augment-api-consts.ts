@@ -351,10 +351,6 @@ declare module '@polkadot/api-base/types/consts' {
       requestsPerBlock: u128 & AugmentedConst<ApiType>;
       rightsMultiplier: u128 & AugmentedConst<ApiType>;
       /**
-       * Withdrawals flat fee
-       **/
-      withdrawFee: u128 & AugmentedConst<ApiType>;
-      /**
        * Generic const
        **/
       [key: string]: Codec;
