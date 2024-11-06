@@ -1514,8 +1514,9 @@ export default {
         amount: 'u128',
       },
       claim_native_rewards: {
-        liquidityTokenId: 'u32'
-      }
+        liquidityTokenId: 'u32',
+      },
+      trigger_event: 'Null'
     }
   },
   /**
