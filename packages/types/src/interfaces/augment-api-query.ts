@@ -10,7 +10,7 @@ import type { Data } from '@polkadot/types';
 import type { BTreeMap, BTreeSet, Bytes, Null, Option, U256, U8aFixed, Vec, bool, u128, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber, ITuple } from '@polkadot/types-codec/types';
 import type { Call, H256, Perbill } from '@polkadot/types/interfaces/runtime';
-import type { FrameSupportDispatchPerDispatchClassWeight, FrameSystemAccountInfo, FrameSystemCodeUpgradeAuthorization, FrameSystemEventRecord, FrameSystemLastRuntimeUpgradeInfo, FrameSystemPhase, MangataTypesAssetsL1Asset, OrmlTokensAccountData, OrmlTokensBalanceLock, OrmlTokensReserveData, OrmlTraitsAssetRegistryAssetMetadata, PalletBootstrapBootstrapPhase, PalletCollectiveMangataVotes, PalletCrowdloanRewardsRewardInfo, PalletFeeLockAccountFeeLockDataInfo, PalletFeeLockFeeLockMetadataInfo, PalletGrandpaStoredPendingChange, PalletGrandpaStoredState, PalletIdentityAuthorityProperties, PalletIdentityRegistrarInfo, PalletIdentityRegistration, PalletIssuanceIssuanceInfo, PalletMaintenanceMaintenanceStatusInfo, PalletMultipurposeLiquidityRelockStatusInfo, PalletMultipurposeLiquidityReserveStatusInfo, PalletProofOfStakePromotedPools, PalletProofOfStakeRewardInfo, PalletProofOfStakeSchedule, PalletProofOfStakeScheduleRewardsCalculatorActivatedLiquidityPerSchedule, PalletProofOfStakeScheduleRewardsCalculatorScheduleRewards, PalletProofOfStakeSchedulesList, PalletProxyAnnouncement, PalletProxyProxyDefinition, PalletRolldownDisputeRole, PalletRolldownL2Request, PalletRolldownMessagesChain, PalletRolldownMessagesL1Update, PalletRolldownMessagesRequestId, PalletRolldownSequencerRights, PalletTransactionPaymentReleases, PalletTreasuryProposal, PalletTreasurySpendStatus, PalletVestingMangataReleases, PalletVestingMangataVestingInfo, ParachainStakingAggregatorMetadataType, ParachainStakingBond, ParachainStakingCollatorCandidate, ParachainStakingCollatorSnapshot, ParachainStakingDelegator, ParachainStakingRoundCollatorRewardInfoType, ParachainStakingRoundInfo, ParachainStakingSetOrderedSetBond, RollupRuntimeSessionKeys, SpConsensusAuraSr25519AppSr25519Public, SpConsensusGrandpaAppPublic, SpCoreCryptoKeyTypeId, SpRuntimeAccountAccountId20, SpRuntimeDigest } from '@polkadot/types/lookup';
+import type { FrameSupportDispatchPerDispatchClassWeight, FrameSystemAccountInfo, FrameSystemEventRecord, FrameSystemLastRuntimeUpgradeInfo, FrameSystemPhase, MangataTypesAssetsL1Asset, OrmlTokensAccountData, OrmlTokensBalanceLock, OrmlTokensReserveData, OrmlTraitsAssetRegistryAssetMetadata, PalletBootstrapBootstrapPhase, PalletCollectiveMangataVotes, PalletCrowdloanRewardsRewardInfo, PalletFeeLockAccountFeeLockDataInfo, PalletFeeLockFeeLockMetadataInfo, PalletGrandpaStoredPendingChange, PalletGrandpaStoredState, PalletIdentityRegistrarInfo, PalletIdentityRegistration, PalletIssuanceIssuanceInfo, PalletMaintenanceMaintenanceStatusInfo, PalletMultipurposeLiquidityRelockStatusInfo, PalletMultipurposeLiquidityReserveStatusInfo, PalletProofOfStakePromotedPools, PalletProofOfStakeRewardInfo, PalletProofOfStakeSchedule, PalletProofOfStakeScheduleRewardsCalculatorActivatedLiquidityPerSchedule, PalletProofOfStakeScheduleRewardsCalculatorScheduleRewards, PalletProofOfStakeSchedulesList, PalletProxyAnnouncement, PalletProxyProxyDefinition, PalletRolldownMessagesL1, PalletRolldownMessagesL1Update, PalletRolldownMessagesRequestId, PalletRolldownPendingUpdate, PalletRolldownSequencerRights, PalletTransactionPaymentMangataReleases, PalletTreasuryProposal, PalletVestingMangataReleases, PalletVestingMangataVestingInfo, ParachainStakingAggregatorMetadataType, ParachainStakingBond, ParachainStakingCollatorCandidate, ParachainStakingCollatorSnapshot, ParachainStakingDelegator, ParachainStakingRoundCollatorRewardInfoType, ParachainStakingRoundInfo, ParachainStakingSetOrderedSetBond, RollupRuntimeSessionKeys, SpConsensusAuraSr25519AppSr25519Public, SpCoreCryptoKeyTypeId, SpRuntimeAccountAccountId20, SpRuntimeDigest, StagingXcmV3MultiLocation } from '@polkadot/types/lookup';
 import type { Observable } from '@polkadot/types/types';
 
 export type __AugmentedQuery<ApiType extends ApiTypes> = AugmentedQuery<ApiType, () => unknown>;
@@ -20,15 +20,18 @@ declare module '@polkadot/api-base/types/storage' {
   interface AugmentedQueries<ApiType extends ApiTypes> {
     assetRegistry: {
       /**
-       * Maps a location to an asset id - useful when processing xcm
-       * messages.
        * Maps a asset id to an L1Asset - useful when processing l1 assets
        **/
       idToL1Asset: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<MangataTypesAssetsL1Asset>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
       /**
        * Maps a L1Asset to an asset id - useful when processing l1 assets
        **/
-      l1AssetToId: AugmentedQuery<ApiType, (arg: MangataTypesAssetsL1Asset | { Ethereum: any } | { Arbitrum: any } | { Base: any } | string | Uint8Array) => Observable<Option<u32>>, [MangataTypesAssetsL1Asset]> & QueryableStorageEntry<ApiType, [MangataTypesAssetsL1Asset]>;
+      l1AssetToId: AugmentedQuery<ApiType, (arg: MangataTypesAssetsL1Asset | { Ethereum: any } | string | Uint8Array) => Observable<Option<u32>>, [MangataTypesAssetsL1Asset]> & QueryableStorageEntry<ApiType, [MangataTypesAssetsL1Asset]>;
+      /**
+       * Maps a multilocation to an asset id - useful when processing xcm
+       * messages.
+       **/
+      locationToAssetId: AugmentedQuery<ApiType, (arg: StagingXcmV3MultiLocation | { parents?: any; interior?: any } | string | Uint8Array) => Observable<Option<u32>>, [StagingXcmV3MultiLocation]> & QueryableStorageEntry<ApiType, [StagingXcmV3MultiLocation]>;
       /**
        * The metadata of an asset, indexed by asset id.
        **/
@@ -184,25 +187,7 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       [key: string]: QueryableStorageEntry<ApiType>;
     };
-    foundationMembers: {
-      /**
-       * The current membership, stored as an ordered Vec.
-       **/
-      members: AugmentedQuery<ApiType, () => Observable<Vec<SpRuntimeAccountAccountId20>>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * The current prime member, if one exists.
-       **/
-      prime: AugmentedQuery<ApiType, () => Observable<Option<U8aFixed>>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * Generic query
-       **/
-      [key: string]: QueryableStorageEntry<ApiType>;
-    };
     grandpa: {
-      /**
-       * The current list of authorities.
-       **/
-      authorities: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[SpConsensusGrandpaAppPublic, u64]>>>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * The number of changes (both in terms of keys and underlying economic responsibilities)
        * in the "set" of Grandpa validators from genesis.
@@ -244,29 +229,11 @@ declare module '@polkadot/api-base/types/storage' {
     };
     identity: {
       /**
-       * Reverse lookup from `username` to the `AccountId` that has registered it. The value should
-       * be a key in the `IdentityOf` map, but it may not if the user has cleared their identity.
-       * 
-       * Multiple usernames may map to the same `AccountId`, but `IdentityOf` will only map to one
-       * primary username.
-       **/
-      accountOfUsername: AugmentedQuery<ApiType, (arg: Bytes | string | Uint8Array) => Observable<Option<SpRuntimeAccountAccountId20>>, [Bytes]> & QueryableStorageEntry<ApiType, [Bytes]>;
-      /**
-       * Information that is pertinent to identify the entity behind an account. First item is the
-       * registration, second is the account's primary username.
+       * Information that is pertinent to identify the entity behind an account.
        * 
        * TWOX-NOTE: OK ― `AccountId` is a secure hash.
        **/
-      identityOf: AugmentedQuery<ApiType, (arg: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<Option<ITuple<[PalletIdentityRegistration, Option<Bytes>]>>>, [SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20]>;
-      /**
-       * Usernames that an authority has granted, but that the account controller has not confirmed
-       * that they want it. Used primarily in cases where the `AccountId` cannot provide a signature
-       * because they are a pure proxy, multisig, etc. In order to confirm it, they should call
-       * [`Call::accept_username`].
-       * 
-       * First tuple item is the account and second is the acceptance deadline.
-       **/
-      pendingUsernames: AugmentedQuery<ApiType, (arg: Bytes | string | Uint8Array) => Observable<Option<ITuple<[SpRuntimeAccountAccountId20, u32]>>>, [Bytes]> & QueryableStorageEntry<ApiType, [Bytes]>;
+      identityOf: AugmentedQuery<ApiType, (arg: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<Option<PalletIdentityRegistration>>, [SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20]>;
       /**
        * The set of registrars. Not expected to get very big as can only be added through a
        * special origin (likely a council motion).
@@ -288,10 +255,6 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       superOf: AugmentedQuery<ApiType, (arg: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<Option<ITuple<[SpRuntimeAccountAccountId20, Data]>>>, [SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20]>;
       /**
-       * A map of the accounts who are authorized to grant usernames.
-       **/
-      usernameAuthorities: AugmentedQuery<ApiType, (arg: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<Option<PalletIdentityAuthorityProperties>>, [SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20]>;
-      /**
        * Generic query
        **/
       [key: string]: QueryableStorageEntry<ApiType>;
@@ -299,7 +262,7 @@ declare module '@polkadot/api-base/types/storage' {
     issuance: {
       issuanceConfigStore: AugmentedQuery<ApiType, () => Observable<Option<PalletIssuanceIssuanceInfo>>, []> & QueryableStorageEntry<ApiType, []>;
       isTGEFinalized: AugmentedQuery<ApiType, () => Observable<bool>, []> & QueryableStorageEntry<ApiType, []>;
-      sessionIssuance: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u128, u128, u128]>>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
+      sessionIssuance: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u128, u128]>>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
       tgeTotal: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
@@ -475,59 +438,34 @@ declare module '@polkadot/api-base/types/storage' {
       [key: string]: QueryableStorageEntry<ApiType>;
     };
     rolldown: {
-      awaitingCancelResolution: AugmentedQuery<ApiType, (arg: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array) => Observable<BTreeSet<ITuple<[SpRuntimeAccountAccountId20, u128, PalletRolldownDisputeRole]>>>, [PalletRolldownMessagesChain]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesChain]>;
-      /**
-       * stores id of the failed depoisit, so it can be  refunded using [`Pallet::refund_failed_deposit`]
-       **/
-      failedL1Deposits: AugmentedQuery<ApiType, (arg: ITuple<[PalletRolldownMessagesChain, u128]> | [PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, u128 | AnyNumber | Uint8Array]) => Observable<Option<ITuple<[SpRuntimeAccountAccountId20, H256]>>>, [ITuple<[PalletRolldownMessagesChain, u128]>]> & QueryableStorageEntry<ApiType, [ITuple<[PalletRolldownMessagesChain, u128]>]>;
-      ferriedDeposits: AugmentedQuery<ApiType, (arg: ITuple<[PalletRolldownMessagesChain, H256]> | [PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, H256 | string | Uint8Array]) => Observable<Option<SpRuntimeAccountAccountId20>>, [ITuple<[PalletRolldownMessagesChain, H256]>]> & QueryableStorageEntry<ApiType, [ITuple<[PalletRolldownMessagesChain, H256]>]>;
-      l2OriginRequestId: AugmentedQuery<ApiType, () => Observable<BTreeMap<PalletRolldownMessagesChain, u128>>, []> & QueryableStorageEntry<ApiType, []>;
-      l2Requests: AugmentedQuery<ApiType, (arg1: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, arg2: PalletRolldownMessagesRequestId | { origin?: any; id?: any } | string | Uint8Array) => Observable<Option<ITuple<[PalletRolldownL2Request, H256]>>>, [PalletRolldownMessagesChain, PalletRolldownMessagesRequestId]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesChain, PalletRolldownMessagesRequestId]>;
-      l2RequestsBatch: AugmentedQuery<ApiType, (arg: ITuple<[PalletRolldownMessagesChain, u128]> | [PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, u128 | AnyNumber | Uint8Array]) => Observable<Option<ITuple<[u32, ITuple<[u128, u128]>, SpRuntimeAccountAccountId20]>>>, [ITuple<[PalletRolldownMessagesChain, u128]>]> & QueryableStorageEntry<ApiType, [ITuple<[PalletRolldownMessagesChain, u128]>]>;
-      /**
-       * For each supported chain stores:
-       * - last batch id
-       * - range of the reqeusts in last batch
-       **/
-      l2RequestsBatchLast: AugmentedQuery<ApiType, () => Observable<BTreeMap<PalletRolldownMessagesChain, ITuple<[u32, u128, ITuple<[u128, u128]>]>>>, []> & QueryableStorageEntry<ApiType, []>;
-      lastMaintananceMode: AugmentedQuery<ApiType, () => Observable<Option<u128>>, []> & QueryableStorageEntry<ApiType, []>;
-      lastProcessedRequestOnL2: AugmentedQuery<ApiType, (arg: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array) => Observable<u128>, [PalletRolldownMessagesChain]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesChain]>;
-      lastScheduledUpdateIdInExecutionQueue: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
-      lastUpdateBySequencer: AugmentedQuery<ApiType, (arg: ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]> | [PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, SpRuntimeAccountAccountId20 | string | Uint8Array]) => Observable<u128>, [ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>]> & QueryableStorageEntry<ApiType, [ITuple<[PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>]>;
-      manualBatchExtraFee: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
-      maxAcceptedRequestIdOnl2: AugmentedQuery<ApiType, (arg: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array) => Observable<u128>, [PalletRolldownMessagesChain]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesChain]>;
-      pendingSequencerUpdates: AugmentedQuery<ApiType, (arg1: u128 | AnyNumber | Uint8Array, arg2: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array) => Observable<Option<ITuple<[SpRuntimeAccountAccountId20, PalletRolldownMessagesL1Update, H256]>>>, [u128, PalletRolldownMessagesChain]> & QueryableStorageEntry<ApiType, [u128, PalletRolldownMessagesChain]>;
-      sequencersRights: AugmentedQuery<ApiType, (arg: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array) => Observable<BTreeMap<SpRuntimeAccountAccountId20, PalletRolldownSequencerRights>>, [PalletRolldownMessagesChain]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesChain]>;
-      totalNumberOfDeposits: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
-      totalNumberOfWithdrawals: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
-      updatesExecutionQueue: AugmentedQuery<ApiType, (arg: u128 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u32, PalletRolldownMessagesChain, PalletRolldownMessagesL1Update]>>>, [u128]> & QueryableStorageEntry<ApiType, [u128]>;
-      updatesExecutionQueueNextId: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
+      awaitingCancelResolution: AugmentedQuery<ApiType, (arg: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<BTreeSet<u128>>, [SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20]>;
+      l2OriginRequestId: AugmentedQuery<ApiType, (arg: PalletRolldownMessagesL1 | 'Ethereum' | number | Uint8Array) => Observable<u128>, [PalletRolldownMessagesL1]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesL1]>;
+      lastProcessedRequestOnL2: AugmentedQuery<ApiType, (arg: PalletRolldownMessagesL1 | 'Ethereum' | number | Uint8Array) => Observable<u128>, [PalletRolldownMessagesL1]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesL1]>;
+      lastUpdateBySequencer: AugmentedQuery<ApiType, (arg: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<u128>, [SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20]>;
+      maxAcceptedRequestIdOnl2: AugmentedQuery<ApiType, (arg: PalletRolldownMessagesL1 | 'Ethereum' | number | Uint8Array) => Observable<u128>, [PalletRolldownMessagesL1]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesL1]>;
+      pendingRequests: AugmentedQuery<ApiType, (arg1: u128 | AnyNumber | Uint8Array, arg2: PalletRolldownMessagesL1 | 'Ethereum' | number | Uint8Array) => Observable<Option<ITuple<[SpRuntimeAccountAccountId20, PalletRolldownMessagesL1Update]>>>, [u128, PalletRolldownMessagesL1]> & QueryableStorageEntry<ApiType, [u128, PalletRolldownMessagesL1]>;
+      pendingUpdates: AugmentedQuery<ApiType, (arg1: PalletRolldownMessagesL1 | 'Ethereum' | number | Uint8Array, arg2: PalletRolldownMessagesRequestId | { origin?: any; id?: any } | string | Uint8Array) => Observable<Option<PalletRolldownPendingUpdate>>, [PalletRolldownMessagesL1, PalletRolldownMessagesRequestId]> & QueryableStorageEntry<ApiType, [PalletRolldownMessagesL1, PalletRolldownMessagesRequestId]>;
+      requestToExecute: AugmentedQuery<ApiType, (arg: u128 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[PalletRolldownMessagesL1, PalletRolldownMessagesL1Update]>>>, [u128]> & QueryableStorageEntry<ApiType, [u128]>;
+      requestToExecuteCnt: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
+      requestToExecuteLast: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
+      sequencerCount: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
+      sequencerRights: AugmentedQuery<ApiType, (arg: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<Option<PalletRolldownSequencerRights>>, [SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20]>;
+      totalNumberOfDeposits: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
+      totalNumberOfWithdrawals: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/
       [key: string]: QueryableStorageEntry<ApiType>;
     };
     sequencerStaking: {
-      activeSequencers: AugmentedQuery<ApiType, () => Observable<BTreeMap<PalletRolldownMessagesChain, Vec<SpRuntimeAccountAccountId20>>>, []> & QueryableStorageEntry<ApiType, []>;
-      aliasAccount: AugmentedQuery<ApiType, (arg: ITuple<[SpRuntimeAccountAccountId20, PalletRolldownMessagesChain]> | [SpRuntimeAccountAccountId20 | string | Uint8Array, PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array]) => Observable<Option<SpRuntimeAccountAccountId20>>, [ITuple<[SpRuntimeAccountAccountId20, PalletRolldownMessagesChain]>]> & QueryableStorageEntry<ApiType, [ITuple<[SpRuntimeAccountAccountId20, PalletRolldownMessagesChain]>]>;
-      aliasAccountInUse: AugmentedQuery<ApiType, (arg: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<Option<Null>>, [SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20]>;
-      /**
-       * Points for each collator per round
-       **/
-      awardedPts: AugmentedQuery<ApiType, (arg1: u32 | AnyNumber | Uint8Array, arg2: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<u32>, [u32, SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [u32, SpRuntimeAccountAccountId20]>;
+      activeSequencers: AugmentedQuery<ApiType, () => Observable<Vec<SpRuntimeAccountAccountId20>>, []> & QueryableStorageEntry<ApiType, []>;
       currentRound: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
+      eligibleToBeSequencers: AugmentedQuery<ApiType, () => Observable<BTreeMap<SpRuntimeAccountAccountId20, u32>>, []> & QueryableStorageEntry<ApiType, []>;
       minimalStakeAmount: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
-      nextSequencerIndex: AugmentedQuery<ApiType, () => Observable<BTreeMap<PalletRolldownMessagesChain, u32>>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * Total points awarded to collators for block production in the round
-       **/
-      points: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<u32>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
-      /**
-       * Stores information about rewards per each session
-       **/
-      roundSequencerRewardInfo: AugmentedQuery<ApiType, (arg1: SpRuntimeAccountAccountId20 | string | Uint8Array, arg2: u32 | AnyNumber | Uint8Array) => Observable<Option<u128>>, [SpRuntimeAccountAccountId20, u32]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20, u32]>;
-      selectedSequencer: AugmentedQuery<ApiType, () => Observable<BTreeMap<PalletRolldownMessagesChain, SpRuntimeAccountAccountId20>>, []> & QueryableStorageEntry<ApiType, []>;
-      sequencerStake: AugmentedQuery<ApiType, (arg: ITuple<[SpRuntimeAccountAccountId20, PalletRolldownMessagesChain]> | [SpRuntimeAccountAccountId20 | string | Uint8Array, PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array]) => Observable<u128>, [ITuple<[SpRuntimeAccountAccountId20, PalletRolldownMessagesChain]>]> & QueryableStorageEntry<ApiType, [ITuple<[SpRuntimeAccountAccountId20, PalletRolldownMessagesChain]>]>;
+      nextSequencerIndex: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
+      roundCollators: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Vec<SpRuntimeAccountAccountId20>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
+      selectedSequencer: AugmentedQuery<ApiType, () => Observable<Option<U8aFixed>>, []> & QueryableStorageEntry<ApiType, []>;
+      sequencerStake: AugmentedQuery<ApiType, (arg: SpRuntimeAccountAccountId20 | string | Uint8Array) => Observable<u128>, [SpRuntimeAccountAccountId20]> & QueryableStorageEntry<ApiType, [SpRuntimeAccountAccountId20]>;
       slashFineAmount: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
@@ -594,10 +532,6 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       allExtrinsicsLen: AugmentedQuery<ApiType, () => Observable<Option<u32>>, []> & QueryableStorageEntry<ApiType, []>;
       /**
-       * `Some` if a code upgrade has been authorized.
-       **/
-      authorizedUpgrade: AugmentedQuery<ApiType, () => Observable<Option<FrameSystemCodeUpgradeAuthorization>>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
        * Map of block numbers to block hashes.
        **/
       blockHash: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<H256>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
@@ -657,10 +591,6 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       extrinsicData: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Bytes>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
       /**
-       * Whether all inherents have been applied.
-       **/
-      inherentsApplied: AugmentedQuery<ApiType, () => Observable<bool>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
        * Stores the `spec_version` and `spec_name` of when the last runtime upgrade happened.
        **/
       lastRuntimeUpgrade: AugmentedQuery<ApiType, () => Observable<Option<FrameSystemLastRuntimeUpgradeInfo>>, []> & QueryableStorageEntry<ApiType, []>;
@@ -717,14 +647,11 @@ declare module '@polkadot/api-base/types/storage' {
     };
     timestamp: {
       /**
-       * Whether the timestamp has been updated in this block.
-       * 
-       * This value is updated to `true` upon successful submission of a timestamp by a node.
-       * It is then checked at the end of each block execution in the `on_finalize` hook.
+       * Did the timestamp get updated in this block?
        **/
       didUpdate: AugmentedQuery<ApiType, () => Observable<bool>, []> & QueryableStorageEntry<ApiType, []>;
       /**
-       * The current time for the current block.
+       * Current time for the current block.
        **/
       now: AugmentedQuery<ApiType, () => Observable<u64>, []> & QueryableStorageEntry<ApiType, []>;
       /**
@@ -763,7 +690,7 @@ declare module '@polkadot/api-base/types/storage' {
     };
     transactionPayment: {
       nextFeeMultiplier: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
-      storageVersion: AugmentedQuery<ApiType, () => Observable<PalletTransactionPaymentReleases>, []> & QueryableStorageEntry<ApiType, []>;
+      storageVersion: AugmentedQuery<ApiType, () => Observable<PalletTransactionPaymentMangataReleases>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/
@@ -786,14 +713,6 @@ declare module '@polkadot/api-base/types/storage' {
        * Proposals that have been made.
        **/
       proposals: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<PalletTreasuryProposal>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
-      /**
-       * The count of spends that have been made.
-       **/
-      spendCount: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
-       * Spends that have been approved and being processed.
-       **/
-      spends: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<PalletTreasurySpendStatus>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
       /**
        * Generic query
        **/
@@ -819,7 +738,7 @@ declare module '@polkadot/api-base/types/storage' {
       liquidityAssets: AugmentedQuery<ApiType, (arg: ITuple<[u32, u32]> | [u32 | AnyNumber | Uint8Array, u32 | AnyNumber | Uint8Array]) => Observable<Option<u32>>, [ITuple<[u32, u32]>]> & QueryableStorageEntry<ApiType, [ITuple<[u32, u32]>]>;
       liquidityPools: AugmentedQuery<ApiType, (arg: u32 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u32, u32]>>>, [u32]> & QueryableStorageEntry<ApiType, [u32]>;
       pools: AugmentedQuery<ApiType, (arg: ITuple<[u32, u32]> | [u32 | AnyNumber | Uint8Array, u32 | AnyNumber | Uint8Array]) => Observable<ITuple<[u128, u128]>>, [ITuple<[u32, u32]>]> & QueryableStorageEntry<ApiType, [ITuple<[u32, u32]>]>;
-      totalNumberOfSwaps: AugmentedQuery<ApiType, () => Observable<u128>, []> & QueryableStorageEntry<ApiType, []>;
+      totalNumberOfSwaps: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/

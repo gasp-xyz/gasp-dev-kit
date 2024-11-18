@@ -102,13 +102,18 @@ declare module '@polkadot/api-base/types/consts' {
     };
     identity: {
       /**
-       * The amount held on deposit for a registered identity.
+       * The amount held on deposit for a registered identity
        **/
       basicDeposit: u128 & AugmentedConst<ApiType>;
       /**
-       * The amount held on deposit per encoded byte for a registered identity.
+       * The amount held on deposit per additional field for a registered identity.
        **/
-      byteDeposit: u128 & AugmentedConst<ApiType>;
+      fieldDeposit: u128 & AugmentedConst<ApiType>;
+      /**
+       * Maximum number of additional fields that may be stored in an ID. Needed to bound the I/O
+       * required to access an identity, but can be pretty high.
+       **/
+      maxAdditionalFields: u32 & AugmentedConst<ApiType>;
       /**
        * Maxmimum number of registrars allowed in the system. Needed to bound the complexity
        * of, e.g., updating judgements.
@@ -118,18 +123,6 @@ declare module '@polkadot/api-base/types/consts' {
        * The maximum number of sub-accounts allowed per identified account.
        **/
       maxSubAccounts: u32 & AugmentedConst<ApiType>;
-      /**
-       * The maximum length of a suffix.
-       **/
-      maxSuffixLength: u32 & AugmentedConst<ApiType>;
-      /**
-       * The maximum length of a username, including its suffix and any system-added delimiters.
-       **/
-      maxUsernameLength: u32 & AugmentedConst<ApiType>;
-      /**
-       * The number of blocks within which a username grant must be accepted.
-       **/
-      pendingUsernameExpiration: u32 & AugmentedConst<ApiType>;
       /**
        * The amount held on deposit for a registered subaccount. This should account for the fact
        * that one storage item's value will increase by the size of an account ID, and there will
@@ -170,14 +163,6 @@ declare module '@polkadot/api-base/types/consts' {
        * The split of issuance for liquidity mining rewards
        **/
       liquidityMiningSplit: Perbill & AugmentedConst<ApiType>;
-      /**
-       * The account id that holds the sequencers issuance
-       **/
-      sequencersIssuanceVault: SpRuntimeAccountAccountId20 & AugmentedConst<ApiType>;
-      /**
-       * The split of issuance for sequencers rewards
-       **/
-      sequencersSplit: Perbill & AugmentedConst<ApiType>;
       /**
        * The account id that holds the staking issuance
        **/
@@ -346,10 +331,7 @@ declare module '@polkadot/api-base/types/consts' {
     };
     rolldown: {
       disputePeriodLength: u128 & AugmentedConst<ApiType>;
-      merkleRootAutomaticBatchPeriod: u128 & AugmentedConst<ApiType>;
-      merkleRootAutomaticBatchSize: u128 & AugmentedConst<ApiType>;
       requestsPerBlock: u128 & AugmentedConst<ApiType>;
-      rightsMultiplier: u128 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -358,14 +340,9 @@ declare module '@polkadot/api-base/types/consts' {
     sequencerStaking: {
       blocksForSequencerUpdate: u32 & AugmentedConst<ApiType>;
       cancellerRewardPercentage: Permill & AugmentedConst<ApiType>;
-      defaultPayoutLimit: u32 & AugmentedConst<ApiType>;
       maxSequencers: u32 & AugmentedConst<ApiType>;
       minimumSequencers: u32 & AugmentedConst<ApiType>;
       noOfPastSessionsForEligibility: u32 & AugmentedConst<ApiType>;
-      /**
-       * Number of rounds after which block authors are rewarded
-       **/
-      rewardPaymentDelay: u32 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -397,7 +374,7 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       ss58Prefix: u16 & AugmentedConst<ApiType>;
       /**
-       * Get the chain's in-code version.
+       * Get the chain's current version.
        **/
       version: SpVersionRuntimeVersion & AugmentedConst<ApiType>;
       /**
@@ -407,12 +384,10 @@ declare module '@polkadot/api-base/types/consts' {
     };
     timestamp: {
       /**
-       * The minimum period between blocks.
-       * 
-       * Be aware that this is different to the *expected* period that the block production
-       * apparatus provides. Your chosen consensus system will generally work with this to
-       * determine a sensible block time. For example, in the Aura pallet it will be double this
-       * period on default settings.
+       * The minimum period between blocks. Beware that this is different to the *expected*
+       * period that the block production apparatus provides. Your chosen consensus system will
+       * generally work with this to determine a sensible block time. e.g. For Aura, it will be
+       * double this period on default settings.
        **/
       minimumPeriod: u64 & AugmentedConst<ApiType>;
       /**
@@ -433,10 +408,10 @@ declare module '@polkadot/api-base/types/consts' {
     };
     transactionPayment: {
       /**
-       * A fee multiplier for `Operational` extrinsics to compute "virtual tip" to boost their
+       * A fee mulitplier for `Operational` extrinsics to compute "virtual tip" to boost their
        * `priority`
        * 
-       * This value is multiplied by the `final_fee` to obtain a "virtual tip" that is later
+       * This value is multipled by the `final_fee` to obtain a "virtual tip" that is later
        * added to a tip component in regular `priority` calculations.
        * It means that a `Normal` transaction can front-run a similarly-sized `Operational`
        * extrinsic (with no tip), by including a tip value greater than the virtual tip.
@@ -476,10 +451,6 @@ declare module '@polkadot/api-base/types/consts' {
        * The treasury's pallet id, used for deriving its sovereign account ID.
        **/
       palletId: FrameSupportPalletId & AugmentedConst<ApiType>;
-      /**
-       * The period during which an approved treasury spend has to be claimed.
-       **/
-      payoutPeriod: u32 & AugmentedConst<ApiType>;
       /**
        * Fraction of a proposal's value that should be bonded in order to place the proposal.
        * An accepted proposal gets these back. A rejected proposal does not.
