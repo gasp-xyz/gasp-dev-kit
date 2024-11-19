@@ -49,7 +49,7 @@ export default {
       _enum: ['L1', 'L2']
     },
     Chain: {
-      _enum: ['Ethereum', 'Arbitrum']
+      _enum: ['Ethereum', 'Arbitrum', 'Base']
     },
     CancelResolution: {
       requestId: "RequestId",
