@@ -17,19 +17,16 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       AssetNotFound: AugmentedError<ApiType>;
       /**
-       * The version of the `VersionedMultiLocation` value used is not able
+       * The version of the `VersionedLocation` value used is not able
        * to be interpreted.
        **/
       BadVersion: AugmentedError<ApiType>;
       /**
+       * Another asset was already register with this location.
        * Another asset was already register with this asset id.
        **/
       ConflictingAssetId: AugmentedError<ApiType>;
       ConflictingL1Asset: AugmentedError<ApiType>;
-      /**
-       * Another asset was already register with this location.
-       **/
-      ConflictingLocation: AugmentedError<ApiType>;
       /**
        * The asset id is invalid.
        **/
@@ -324,6 +321,24 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    foundationMembers: {
+      /**
+       * Already a member.
+       **/
+      AlreadyMember: AugmentedError<ApiType>;
+      /**
+       * Not a member.
+       **/
+      NotMember: AugmentedError<ApiType>;
+      /**
+       * Too many members.
+       **/
+      TooManyMembers: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     grandpa: {
       /**
        * Attempt to signal GRANDPA change with one already pending.
@@ -382,9 +397,21 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       InvalidJudgement: AugmentedError<ApiType>;
       /**
+       * The signature on a username was not valid.
+       **/
+      InvalidSignature: AugmentedError<ApiType>;
+      /**
+       * The provided suffix is too long.
+       **/
+      InvalidSuffix: AugmentedError<ApiType>;
+      /**
        * The target is invalid.
        **/
       InvalidTarget: AugmentedError<ApiType>;
+      /**
+       * The username does not meet the requirements.
+       **/
+      InvalidUsername: AugmentedError<ApiType>;
       /**
        * The provided judgement was for a different identity.
        **/
@@ -398,9 +425,17 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       JudgementPaymentFailed: AugmentedError<ApiType>;
       /**
+       * The authority cannot allocate any more usernames.
+       **/
+      NoAllocation: AugmentedError<ApiType>;
+      /**
        * No identity found.
        **/
       NoIdentity: AugmentedError<ApiType>;
+      /**
+       * The username cannot be forcefully removed because it can still be accepted.
+       **/
+      NotExpired: AugmentedError<ApiType>;
       /**
        * Account isn't found.
        **/
@@ -418,13 +453,21 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       NotSub: AugmentedError<ApiType>;
       /**
+       * The sender does not have permission to issue a username.
+       **/
+      NotUsernameAuthority: AugmentedError<ApiType>;
+      /**
+       * The requested username does not exist.
+       **/
+      NoUsername: AugmentedError<ApiType>;
+      /**
+       * Setting this username requires a signature, but none was provided.
+       **/
+      RequiresSignature: AugmentedError<ApiType>;
+      /**
        * Sticky judgement.
        **/
       StickyJudgement: AugmentedError<ApiType>;
-      /**
-       * Too many additional fields.
-       **/
-      TooManyFields: AugmentedError<ApiType>;
       /**
        * Maximum amount of registrars reached. Cannot add any more.
        **/
@@ -433,6 +476,10 @@ declare module '@polkadot/api-base/types/errors' {
        * Too many subs-accounts.
        **/
       TooManySubAccounts: AugmentedError<ApiType>;
+      /**
+       * The username is already taken.
+       **/
+      UsernameTaken: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -697,23 +744,37 @@ declare module '@polkadot/api-base/types/errors' {
     };
     rolldown: {
       AddressDeserializationFailure: AugmentedError<ApiType>;
+      AlreadyExecuted: AugmentedError<ApiType>;
+      AssetRegistrationProblem: AugmentedError<ApiType>;
       BalanceOverflow: AugmentedError<ApiType>;
       BlockedByMaintenanceMode: AugmentedError<ApiType>;
       CancelRightsExhausted: AugmentedError<ApiType>;
+      EmptyBatch: AugmentedError<ApiType>;
       EmptyUpdate: AugmentedError<ApiType>;
+      FailedDepositDoesNotExist: AugmentedError<ApiType>;
+      FerryHashMismatch: AugmentedError<ApiType>;
+      InvalidRange: AugmentedError<ApiType>;
       InvalidUpdate: AugmentedError<ApiType>;
       L1AssetCreationFailed: AugmentedError<ApiType>;
       L1AssetNotFound: AugmentedError<ApiType>;
       MathOverflow: AugmentedError<ApiType>;
+      MintError: AugmentedError<ApiType>;
       MultipleUpdatesInSingleBlock: AugmentedError<ApiType>;
+      NonExistingRequestId: AugmentedError<ApiType>;
+      NotEligibleForRefund: AugmentedError<ApiType>;
       NotEnoughAssets: AugmentedError<ApiType>;
+      NotEnoughAssetsForFee: AugmentedError<ApiType>;
       OnlySelectedSequencerisAllowedToUpdate: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
       ReadRightsExhausted: AugmentedError<ApiType>;
       RequestDoesNotExist: AugmentedError<ApiType>;
       SequencerAwaitingCancelResolution: AugmentedError<ApiType>;
       SequencerLastUpdateStillInDisputePeriod: AugmentedError<ApiType>;
+      TokenDoesNotExist: AugmentedError<ApiType>;
       TooManyRequests: AugmentedError<ApiType>;
+      UnknownAliasAccount: AugmentedError<ApiType>;
+      UnsupportedAsset: AugmentedError<ApiType>;
+      UpdateHashMishmatch: AugmentedError<ApiType>;
       WrongRequestId: AugmentedError<ApiType>;
       /**
        * Generic error
@@ -721,15 +782,20 @@ declare module '@polkadot/api-base/types/errors' {
       [key: string]: AugmentedError<ApiType>;
     };
     sequencerStaking: {
+      AddressInUse: AugmentedError<ApiType>;
+      AliasAccountIsActiveSequencer: AugmentedError<ApiType>;
       CantUnstakeWhileInActiveSet: AugmentedError<ApiType>;
       MathOverflow: AugmentedError<ApiType>;
       MaxSequencersLimitReached: AugmentedError<ApiType>;
-      NotEligibleToBeSequencer: AugmentedError<ApiType>;
+      NoStakeToUnStake: AugmentedError<ApiType>;
       NotEnoughSequencerStake: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
+      SequencerAccountIsActiveSequencerAlias: AugmentedError<ApiType>;
       SequencerAlreadyInActiveSet: AugmentedError<ApiType>;
       SequencerIsNotInActiveSet: AugmentedError<ApiType>;
+      SequencerRoundRewardsDNE: AugmentedError<ApiType>;
       TestUnstakingError: AugmentedError<ApiType>;
+      UnknownChainId: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -763,7 +829,7 @@ declare module '@polkadot/api-base/types/errors' {
     };
     sudo: {
       /**
-       * Sender must be the Sudo account
+       * Sender must be the Sudo account.
        **/
       RequireSudo: AugmentedError<ApiType>;
       /**
@@ -794,6 +860,10 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       InvalidSpecName: AugmentedError<ApiType>;
       /**
+       * A multi-block migration is ongoing and prevents the current code from being replaced.
+       **/
+      MultiBlockMigrationsOngoing: AugmentedError<ApiType>;
+      /**
        * Suicide called when the account has non-default composite data.
        **/
       NonDefaultComposite: AugmentedError<ApiType>;
@@ -801,6 +871,10 @@ declare module '@polkadot/api-base/types/errors' {
        * There is a non-zero reference count preventing the account from being purged.
        **/
       NonZeroRefCount: AugmentedError<ApiType>;
+      /**
+       * No upgrade authorized.
+       **/
+      NothingAuthorized: AugmentedError<ApiType>;
       /**
        * The specification version is not allowed to decrease between the current runtime
        * and the new runtime.
@@ -810,6 +884,10 @@ declare module '@polkadot/api-base/types/errors' {
        * the storage queue is empty and cannot accept any new txs
        **/
       StorageQueueFull: AugmentedError<ApiType>;
+      /**
+       * The submitted code is not authorized.
+       **/
+      Unauthorized: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -856,6 +934,22 @@ declare module '@polkadot/api-base/types/errors' {
     };
     treasury: {
       /**
+       * The payment has already been attempted.
+       **/
+      AlreadyAttempted: AugmentedError<ApiType>;
+      /**
+       * The spend is not yet eligible for payout.
+       **/
+      EarlyPayout: AugmentedError<ApiType>;
+      /**
+       * The balance of the asset kind is not convertible to the balance of the native asset.
+       **/
+      FailedToConvertBalance: AugmentedError<ApiType>;
+      /**
+       * The payment has neither failed nor succeeded yet.
+       **/
+      Inconclusive: AugmentedError<ApiType>;
+      /**
        * The spend origin is valid but the amount it is allowed to spend is lower than the
        * amount to be spent.
        **/
@@ -865,13 +959,25 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       InsufficientProposersBalance: AugmentedError<ApiType>;
       /**
-       * No proposal or bounty at that index.
+       * No proposal, bounty or spend at that index.
        **/
       InvalidIndex: AugmentedError<ApiType>;
+      /**
+       * The payout was not yet attempted/claimed.
+       **/
+      NotAttempted: AugmentedError<ApiType>;
+      /**
+       * There was some issue with the mechanism of payment.
+       **/
+      PayoutError: AugmentedError<ApiType>;
       /**
        * Proposal has not been approved.
        **/
       ProposalNotApproved: AugmentedError<ApiType>;
+      /**
+       * The spend has expired and cannot be claimed.
+       **/
+      SpendExpired: AugmentedError<ApiType>;
       /**
        * Too many approvals in the queue.
        **/
@@ -1007,7 +1113,7 @@ declare module '@polkadot/api-base/types/errors' {
       /**
        * Unexpected failure
        **/
-      NotMangataLiquidityAsset: AugmentedError<ApiType>;
+      NotPairedWithNativeAsset: AugmentedError<ApiType>;
       /**
        * Past time calculation
        **/
