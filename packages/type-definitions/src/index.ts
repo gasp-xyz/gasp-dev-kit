@@ -74,7 +74,7 @@ export const mTypes = {
     kind: "PalletMarketPoolKind",
     lpTokenId: "TokenId",
     assets: "Vec<TokenId>",
-    reserves: "Vec<u128>"
+    reserves: "Vec<Balance>"
   },
 };
 
@@ -275,11 +275,11 @@ export const mRpc = {
   market: {
     calculate_buy_price: {
       description: "",
-        params: [
-          {
-            name: "pool_id",
-            type: "u32"
-          },
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
         {
           name: "buy_asset_id",
           type: "u32"
@@ -293,11 +293,11 @@ export const mRpc = {
     },
     calculate_expected_amount_for_minting: {
       description: "",
-        params: [
-          {
-            name: "pool_id",
-            type: "u32"
-          },
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
         {
           name: "asset_id",
           type: "u32"
@@ -325,11 +325,11 @@ export const mRpc = {
     },
     calculate_sell_price: {
       description: "",
-        params: [
-          {
-            name: "pool_id",
-            type: "u32"
-          },
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
         {
           name: "sell_asset_id",
           type: "u32"
@@ -343,7 +343,12 @@ export const mRpc = {
     },
     get_pools: {
       description: "",
-      params: [],
+      params: [
+        {
+          name: "pool_id",
+          type: "Option<u32>"
+        },
+      ],
       type: "Vec<PoolInfo>"
     },
     get_burn_amount: {
@@ -502,7 +507,7 @@ export const mRpc = {
         {
           name: 'range',
           type: '(u128, u128)',
-        },{
+        }, {
           name: 'tx_id',
           type: 'u128',
         },
