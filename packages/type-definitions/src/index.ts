@@ -69,12 +69,12 @@ export const mTypes = {
     l2UpdatesToRemove: "Vec<u128>",
     timeStamp: "U256"
   },
-  PoolInfo: {
-    poolId: "u32",
+  RpcPoolInfo: {
+    poolId: "TokenId",
     kind: "PalletMarketPoolKind",
     lpTokenId: "TokenId",
     assets: "Vec<TokenId>",
-    reserves: "Option<(u128,u128)>"
+    reserves: "Vec<serde_json::Value>"
   },
 };
 
@@ -349,7 +349,7 @@ export const mRpc = {
           type: "Option<u32>"
         },
       ],
-      type: "Vec<PoolInfo>"
+      type: "Vec<RpcPoolInfo>"
     },
     get_burn_amount: {
       description: "",
