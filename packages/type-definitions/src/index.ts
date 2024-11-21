@@ -74,7 +74,7 @@ export const mTypes = {
     kind: "PalletMarketPoolKind",
     lpTokenId: "TokenId",
     assets: "Vec<TokenId>",
-    reserves: "Vec<serde_json::Value>"
+    reserves: "Vec<U256>"
   },
 };
 
