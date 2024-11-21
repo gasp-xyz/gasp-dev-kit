@@ -5,7 +5,7 @@
 // this is required to allow for ambient/previous definitions
 import '@polkadot/types/types/registry';
 
-import type { FinalityGrandpaEquivocationPrecommit, FinalityGrandpaEquivocationPrevote, FinalityGrandpaPrecommit, FinalityGrandpaPrevote, FrameSupportDispatchDispatchClass, FrameSupportDispatchDispatchInfo, FrameSupportDispatchPays, FrameSupportDispatchPerDispatchClassU32, FrameSupportDispatchPerDispatchClassWeight, FrameSupportDispatchPerDispatchClassWeightsPerClass, FrameSupportDispatchRawOrigin, FrameSupportPalletId, FrameSupportTokensMiscBalanceStatus, FrameSystemAccountInfo, FrameSystemCall, FrameSystemError, FrameSystemEvent, FrameSystemEventRecord, FrameSystemExtensionsCheckGenesis, FrameSystemExtensionsCheckNonZeroSender, FrameSystemExtensionsCheckNonce, FrameSystemExtensionsCheckSpecVersion, FrameSystemExtensionsCheckTxVersion, FrameSystemExtensionsCheckWeight, FrameSystemLastRuntimeUpgradeInfo, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, FrameSystemLimitsWeightsPerClass, FrameSystemPhase, MangataTypesAssetsCustomMetadata, MangataTypesAssetsL1Asset, MangataTypesAssetsXcmMetadata, MangataTypesAssetsXykMetadata, MangataTypesMultipurposeLiquidityActivateKind, MangataTypesMultipurposeLiquidityBondKind, OrmlAssetRegistryModuleCall, OrmlAssetRegistryModuleError, OrmlAssetRegistryModuleEvent, OrmlTokensAccountData, OrmlTokensBalanceLock, OrmlTokensModuleCall, OrmlTokensModuleError, OrmlTokensModuleEvent, OrmlTokensReserveData, OrmlTraitsAssetRegistryAssetMetadata, PalletBootstrapBootstrapPhase, PalletBootstrapCall, PalletBootstrapError, PalletBootstrapEvent, PalletCollectiveMangataCall, PalletCollectiveMangataError, PalletCollectiveMangataEvent, PalletCollectiveMangataRawOrigin, PalletCollectiveMangataVotes, PalletCrowdloanRewardsCall, PalletCrowdloanRewardsError, PalletCrowdloanRewardsEvent, PalletCrowdloanRewardsRewardInfo, PalletFeeLockAccountFeeLockDataInfo, PalletFeeLockCall, PalletFeeLockError, PalletFeeLockEvent, PalletFeeLockFeeLockMetadataInfo, PalletGrandpaCall, PalletGrandpaError, PalletGrandpaEvent, PalletGrandpaStoredPendingChange, PalletGrandpaStoredState, PalletIdentityBitFlags, PalletIdentityCall, PalletIdentityError, PalletIdentityEvent, PalletIdentityIdentityField, PalletIdentityIdentityInfo, PalletIdentityJudgement, PalletIdentityRegistrarInfo, PalletIdentityRegistration, PalletIssuanceCall, PalletIssuanceError, PalletIssuanceEvent, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletMaintenanceCall, PalletMaintenanceError, PalletMaintenanceEvent, PalletMaintenanceMaintenanceStatusInfo, PalletMetamaskSignatureCall, PalletMetamaskSignatureError, PalletMetamaskSignatureEvent, PalletMultipurposeLiquidityCall, PalletMultipurposeLiquidityError, PalletMultipurposeLiquidityEvent, PalletMultipurposeLiquidityRelockStatusInfo, PalletMultipurposeLiquidityReserveStatusInfo, PalletProofOfStakeCall, PalletProofOfStakeError, PalletProofOfStakeEvent, PalletProofOfStakePromotedPools, PalletProofOfStakeRewardInfo, PalletProofOfStakeSchedule, PalletProofOfStakeScheduleRewardsCalculatorActivatedLiquidityPerSchedule, PalletProofOfStakeScheduleRewardsCalculatorScheduleRewards, PalletProofOfStakeSchedulesList, PalletProofOfStakeThirdPartyActivationKind, PalletProxyAnnouncement, PalletProxyCall, PalletProxyError, PalletProxyEvent, PalletProxyProxyDefinition, PalletRolldownCall, PalletRolldownCancel, PalletRolldownError, PalletRolldownEvent, PalletRolldownMessagesCancelResolution, PalletRolldownMessagesDeposit, PalletRolldownMessagesEthAbiUpdateType, PalletRolldownMessagesL1, PalletRolldownMessagesL1Update, PalletRolldownMessagesL2UpdatesToRemove, PalletRolldownMessagesOrigin, PalletRolldownMessagesRequestId, PalletRolldownMessagesWithdrawalResolution, PalletRolldownPendingUpdate, PalletRolldownRequestResult, PalletRolldownSequencerRights, PalletRolldownWithdrawal, PalletSequencerStakingCall, PalletSequencerStakingError, PalletSequencerStakingEvent, PalletSessionCall, PalletSessionError, PalletSessionEvent, PalletSudoMangataCall, PalletSudoMangataError, PalletSudoMangataEvent, PalletSudoOriginCall, PalletSudoOriginError, PalletSudoOriginEvent, PalletTimestampCall, PalletTransactionPaymentMangataChargeTransactionPayment, PalletTransactionPaymentMangataEvent, PalletTransactionPaymentMangataReleases, PalletTreasuryCall, PalletTreasuryError, PalletTreasuryEvent, PalletTreasuryProposal, PalletUtilityMangataCall, PalletUtilityMangataError, PalletUtilityMangataEvent, PalletVestingMangataCall, PalletVestingMangataError, PalletVestingMangataEvent, PalletVestingMangataReleases, PalletVestingMangataVestingInfo, PalletXykCall, PalletXykError, PalletXykEvent, ParachainStakingAggregatorMetadataType, ParachainStakingBond, ParachainStakingCall, ParachainStakingCandidateBondChange, ParachainStakingCandidateBondRequest, ParachainStakingCollatorCandidate, ParachainStakingCollatorSnapshot, ParachainStakingCollatorStatus, ParachainStakingDelegationChange, ParachainStakingDelegationRequest, ParachainStakingDelegator, ParachainStakingDelegatorAdded, ParachainStakingDelegatorStatus, ParachainStakingError, ParachainStakingEvent, ParachainStakingMetadataUpdateAction, ParachainStakingPairedOrLiquidityToken, ParachainStakingPayoutRounds, ParachainStakingPendingDelegationRequests, ParachainStakingRoundCollatorRewardInfoType, ParachainStakingRoundInfo, ParachainStakingSetOrderedSetAccountId20, ParachainStakingSetOrderedSetBond, RollupRuntimeOriginCaller, RollupRuntimeRuntime, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, RollupRuntimeSessionKeys, SpArithmeticArithmeticError, SpConsensusAuraSr25519AppSr25519Public, SpConsensusGrandpaAppPublic, SpConsensusGrandpaAppSignature, SpConsensusGrandpaEquivocation, SpConsensusGrandpaEquivocationProof, SpCoreCryptoKeyTypeId, SpCoreEcdsaSignature, SpCoreEd25519Public, SpCoreEd25519Signature, SpCoreSr25519Public, SpCoreVoid, SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature, SpRuntimeDigest, SpRuntimeDigestDigestItem, SpRuntimeDispatchError, SpRuntimeModuleError, SpRuntimeTokenError, SpRuntimeTransactionalError, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight, StagingXcmV2BodyId, StagingXcmV2BodyPart, StagingXcmV2Junction, StagingXcmV2MultiLocation, StagingXcmV2MultilocationJunctions, StagingXcmV2NetworkId, StagingXcmV3Junction, StagingXcmV3JunctionBodyId, StagingXcmV3JunctionBodyPart, StagingXcmV3JunctionNetworkId, StagingXcmV3Junctions, StagingXcmV3MultiLocation, StagingXcmVersionedMultiLocation } from '@polkadot/types/lookup';
+import type { FinalityGrandpaEquivocationPrecommit, FinalityGrandpaEquivocationPrevote, FinalityGrandpaPrecommit, FinalityGrandpaPrevote, FrameSupportDispatchDispatchClass, FrameSupportDispatchDispatchInfo, FrameSupportDispatchPays, FrameSupportDispatchPerDispatchClassU32, FrameSupportDispatchPerDispatchClassWeight, FrameSupportDispatchPerDispatchClassWeightsPerClass, FrameSupportDispatchRawOrigin, FrameSupportPalletId, FrameSupportTokensMiscBalanceStatus, FrameSystemAccountInfo, FrameSystemCall, FrameSystemCodeUpgradeAuthorization, FrameSystemError, FrameSystemEvent, FrameSystemEventRecord, FrameSystemExtensionsCheckGenesis, FrameSystemExtensionsCheckNonZeroSender, FrameSystemExtensionsCheckNonce, FrameSystemExtensionsCheckSpecVersion, FrameSystemExtensionsCheckTxVersion, FrameSystemExtensionsCheckWeight, FrameSystemLastRuntimeUpgradeInfo, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, FrameSystemLimitsWeightsPerClass, FrameSystemPhase, MangataTypesAssetsCustomMetadata, MangataTypesAssetsL1Asset, MangataTypesAssetsXcmMetadata, MangataTypesAssetsXykMetadata, MangataTypesMultipurposeLiquidityActivateKind, MangataTypesMultipurposeLiquidityBondKind, OrmlAssetRegistryModuleCall, OrmlAssetRegistryModuleError, OrmlAssetRegistryModuleEvent, OrmlTokensAccountData, OrmlTokensBalanceLock, OrmlTokensModuleCall, OrmlTokensModuleError, OrmlTokensModuleEvent, OrmlTokensReserveData, OrmlTraitsAssetRegistryAssetMetadata, PalletBootstrapBootstrapPhase, PalletBootstrapCall, PalletBootstrapError, PalletBootstrapEvent, PalletCollectiveMangataCall, PalletCollectiveMangataError, PalletCollectiveMangataEvent, PalletCollectiveMangataRawOrigin, PalletCollectiveMangataVotes, PalletCrowdloanRewardsCall, PalletCrowdloanRewardsError, PalletCrowdloanRewardsEvent, PalletCrowdloanRewardsRewardInfo, PalletFeeLockAccountFeeLockDataInfo, PalletFeeLockCall, PalletFeeLockError, PalletFeeLockEvent, PalletFeeLockFeeLockMetadataInfo, PalletGrandpaCall, PalletGrandpaError, PalletGrandpaEvent, PalletGrandpaStoredPendingChange, PalletGrandpaStoredState, PalletIdentityAuthorityProperties, PalletIdentityCall, PalletIdentityError, PalletIdentityEvent, PalletIdentityJudgement, PalletIdentityLegacyIdentityInfo, PalletIdentityRegistrarInfo, PalletIdentityRegistration, PalletIssuanceCall, PalletIssuanceError, PalletIssuanceEvent, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletMaintenanceCall, PalletMaintenanceError, PalletMaintenanceEvent, PalletMaintenanceMaintenanceStatusInfo, PalletMarketAtomicSwap, PalletMarketCall, PalletMarketError, PalletMarketEvent, PalletMarketPoolKind, PalletMembershipCall, PalletMembershipError, PalletMembershipEvent, PalletMetamaskSignatureCall, PalletMetamaskSignatureError, PalletMetamaskSignatureEvent, PalletMultipurposeLiquidityCall, PalletMultipurposeLiquidityError, PalletMultipurposeLiquidityEvent, PalletMultipurposeLiquidityRelockStatusInfo, PalletMultipurposeLiquidityReserveStatusInfo, PalletProofOfStakeCall, PalletProofOfStakeError, PalletProofOfStakeEvent, PalletProofOfStakePromotedPools, PalletProofOfStakeRewardInfo, PalletProofOfStakeSchedule, PalletProofOfStakeScheduleRewardsCalculatorActivatedLiquidityPerSchedule, PalletProofOfStakeScheduleRewardsCalculatorScheduleRewards, PalletProofOfStakeSchedulesList, PalletProofOfStakeThirdPartyActivationKind, PalletProxyAnnouncement, PalletProxyCall, PalletProxyError, PalletProxyEvent, PalletProxyProxyDefinition, PalletRolldownBatchSource, PalletRolldownCall, PalletRolldownDisputeRole, PalletRolldownError, PalletRolldownEvent, PalletRolldownL1RequestProcessingError, PalletRolldownL2Request, PalletRolldownMessagesCancel, PalletRolldownMessagesCancelResolution, PalletRolldownMessagesChain, PalletRolldownMessagesDeposit, PalletRolldownMessagesFailedDepositResolution, PalletRolldownMessagesL1Update, PalletRolldownMessagesOrigin, PalletRolldownMessagesRequestId, PalletRolldownMessagesWithdrawal, PalletRolldownSequencerRights, PalletSequencerStakingCall, PalletSequencerStakingError, PalletSequencerStakingEvent, PalletSequencerStakingPayoutRounds, PalletSequencerStakingStakeAction, PalletSessionCall, PalletSessionError, PalletSessionEvent, PalletStableSwapCall, PalletStableSwapError, PalletStableSwapEvent, PalletStableSwapPoolInfo, PalletSudoMangataCall, PalletSudoMangataError, PalletSudoMangataEvent, PalletSudoOriginCall, PalletSudoOriginError, PalletSudoOriginEvent, PalletTimestampCall, PalletTransactionPaymentChargeTransactionPayment, PalletTransactionPaymentEvent, PalletTransactionPaymentReleases, PalletTreasuryCall, PalletTreasuryError, PalletTreasuryEvent, PalletTreasuryPaymentState, PalletTreasuryProposal, PalletTreasurySpendStatus, PalletUtilityMangataCall, PalletUtilityMangataError, PalletUtilityMangataEvent, PalletVestingMangataCall, PalletVestingMangataError, PalletVestingMangataEvent, PalletVestingMangataReleases, PalletVestingMangataVestingInfo, PalletXykCall, PalletXykError, PalletXykEvent, ParachainStakingAggregatorMetadataType, ParachainStakingBond, ParachainStakingCall, ParachainStakingCandidateBondChange, ParachainStakingCandidateBondRequest, ParachainStakingCollatorCandidate, ParachainStakingCollatorSnapshot, ParachainStakingCollatorStatus, ParachainStakingDelegationChange, ParachainStakingDelegationRequest, ParachainStakingDelegator, ParachainStakingDelegatorAdded, ParachainStakingDelegatorStatus, ParachainStakingError, ParachainStakingEvent, ParachainStakingMetadataUpdateAction, ParachainStakingPairedOrLiquidityToken, ParachainStakingPayoutRounds, ParachainStakingPendingDelegationRequests, ParachainStakingRoundCollatorRewardInfoType, ParachainStakingRoundInfo, ParachainStakingSetOrderedSetAccountId20, ParachainStakingSetOrderedSetBond, RollupRuntimeOriginCaller, RollupRuntimeRuntime, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, RollupRuntimeSessionKeys, SpArithmeticArithmeticError, SpConsensusAuraSr25519AppSr25519Public, SpConsensusGrandpaAppPublic, SpConsensusGrandpaAppSignature, SpConsensusGrandpaEquivocation, SpConsensusGrandpaEquivocationProof, SpCoreCryptoKeyTypeId, SpCoreEcdsaSignature, SpCoreEd25519Public, SpCoreEd25519Signature, SpCoreSr25519Public, SpCoreVoid, SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature, SpRuntimeDigest, SpRuntimeDigestDigestItem, SpRuntimeDispatchError, SpRuntimeModuleError, SpRuntimeTokenError, SpRuntimeTransactionalError, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight } from '@polkadot/types/lookup';
 
 declare module '@polkadot/types/types/registry' {
   interface InterfaceTypes {
@@ -24,6 +24,7 @@ declare module '@polkadot/types/types/registry' {
     FrameSupportTokensMiscBalanceStatus: FrameSupportTokensMiscBalanceStatus;
     FrameSystemAccountInfo: FrameSystemAccountInfo;
     FrameSystemCall: FrameSystemCall;
+    FrameSystemCodeUpgradeAuthorization: FrameSystemCodeUpgradeAuthorization;
     FrameSystemError: FrameSystemError;
     FrameSystemEvent: FrameSystemEvent;
     FrameSystemEventRecord: FrameSystemEventRecord;
@@ -77,13 +78,12 @@ declare module '@polkadot/types/types/registry' {
     PalletGrandpaEvent: PalletGrandpaEvent;
     PalletGrandpaStoredPendingChange: PalletGrandpaStoredPendingChange;
     PalletGrandpaStoredState: PalletGrandpaStoredState;
-    PalletIdentityBitFlags: PalletIdentityBitFlags;
+    PalletIdentityAuthorityProperties: PalletIdentityAuthorityProperties;
     PalletIdentityCall: PalletIdentityCall;
     PalletIdentityError: PalletIdentityError;
     PalletIdentityEvent: PalletIdentityEvent;
-    PalletIdentityIdentityField: PalletIdentityIdentityField;
-    PalletIdentityIdentityInfo: PalletIdentityIdentityInfo;
     PalletIdentityJudgement: PalletIdentityJudgement;
+    PalletIdentityLegacyIdentityInfo: PalletIdentityLegacyIdentityInfo;
     PalletIdentityRegistrarInfo: PalletIdentityRegistrarInfo;
     PalletIdentityRegistration: PalletIdentityRegistration;
     PalletIssuanceCall: PalletIssuanceCall;
@@ -95,6 +95,14 @@ declare module '@polkadot/types/types/registry' {
     PalletMaintenanceError: PalletMaintenanceError;
     PalletMaintenanceEvent: PalletMaintenanceEvent;
     PalletMaintenanceMaintenanceStatusInfo: PalletMaintenanceMaintenanceStatusInfo;
+    PalletMarketAtomicSwap: PalletMarketAtomicSwap;
+    PalletMarketCall: PalletMarketCall;
+    PalletMarketError: PalletMarketError;
+    PalletMarketEvent: PalletMarketEvent;
+    PalletMarketPoolKind: PalletMarketPoolKind;
+    PalletMembershipCall: PalletMembershipCall;
+    PalletMembershipError: PalletMembershipError;
+    PalletMembershipEvent: PalletMembershipEvent;
     PalletMetamaskSignatureCall: PalletMetamaskSignatureCall;
     PalletMetamaskSignatureError: PalletMetamaskSignatureError;
     PalletMetamaskSignatureEvent: PalletMetamaskSignatureEvent;
@@ -118,29 +126,35 @@ declare module '@polkadot/types/types/registry' {
     PalletProxyError: PalletProxyError;
     PalletProxyEvent: PalletProxyEvent;
     PalletProxyProxyDefinition: PalletProxyProxyDefinition;
+    PalletRolldownBatchSource: PalletRolldownBatchSource;
     PalletRolldownCall: PalletRolldownCall;
-    PalletRolldownCancel: PalletRolldownCancel;
+    PalletRolldownDisputeRole: PalletRolldownDisputeRole;
     PalletRolldownError: PalletRolldownError;
     PalletRolldownEvent: PalletRolldownEvent;
+    PalletRolldownL1RequestProcessingError: PalletRolldownL1RequestProcessingError;
+    PalletRolldownL2Request: PalletRolldownL2Request;
+    PalletRolldownMessagesCancel: PalletRolldownMessagesCancel;
     PalletRolldownMessagesCancelResolution: PalletRolldownMessagesCancelResolution;
+    PalletRolldownMessagesChain: PalletRolldownMessagesChain;
     PalletRolldownMessagesDeposit: PalletRolldownMessagesDeposit;
-    PalletRolldownMessagesEthAbiUpdateType: PalletRolldownMessagesEthAbiUpdateType;
-    PalletRolldownMessagesL1: PalletRolldownMessagesL1;
+    PalletRolldownMessagesFailedDepositResolution: PalletRolldownMessagesFailedDepositResolution;
     PalletRolldownMessagesL1Update: PalletRolldownMessagesL1Update;
-    PalletRolldownMessagesL2UpdatesToRemove: PalletRolldownMessagesL2UpdatesToRemove;
     PalletRolldownMessagesOrigin: PalletRolldownMessagesOrigin;
     PalletRolldownMessagesRequestId: PalletRolldownMessagesRequestId;
-    PalletRolldownMessagesWithdrawalResolution: PalletRolldownMessagesWithdrawalResolution;
-    PalletRolldownPendingUpdate: PalletRolldownPendingUpdate;
-    PalletRolldownRequestResult: PalletRolldownRequestResult;
+    PalletRolldownMessagesWithdrawal: PalletRolldownMessagesWithdrawal;
     PalletRolldownSequencerRights: PalletRolldownSequencerRights;
-    PalletRolldownWithdrawal: PalletRolldownWithdrawal;
     PalletSequencerStakingCall: PalletSequencerStakingCall;
     PalletSequencerStakingError: PalletSequencerStakingError;
     PalletSequencerStakingEvent: PalletSequencerStakingEvent;
+    PalletSequencerStakingPayoutRounds: PalletSequencerStakingPayoutRounds;
+    PalletSequencerStakingStakeAction: PalletSequencerStakingStakeAction;
     PalletSessionCall: PalletSessionCall;
     PalletSessionError: PalletSessionError;
     PalletSessionEvent: PalletSessionEvent;
+    PalletStableSwapCall: PalletStableSwapCall;
+    PalletStableSwapError: PalletStableSwapError;
+    PalletStableSwapEvent: PalletStableSwapEvent;
+    PalletStableSwapPoolInfo: PalletStableSwapPoolInfo;
     PalletSudoMangataCall: PalletSudoMangataCall;
     PalletSudoMangataError: PalletSudoMangataError;
     PalletSudoMangataEvent: PalletSudoMangataEvent;
@@ -148,13 +162,15 @@ declare module '@polkadot/types/types/registry' {
     PalletSudoOriginError: PalletSudoOriginError;
     PalletSudoOriginEvent: PalletSudoOriginEvent;
     PalletTimestampCall: PalletTimestampCall;
-    PalletTransactionPaymentMangataChargeTransactionPayment: PalletTransactionPaymentMangataChargeTransactionPayment;
-    PalletTransactionPaymentMangataEvent: PalletTransactionPaymentMangataEvent;
-    PalletTransactionPaymentMangataReleases: PalletTransactionPaymentMangataReleases;
+    PalletTransactionPaymentChargeTransactionPayment: PalletTransactionPaymentChargeTransactionPayment;
+    PalletTransactionPaymentEvent: PalletTransactionPaymentEvent;
+    PalletTransactionPaymentReleases: PalletTransactionPaymentReleases;
     PalletTreasuryCall: PalletTreasuryCall;
     PalletTreasuryError: PalletTreasuryError;
     PalletTreasuryEvent: PalletTreasuryEvent;
+    PalletTreasuryPaymentState: PalletTreasuryPaymentState;
     PalletTreasuryProposal: PalletTreasuryProposal;
+    PalletTreasurySpendStatus: PalletTreasurySpendStatus;
     PalletUtilityMangataCall: PalletUtilityMangataCall;
     PalletUtilityMangataError: PalletUtilityMangataError;
     PalletUtilityMangataEvent: PalletUtilityMangataEvent;
@@ -216,18 +232,5 @@ declare module '@polkadot/types/types/registry' {
     SpVersionRuntimeVersion: SpVersionRuntimeVersion;
     SpWeightsRuntimeDbWeight: SpWeightsRuntimeDbWeight;
     SpWeightsWeightV2Weight: SpWeightsWeightV2Weight;
-    StagingXcmV2BodyId: StagingXcmV2BodyId;
-    StagingXcmV2BodyPart: StagingXcmV2BodyPart;
-    StagingXcmV2Junction: StagingXcmV2Junction;
-    StagingXcmV2MultiLocation: StagingXcmV2MultiLocation;
-    StagingXcmV2MultilocationJunctions: StagingXcmV2MultilocationJunctions;
-    StagingXcmV2NetworkId: StagingXcmV2NetworkId;
-    StagingXcmV3Junction: StagingXcmV3Junction;
-    StagingXcmV3JunctionBodyId: StagingXcmV3JunctionBodyId;
-    StagingXcmV3JunctionBodyPart: StagingXcmV3JunctionBodyPart;
-    StagingXcmV3JunctionNetworkId: StagingXcmV3JunctionNetworkId;
-    StagingXcmV3Junctions: StagingXcmV3Junctions;
-    StagingXcmV3MultiLocation: StagingXcmV3MultiLocation;
-    StagingXcmVersionedMultiLocation: StagingXcmVersionedMultiLocation;
   } // InterfaceTypes
 } // declare module
