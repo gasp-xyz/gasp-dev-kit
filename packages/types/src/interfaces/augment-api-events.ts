@@ -9,7 +9,7 @@ import type { ApiTypes, AugmentedEvent } from '@polkadot/api-base/types';
 import type { Bytes, Null, Option, Result, Struct, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 import type { H256, Perbill } from '@polkadot/types/interfaces/runtime';
-import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletMarketAtomicSwap, PalletRolldownBatchSource, PalletRolldownL1RequestProcessingError, PalletRolldownMessagesChain, PalletRolldownMessagesDeposit, PalletRolldownMessagesRequestId, PalletSequencerStakingPayoutRounds, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
+import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletRolldownMessagesL1, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
 
 export type __AugmentedEvent<ApiType extends ApiTypes> = AugmentedEvent<ApiType>;
 
@@ -146,36 +146,6 @@ declare module '@polkadot/api-base/types/events' {
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
-    foundationMembers: {
-      /**
-       * Phantom member, never used.
-       **/
-      Dummy: AugmentedEvent<ApiType, []>;
-      /**
-       * One of the members' keys changed.
-       **/
-      KeyChanged: AugmentedEvent<ApiType, []>;
-      /**
-       * The given member was added; see the transaction for who.
-       **/
-      MemberAdded: AugmentedEvent<ApiType, []>;
-      /**
-       * The given member was removed; see the transaction for who.
-       **/
-      MemberRemoved: AugmentedEvent<ApiType, []>;
-      /**
-       * The membership was reset; see the transaction for who the new set is.
-       **/
-      MembersReset: AugmentedEvent<ApiType, []>;
-      /**
-       * Two members were swapped; see the transaction for who.
-       **/
-      MembersSwapped: AugmentedEvent<ApiType, []>;
-      /**
-       * Generic event
-       **/
-      [key: string]: AugmentedEvent<ApiType>;
-    };
     grandpa: {
       /**
        * New authority set has been applied.
@@ -195,19 +165,6 @@ declare module '@polkadot/api-base/types/events' {
       [key: string]: AugmentedEvent<ApiType>;
     };
     identity: {
-      /**
-       * A username authority was added.
-       **/
-      AuthorityAdded: AugmentedEvent<ApiType, [authority: SpRuntimeAccountAccountId20], { authority: SpRuntimeAccountAccountId20 }>;
-      /**
-       * A username authority was removed.
-       **/
-      AuthorityRemoved: AugmentedEvent<ApiType, [authority: SpRuntimeAccountAccountId20], { authority: SpRuntimeAccountAccountId20 }>;
-      /**
-       * A dangling username (as in, a username corresponding to an account that has removed its
-       * identity) has been removed.
-       **/
-      DanglingUsernameRemoved: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, username: Bytes], { who: SpRuntimeAccountAccountId20, username: Bytes }>;
       /**
        * A name was cleared, and the given balance returned.
        **/
@@ -233,14 +190,6 @@ declare module '@polkadot/api-base/types/events' {
        **/
       JudgementUnrequested: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, registrarIndex: u32], { who: SpRuntimeAccountAccountId20, registrarIndex: u32 }>;
       /**
-       * A queued username passed its expiration without being claimed and was removed.
-       **/
-      PreapprovalExpired: AugmentedEvent<ApiType, [whose: SpRuntimeAccountAccountId20], { whose: SpRuntimeAccountAccountId20 }>;
-      /**
-       * A username was set as a primary and can be looked up from `who`.
-       **/
-      PrimaryUsernameSet: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, username: Bytes], { who: SpRuntimeAccountAccountId20, username: Bytes }>;
-      /**
        * A registrar was added.
        **/
       RegistrarAdded: AugmentedEvent<ApiType, [registrarIndex: u32], { registrarIndex: u32 }>;
@@ -258,14 +207,6 @@ declare module '@polkadot/api-base/types/events' {
        **/
       SubIdentityRevoked: AugmentedEvent<ApiType, [sub: SpRuntimeAccountAccountId20, main: SpRuntimeAccountAccountId20, deposit: u128], { sub: SpRuntimeAccountAccountId20, main: SpRuntimeAccountAccountId20, deposit: u128 }>;
       /**
-       * A username was queued, but `who` must accept it prior to `expiration`.
-       **/
-      UsernameQueued: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, username: Bytes, expiration: u32], { who: SpRuntimeAccountAccountId20, username: Bytes, expiration: u32 }>;
-      /**
-       * A username was set for `who`.
-       **/
-      UsernameSet: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, username: Bytes], { who: SpRuntimeAccountAccountId20, username: Bytes }>;
-      /**
        * Generic event
        **/
       [key: string]: AugmentedEvent<ApiType>;
@@ -278,11 +219,11 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * Issuance for upcoming session issued
        **/
-      SessionIssuanceIssued: AugmentedEvent<ApiType, [u32, u128, u128, u128]>;
+      SessionIssuanceIssued: AugmentedEvent<ApiType, [u32, u128, u128]>;
       /**
        * Issuance for upcoming session calculated and recorded
        **/
-      SessionIssuanceRecorded: AugmentedEvent<ApiType, [u32, u128, u128, u128]>;
+      SessionIssuanceRecorded: AugmentedEvent<ApiType, [u32, u128, u128]>;
       /**
        * TGE has been finalized
        **/
@@ -310,10 +251,6 @@ declare module '@polkadot/api-base/types/events' {
        **/
       MaintenanceModeSwitchedOn: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20]>;
       /**
-       * Maintenance mode has been switched on externally
-       **/
-      MaintenanceModeSwitchedOnExternally: AugmentedEvent<ApiType, []>;
-      /**
        * Upgradablilty in maintenance mode has been switched off
        **/
       UpgradabilityInMaintenanceModeSwitchedOff: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20]>;
@@ -321,28 +258,6 @@ declare module '@polkadot/api-base/types/events' {
        * Upgradablilty in maintenance mode has been switched on
        **/
       UpgradabilityInMaintenanceModeSwitchedOn: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20]>;
-      /**
-       * Generic event
-       **/
-      [key: string]: AugmentedEvent<ApiType>;
-    };
-    market: {
-      /**
-       * Assets were swapped successfully
-       **/
-      AssetsSwapped: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, swaps: Vec<PalletMarketAtomicSwap>], { who: SpRuntimeAccountAccountId20, swaps: Vec<PalletMarketAtomicSwap> }>;
-      /**
-       * A successful call of the `RemoveLiquidity` extrinsic will create this event.
-       **/
-      LiquidityBurned: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, amounts: ITuple<[u128, u128]>, burnedAmount: u128, totalSupply: u128], { who: SpRuntimeAccountAccountId20, poolId: u32, amounts: ITuple<[u128, u128]>, burnedAmount: u128, totalSupply: u128 }>;
-      /**
-       * A successful call of the `AddLiquidity` extrinsic will create this event.
-       **/
-      LiquidityMinted: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, amountsProvided: ITuple<[u128, u128]>, lpToken: u32, lpTokenMinted: u128, totalSupply: u128], { who: SpRuntimeAccountAccountId20, poolId: u32, amountsProvided: ITuple<[u128, u128]>, lpToken: u32, lpTokenMinted: u128, totalSupply: u128 }>;
-      /**
-       * A successful call of the `CretaPool` extrinsic will create this event.
-       **/
-      PoolCreated: AugmentedEvent<ApiType, [creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: ITuple<[u32, u32]>], { creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: ITuple<[u32, u32]> }>;
       /**
        * Generic event
        **/
@@ -537,40 +452,17 @@ declare module '@polkadot/api-base/types/events' {
       [key: string]: AugmentedEvent<ApiType>;
     };
     rolldown: {
-      DepositFerried: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, deposit: PalletRolldownMessagesDeposit, depositHash: H256], { chain: PalletRolldownMessagesChain, deposit: PalletRolldownMessagesDeposit, depositHash: H256 }>;
-      DepositRefundCreated: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, refundedRequestId: PalletRolldownMessagesRequestId, ferry: Option<SpRuntimeAccountAccountId20>], { chain: PalletRolldownMessagesChain, refundedRequestId: PalletRolldownMessagesRequestId, ferry: Option<SpRuntimeAccountAccountId20> }>;
-      L1ReadCanceled: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId], { chain: PalletRolldownMessagesChain, canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId }>;
-      L1ReadIgnoredBecauseOfMaintenanceMode: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, hash_: H256], { chain: PalletRolldownMessagesChain, hash_: H256 }>;
-      L1ReadScheduledForExecution: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, hash_: H256], { chain: PalletRolldownMessagesChain, hash_: H256 }>;
-      L1ReadStored: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, sequencer: SpRuntimeAccountAccountId20, disputePeriodEnd: u128, range: {
+      L1ReadStored: AugmentedEvent<ApiType, [ITuple<[SpRuntimeAccountAccountId20, u128, {
     readonly start: u128;
     readonly end: u128;
-  } & Struct, hash_: H256], { chain: PalletRolldownMessagesChain, sequencer: SpRuntimeAccountAccountId20, disputePeriodEnd: u128, range: {
-    readonly start: u128;
-    readonly end: u128;
-  } & Struct, hash_: H256 }>;
-      ManualBatchExtraFeeSet: AugmentedEvent<ApiType, [u128]>;
-      RequestProcessedOnL2: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, requestId: u128, status: Result<Null, PalletRolldownL1RequestProcessingError>], { chain: PalletRolldownMessagesChain, requestId: u128, status: Result<Null, PalletRolldownL1RequestProcessingError> }>;
-      TxBatchCreated: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, source: PalletRolldownBatchSource, assignee: SpRuntimeAccountAccountId20, batchId: u128, range: ITuple<[u128, u128]>], { chain: PalletRolldownMessagesChain, source: PalletRolldownBatchSource, assignee: SpRuntimeAccountAccountId20, batchId: u128, range: ITuple<[u128, u128]> }>;
-      WithdrawalRequestCreated: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, requestId: PalletRolldownMessagesRequestId, recipient: U8aFixed, tokenAddress: U8aFixed, amount: u128, hash_: H256, ferryTip: u128], { chain: PalletRolldownMessagesChain, requestId: PalletRolldownMessagesRequestId, recipient: U8aFixed, tokenAddress: U8aFixed, amount: u128, hash_: H256, ferryTip: u128 }>;
+  } & Struct, H256]>]>;
+      RequestProcessedOnL2: AugmentedEvent<ApiType, [PalletRolldownMessagesL1, u128]>;
       /**
        * Generic event
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
     sequencerStaking: {
-      /**
-       * Paid the account the balance as liquid rewards
-       **/
-      Rewarded: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20, u128]>;
-      SequencerJoinedActiveSet: AugmentedEvent<ApiType, [PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>;
-      /**
-       * Notify about reward periods that has been paid (sequencer, payout rounds, any rewards left)
-       **/
-      SequencerRewardsDistributed: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, PalletSequencerStakingPayoutRounds]>;
-      SequencersRemovedFromActiveSet: AugmentedEvent<ApiType, [PalletRolldownMessagesChain, Vec<SpRuntimeAccountAccountId20>]>;
-      StakeProvided: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, addedStake: u128, totalStake: u128], { chain: PalletRolldownMessagesChain, addedStake: u128, totalStake: u128 }>;
-      StakeRemoved: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, removedStake: u128], { chain: PalletRolldownMessagesChain, removedStake: u128 }>;
       /**
        * Generic event
        **/
@@ -587,47 +479,17 @@ declare module '@polkadot/api-base/types/events' {
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
-    stableSwap: {
-      /**
-       * Assets have been swapped, a successfull call to `Swap` will create this event.
-       **/
-      AssetsSwapped: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, assetIn: u32, amountIn: u128, assetOut: u32, amountOut: u128], { who: SpRuntimeAccountAccountId20, poolId: u32, assetIn: u32, amountIn: u128, assetOut: u32, amountOut: u128 }>;
-      /**
-       * A successful call of the `RemoveLiquidityImbalanced` & `RemoveLiquidity` extrinsic will create this event.
-       **/
-      LiquidityBurned: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, amounts: Vec<u128>, burnedAmount: u128, totalSupply: u128, fees: Vec<u128>], { who: SpRuntimeAccountAccountId20, poolId: u32, amounts: Vec<u128>, burnedAmount: u128, totalSupply: u128, fees: Vec<u128> }>;
-      /**
-       * A successful call of the `RemoveLiquidityOneAsset` extrinsic will create this event.
-       **/
-      LiquidityBurnedOne: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, assetId: u32, amount: u128, burnedAmount: u128, totalSupply: u128], { who: SpRuntimeAccountAccountId20, poolId: u32, assetId: u32, amount: u128, burnedAmount: u128, totalSupply: u128 }>;
-      /**
-       * A successful call of the `AddLiquidity` extrinsic will create this event.
-       **/
-      LiquidityMinted: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, amountsProvided: Vec<u128>, lpToken: u32, lpTokenMinted: u128, totalSupply: u128, fees: Vec<u128>], { who: SpRuntimeAccountAccountId20, poolId: u32, amountsProvided: Vec<u128>, lpToken: u32, lpTokenMinted: u128, totalSupply: u128, fees: Vec<u128> }>;
-      /**
-       * A successful call of the `CretaPool` extrinsic will create this event.
-       **/
-      PoolCreated: AugmentedEvent<ApiType, [creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: Vec<u32>], { creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: Vec<u32> }>;
-      /**
-       * Generic event
-       **/
-      [key: string]: AugmentedEvent<ApiType>;
-    };
     sudo: {
       /**
-       * The sudo key has been updated.
+       * The \[sudoer\] just switched identity; the old key is supplied if one existed.
        **/
-      KeyChanged: AugmentedEvent<ApiType, [old: Option<SpRuntimeAccountAccountId20>, new_: SpRuntimeAccountAccountId20], { old: Option<SpRuntimeAccountAccountId20>, new_: SpRuntimeAccountAccountId20 }>;
+      KeyChanged: AugmentedEvent<ApiType, [oldSudoer: Option<SpRuntimeAccountAccountId20>], { oldSudoer: Option<SpRuntimeAccountAccountId20> }>;
       /**
-       * The key was permanently removed.
-       **/
-      KeyRemoved: AugmentedEvent<ApiType, []>;
-      /**
-       * A sudo call just took place.
+       * A sudo just took place. \[result\]
        **/
       Sudid: AugmentedEvent<ApiType, [sudoResult: Result<Null, SpRuntimeDispatchError>], { sudoResult: Result<Null, SpRuntimeDispatchError> }>;
       /**
-       * A [sudo_as](Pallet::sudo_as) call just took place.
+       * A sudo just took place. \[result\]
        **/
       SudoAsDone: AugmentedEvent<ApiType, [sudoResult: Result<Null, SpRuntimeDispatchError>], { sudoResult: Result<Null, SpRuntimeDispatchError> }>;
       /**
@@ -678,10 +540,6 @@ declare module '@polkadot/api-base/types/events' {
        * On stored txs
        **/
       TxsEnqueued: AugmentedEvent<ApiType, [count: u64], { count: u64 }>;
-      /**
-       * An upgrade was authorized.
-       **/
-      UpgradeAuthorized: AugmentedEvent<ApiType, [codeHash: H256, checkVersion: bool], { codeHash: H256, checkVersion: bool }>;
       /**
        * Generic event
        **/
@@ -770,21 +628,13 @@ declare module '@polkadot/api-base/types/events' {
        * A transaction fee `actual_fee`, of which `tip` was added to the minimum inclusion fee,
        * has been paid by `who`.
        **/
-      TransactionFeePaid: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, tokenId: u32, actualFee: u128, tip: u128], { who: SpRuntimeAccountAccountId20, tokenId: u32, actualFee: u128, tip: u128 }>;
+      TransactionFeePaid: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, actualFee: u128, tip: u128], { who: SpRuntimeAccountAccountId20, actualFee: u128, tip: u128 }>;
       /**
        * Generic event
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
     treasury: {
-      /**
-       * A new asset spend proposal has been approved.
-       **/
-      AssetSpendApproved: AugmentedEvent<ApiType, [index: u32, assetKind: Null, amount: u128, beneficiary: SpRuntimeAccountAccountId20, validFrom: u32, expireAt: u32], { index: u32, assetKind: Null, amount: u128, beneficiary: SpRuntimeAccountAccountId20, validFrom: u32, expireAt: u32 }>;
-      /**
-       * An approved spend was voided.
-       **/
-      AssetSpendVoided: AugmentedEvent<ApiType, [index: u32], { index: u32 }>;
       /**
        * Some funds have been allocated.
        **/
@@ -797,14 +647,6 @@ declare module '@polkadot/api-base/types/events' {
        * Some funds have been deposited.
        **/
       Deposit: AugmentedEvent<ApiType, [value: u128], { value: u128 }>;
-      /**
-       * A payment happened.
-       **/
-      Paid: AugmentedEvent<ApiType, [index: u32, paymentId: Null], { index: u32, paymentId: Null }>;
-      /**
-       * A payment failed and can be retried.
-       **/
-      PaymentFailed: AugmentedEvent<ApiType, [index: u32, paymentId: Null], { index: u32, paymentId: Null }>;
       /**
        * New proposal.
        **/
@@ -825,11 +667,6 @@ declare module '@polkadot/api-base/types/events' {
        * We have ended a spend period and will now allocate funds.
        **/
       Spending: AugmentedEvent<ApiType, [budgetRemaining: u128], { budgetRemaining: u128 }>;
-      /**
-       * A spend was processed and removed from the storage. It might have been successfully
-       * paid or it may have expired.
-       **/
-      SpendProcessed: AugmentedEvent<ApiType, [index: u32], { index: u32 }>;
       /**
        * The inactive funds of the pallet have been updated.
        **/
