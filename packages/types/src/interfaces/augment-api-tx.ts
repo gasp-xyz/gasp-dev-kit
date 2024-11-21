@@ -9,7 +9,7 @@ import type { ApiTypes, AugmentedSubmittable, SubmittableExtrinsic, SubmittableE
 import type { Data } from '@polkadot/types';
 import type { Bytes, Compact, Null, Option, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { AnyNumber, IMethod, ITuple } from '@polkadot/types-codec/types';
-import type { Call, H256, Perbill, Permill } from '@polkadot/types/interfaces/runtime';
+import type { Call, H256, Perbill } from '@polkadot/types/interfaces/runtime';
 import type { MangataTypesAssetsCustomMetadata, MangataTypesAssetsL1Asset, MangataTypesMultipurposeLiquidityActivateKind, MangataTypesMultipurposeLiquidityBondKind, OrmlTraitsAssetRegistryAssetMetadata, PalletIdentityJudgement, PalletIdentityLegacyIdentityInfo, PalletIssuanceTgeInfo, PalletMarketPoolKind, PalletProofOfStakeThirdPartyActivationKind, PalletRolldownMessagesChain, PalletRolldownMessagesL1Update, PalletRolldownMessagesRequestId, PalletSequencerStakingStakeAction, PalletVestingMangataVestingInfo, ParachainStakingMetadataUpdateAction, ParachainStakingPairedOrLiquidityToken, RollupRuntimeOriginCaller, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, RollupRuntimeSessionKeys, SpConsensusGrandpaEquivocationProof, SpCoreVoid, SpRuntimeAccountAccountId20, SpRuntimeAccountEthereumSignature, SpWeightsWeightV2Weight } from '@polkadot/types/lookup';
 
 export type __AugmentedSubmittable = AugmentedSubmittable<() => unknown>;
@@ -1204,42 +1204,6 @@ declare module '@polkadot/api-base/types/submittable' {
        **/
       [key: string]: SubmittableExtrinsicFunction<ApiType>;
     };
-    stableSwap: {
-      addLiquidity: AugmentedSubmittable<(poolId: u32 | AnyNumber | Uint8Array, amounts: Vec<u128> | (u128 | AnyNumber | Uint8Array)[], minAmountLpTokens: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, Vec<u128>, u128]>;
-      /**
-       * Creates a liquidity pool and an associated new `lp_token` asset
-       * (the id of which is returned in the `Event::PoolCreated` event).
-       * Tokens can have arbitrary decimals (<=18).
-       * 
-       * * `assets` - An array of asset ids in pool
-       * * `rates` - An array of: [10 ** (36 - _coins[n].decimals()), ... for n in range(N_COINS)]
-       * * `amp_coeff` - Amplification co-efficient - a lower value here means less tolerance for imbalance within the pool's assets.
-       * Suggested values include:
-       * * Uncollateralized algorithmic stablecoins: 5-10
-       * * Non-redeemable, collateralized assets: 100
-       * * Redeemable assets: 200-400
-       * 
-       * Initial liquidity amounts needs to be provided with [`Pallet::add_liquidity`].
-       **/
-      createPool: AugmentedSubmittable<(assets: Vec<u32> | (u32 | AnyNumber | Uint8Array)[], rates: Vec<u128> | (u128 | AnyNumber | Uint8Array)[], ampCoeff: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<u32>, Vec<u128>, u128]>;
-      /**
-       * Withdraw balanced assets from the pool given LP tokens amount to burn
-       **/
-      removeLiquidity: AugmentedSubmittable<(poolId: u32 | AnyNumber | Uint8Array, burnAmount: u128 | AnyNumber | Uint8Array, minAmounts: Vec<u128> | (u128 | AnyNumber | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [u32, u128, Vec<u128>]>;
-      /**
-       * Withdraw assets from the pool in an imbalanced amounts
-       **/
-      removeLiquidityImbalanced: AugmentedSubmittable<(poolId: u32 | AnyNumber | Uint8Array, amounts: Vec<u128> | (u128 | AnyNumber | Uint8Array)[], maxBurnAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, Vec<u128>, u128]>;
-      /**
-       * Withdraw a single asset from the pool
-       **/
-      removeLiquidityOneAsset: AugmentedSubmittable<(poolId: u32 | AnyNumber | Uint8Array, assetId: u32 | AnyNumber | Uint8Array, burnAmount: u128 | AnyNumber | Uint8Array, minAmountOut: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u32, u128, u128]>;
-      swap: AugmentedSubmittable<(poolId: u32 | AnyNumber | Uint8Array, assetIn: u32 | AnyNumber | Uint8Array, assetOut: u32 | AnyNumber | Uint8Array, dx: u128 | AnyNumber | Uint8Array, minDy: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u32, u32, u128, u128]>;
-      /**
-       * Generic tx
-       **/
-      [key: string]: SubmittableExtrinsicFunction<ApiType>;
-    };
     sudo: {
       /**
        * Permanently removes the sudo key.
@@ -1884,90 +1848,6 @@ declare module '@polkadot/api-base/types/submittable' {
        * - `O(1)`.
        **/
       vestOther: AugmentedSubmittable<(tokenId: u32 | AnyNumber | Uint8Array, target: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, SpRuntimeAccountAccountId20]>;
-      /**
-       * Generic tx
-       **/
-      [key: string]: SubmittableExtrinsicFunction<ApiType>;
-    };
-    xyk: {
-      burnLiquidity: AugmentedSubmittable<(firstAssetId: u32 | AnyNumber | Uint8Array, secondAssetId: u32 | AnyNumber | Uint8Array, liquidityAssetAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u32, u128]>;
-      /**
-       * Executes buy_asset swap.
-       * First the swap is prevalidated, if it is successful then the extrinsic is accepted. Beyond this point the exchange commission will be charged.
-       * The bought of the bought asset is used to determine the sold asset amount.
-       * If the sold asset amount is higher than the max_amount_in then it will fail on slippage.
-       * The percentage exchange commission is still charged even if the swap fails on slippage. Though the swap itself will be a no-op.
-       * The slippage is calculated based upon the sold asset amount.
-       * Upon slippage failure, the extrinsic is marked "successful", but an event for the failure is emitted
-       * 
-       * 
-       * # Args:
-       * - `sold_asset_id` - The token being sold
-       * - `bought_asset_id` - The token being bought
-       * - `bought_asset_amount`: The amount of the bought token being bought
-       * - `max_amount_in` - The maximum amount of sold asset that must be sold in order to not fail on slippage. Slippage failures still charge exchange commission.
-       **/
-      buyAsset: AugmentedSubmittable<(soldAssetId: u32 | AnyNumber | Uint8Array, boughtAssetId: u32 | AnyNumber | Uint8Array, boughtAssetAmount: u128 | AnyNumber | Uint8Array, maxAmountIn: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u32, u128, u128]>;
-      compoundRewards: AugmentedSubmittable<(liquidityAssetId: u32 | AnyNumber | Uint8Array, amountPermille: Permill | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, Permill]>;
-      createPool: AugmentedSubmittable<(firstAssetId: u32 | AnyNumber | Uint8Array, firstAssetAmount: u128 | AnyNumber | Uint8Array, secondAssetId: u32 | AnyNumber | Uint8Array, secondAssetAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u128, u32, u128]>;
-      mintLiquidity: AugmentedSubmittable<(firstAssetId: u32 | AnyNumber | Uint8Array, secondAssetId: u32 | AnyNumber | Uint8Array, firstAssetAmount: u128 | AnyNumber | Uint8Array, expectedSecondAssetAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u32, u128, u128]>;
-      mintLiquidityUsingVestingNativeTokens: AugmentedSubmittable<(vestingNativeAssetAmount: u128 | AnyNumber | Uint8Array, secondAssetId: u32 | AnyNumber | Uint8Array, expectedSecondAssetAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128, u32, u128]>;
-      mintLiquidityUsingVestingNativeTokensByVestingIndex: AugmentedSubmittable<(nativeAssetVestingIndex: u32 | AnyNumber | Uint8Array, vestingNativeAssetUnlockSomeAmountOrAll: Option<u128> | null | Uint8Array | u128 | AnyNumber, secondAssetId: u32 | AnyNumber | Uint8Array, expectedSecondAssetAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, Option<u128>, u32, u128]>;
-      /**
-       * Executes a multiswap buy asset in a series of buy asset atomic swaps.
-       * 
-       * Multiswaps must fee lock instead of paying transaction fees.
-       * 
-       * First the multiswap is prevalidated, if it is successful then the extrinsic is accepted
-       * and the exchange commission will be charged upon execution on the *first* swap using *max_amount_in*.
-       * multiswap_buy_asset cannot have two (or more) atomic swaps on the same pool.
-       * multiswap_buy_asset prevaildation only checks for whether there are enough funds to pay for the exchange commission.
-       * Failure to have the required amount of first asset funds will result in failure (and charging of the exchange commission).
-       * 
-       * Upon failure of an atomic swap or bad slippage, all the atomic swaps are reverted and the exchange commission is charged.
-       * Upon such a failure, the extrinsic is marked "successful", but an event for the failure is emitted
-       * 
-       * # Args:
-       * - `swap_token_list` - This list of tokens is the route of the atomic swaps, starting with the asset sold and ends with the asset finally bought
-       * - `bought_asset_amount`: The amount of the last asset bought
-       * - `max_amount_in` - The maximum amount of first asset that can be sold in order to not fail on slippage. Slippage failures still charge exchange commission.
-       **/
-      multiswapBuyAsset: AugmentedSubmittable<(swapTokenList: Vec<u32> | (u32 | AnyNumber | Uint8Array)[], boughtAssetAmount: u128 | AnyNumber | Uint8Array, maxAmountIn: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<u32>, u128, u128]>;
-      /**
-       * Executes a multiswap sell asset in a series of sell asset atomic swaps.
-       * 
-       * Multiswaps must fee lock instead of paying transaction fees.
-       * 
-       * First the multiswap is prevalidated, if it is successful then the extrinsic is accepted
-       * and the exchange commission will be charged upon execution on the **first** swap using **sold_asset_amount**.
-       * 
-       * Upon failure of an atomic swap or bad slippage, all the atomic swaps are reverted and the exchange commission is charged.
-       * Upon such a failure, the extrinsic is marked "successful", but an event for the failure is emitted
-       * 
-       * # Args:
-       * - `swap_token_list` - This list of tokens is the route of the atomic swaps, starting with the asset sold and ends with the asset finally bought
-       * - `sold_asset_amount`: The amount of the first asset sold
-       * - `min_amount_out` - The minimum amount of last asset that must be bought in order to not fail on slippage. Slippage failures still charge exchange commission.
-       **/
-      multiswapSellAsset: AugmentedSubmittable<(swapTokenList: Vec<u32> | (u32 | AnyNumber | Uint8Array)[], soldAssetAmount: u128 | AnyNumber | Uint8Array, minAmountOut: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<u32>, u128, u128]>;
-      provideLiquidityWithConversion: AugmentedSubmittable<(liquidityAssetId: u32 | AnyNumber | Uint8Array, providedAssetId: u32 | AnyNumber | Uint8Array, providedAssetAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u32, u128]>;
-      /**
-       * Executes sell_asset swap.
-       * First the swap is prevalidated, if it is successful then the extrinsic is accepted. Beyond this point the exchange commission will be charged.
-       * The sold amount of the sold asset is used to determine the bought asset amount.
-       * If the bought asset amount is lower than the min_amount_out then it will fail on slippage.
-       * The percentage exchange commission is still charged even if the swap fails on slippage. Though the swap itself will be a no-op.
-       * The slippage is calculated based upon the sold_asset_amount.
-       * Upon slippage failure, the extrinsic is marked "successful", but an event for the failure is emitted
-       * 
-       * 
-       * # Args:
-       * - `sold_asset_id` - The token being sold
-       * - `bought_asset_id` - The token being bought
-       * - `sold_asset_amount`: The amount of the sold token being sold
-       * - `min_amount_out` - The minimum amount of bought asset that must be bought in order to not fail on slippage. Slippage failures still charge exchange commission.
-       **/
-      sellAsset: AugmentedSubmittable<(soldAssetId: u32 | AnyNumber | Uint8Array, boughtAssetId: u32 | AnyNumber | Uint8Array, soldAssetAmount: u128 | AnyNumber | Uint8Array, minAmountOut: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u32, u128, u128]>;
       /**
        * Generic tx
        **/
