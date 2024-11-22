@@ -313,7 +313,7 @@ export default {
    * Lookup44: pallet_rolldown::messages::Chain
    **/
   PalletRolldownMessagesChain: {
-    _enum: ['Ethereum', 'Arbitrum']
+    _enum: ['Ethereum', 'Arbitrum', 'Base']
   },
   /**
    * Lookup48: pallet_rolldown::L1RequestProcessingError
@@ -2015,7 +2015,8 @@ export default {
   MangataTypesAssetsL1Asset: {
     _enum: {
       Ethereum: '[u8;20]',
-      Arbitrum: '[u8;20]'
+      Arbitrum: '[u8;20]',
+      Base: '[u8;20]'
     }
   },
   /**
