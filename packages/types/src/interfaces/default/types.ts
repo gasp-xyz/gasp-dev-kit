@@ -17,7 +17,8 @@ export interface CancelResolution extends Struct {
 export interface Chain extends Enum {
   readonly isEthereum: boolean;
   readonly isArbitrum: boolean;
-  readonly type: 'Ethereum' | 'Arbitrum';
+  readonly isBase: boolean;
+  readonly type: 'Ethereum' | 'Arbitrum' | 'Base';
 }
 
 /** @name Deposit */
