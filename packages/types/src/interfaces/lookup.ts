@@ -302,10 +302,28 @@ export default {
         chain: 'PalletRolldownMessagesChain',
         hash_: 'H256',
       },
+      L1ReadIgnoredBecauseOfUnknownDisputePeriod: {
+        _alias: {
+          hash_: 'hash',
+        },
+        chain: 'PalletRolldownMessagesChain',
+        hash_: 'H256',
+      },
       DepositFerried: {
         chain: 'PalletRolldownMessagesChain',
         deposit: 'PalletRolldownMessagesDeposit',
-        depositHash: 'H256'
+        depositHash: 'H256',
+      },
+      L1ReadExecuted: {
+        _alias: {
+          hash_: 'hash',
+        },
+        chain: 'PalletRolldownMessagesChain',
+        hash_: 'H256',
+      },
+      DisputePeriodSet: {
+        chain: 'PalletRolldownMessagesChain',
+        disputePeriodLength: 'u128'
       }
     }
   },
@@ -1319,7 +1337,11 @@ export default {
         ferryTip: 'u128',
       },
       update_l2_from_l1_unsafe: {
-        requests: 'PalletRolldownMessagesL1Update'
+        requests: 'PalletRolldownMessagesL1Update',
+      },
+      set_dispute_period: {
+        chain: 'PalletRolldownMessagesChain',
+        disputePeriodLength: 'u128'
       }
     }
   },
@@ -2413,6 +2435,16 @@ export default {
     _enum: ['NotFoundationAccount', 'NotInMaintenanceMode', 'AlreadyInMaintenanceMode', 'AlreadyUpgradableInMaintenanceMode', 'AlreadyNotUpgradableInMaintenanceMode', 'UpgradeBlockedByMaintenance']
   },
   /**
+   * Lookup271: pallet_rolldown::pallet::UpdateMetadata<sp_runtime::account::AccountId20>
+   **/
+  PalletRolldownUpdateMetadata: {
+    maxId: 'u128',
+    minId: 'u128',
+    updateSize: 'u128',
+    sequencer: 'SpRuntimeAccountAccountId20',
+    updateHash: 'H256'
+  },
+  /**
    * Lookup274: pallet_rolldown::pallet::SequencerRights
    **/
   PalletRolldownSequencerRights: {
@@ -2473,7 +2505,7 @@ export default {
    * Lookup293: pallet_rolldown::pallet::Error<T>
    **/
   PalletRolldownError: {
-    _enum: ['OperationFailed', 'ReadRightsExhausted', 'CancelRightsExhausted', 'EmptyUpdate', 'AddressDeserializationFailure', 'RequestDoesNotExist', 'NotEnoughAssets', 'NotEnoughAssetsForFee', 'BalanceOverflow', 'L1AssetCreationFailed', 'MathOverflow', 'TooManyRequests', 'InvalidUpdate', 'L1AssetNotFound', 'WrongRequestId', 'OnlySelectedSequencerisAllowedToUpdate', 'SequencerLastUpdateStillInDisputePeriod', 'SequencerAwaitingCancelResolution', 'MultipleUpdatesInSingleBlock', 'BlockedByMaintenanceMode', 'UnsupportedAsset', 'InvalidRange', 'NonExistingRequestId', 'UnknownAliasAccount', 'FailedDepositDoesNotExist', 'EmptyBatch', 'TokenDoesNotExist', 'NotEligibleForRefund', 'FerryHashMismatch', 'MintError', 'AssetRegistrationProblem', 'UpdateHashMishmatch', 'AlreadyExecuted']
+    _enum: ['OperationFailed', 'ReadRightsExhausted', 'CancelRightsExhausted', 'EmptyUpdate', 'AddressDeserializationFailure', 'RequestDoesNotExist', 'NotEnoughAssets', 'NotEnoughAssetsForFee', 'BalanceOverflow', 'L1AssetCreationFailed', 'MathOverflow', 'TooManyRequests', 'InvalidUpdate', 'L1AssetNotFound', 'WrongRequestId', 'OnlySelectedSequencerisAllowedToUpdate', 'SequencerLastUpdateStillInDisputePeriod', 'SequencerAwaitingCancelResolution', 'MultipleUpdatesInSingleBlock', 'BlockedByMaintenanceMode', 'UnsupportedAsset', 'InvalidRange', 'NonExistingRequestId', 'UnknownAliasAccount', 'FailedDepositDoesNotExist', 'EmptyBatch', 'TokenDoesNotExist', 'NotEligibleForRefund', 'FerryHashMismatch', 'MintError', 'AssetRegistrationProblem', 'UpdateHashMishmatch', 'AlreadyExecuted', 'UninitializedChainId']
   },
   /**
    * Lookup294: pallet_metamask_signature::pallet::Error<T>
