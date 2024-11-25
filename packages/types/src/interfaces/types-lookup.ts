@@ -332,7 +332,8 @@ declare module '@polkadot/types/lookup' {
   interface PalletRolldownMessagesChain extends Enum {
     readonly isEthereum: boolean;
     readonly isArbitrum: boolean;
-    readonly type: 'Ethereum' | 'Arbitrum';
+    readonly isBase: boolean;
+    readonly type: 'Ethereum' | 'Arbitrum' | 'Base';
   }
 
   /** @name PalletRolldownL1RequestProcessingError (48) */
@@ -2297,7 +2298,9 @@ declare module '@polkadot/types/lookup' {
     readonly asEthereum: U8aFixed;
     readonly isArbitrum: boolean;
     readonly asArbitrum: U8aFixed;
-    readonly type: 'Ethereum' | 'Arbitrum';
+    readonly isBase: boolean;
+    readonly asBase: U8aFixed;
+    readonly type: 'Ethereum' | 'Arbitrum' | 'Base';
   }
 
   /** @name PalletTreasuryCall (212) */
