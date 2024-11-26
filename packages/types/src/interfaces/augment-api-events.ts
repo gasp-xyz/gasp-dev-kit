@@ -9,7 +9,7 @@ import type { ApiTypes, AugmentedEvent } from '@polkadot/api-base/types';
 import type { Bytes, Null, Option, Result, Struct, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 import type { H256, Perbill } from '@polkadot/types/interfaces/runtime';
-import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletRolldownBatchSource, PalletRolldownL1RequestProcessingError, PalletRolldownMessagesChain, PalletRolldownMessagesDeposit, PalletRolldownMessagesRequestId, PalletSequencerStakingPayoutRounds, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
+import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletMarketAtomicSwap, PalletRolldownBatchSource, PalletRolldownL1RequestProcessingError, PalletRolldownMessagesChain, PalletRolldownMessagesDeposit, PalletRolldownMessagesRequestId, PalletSequencerStakingPayoutRounds, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
 
 export type __AugmentedEvent<ApiType extends ApiTypes> = AugmentedEvent<ApiType>;
 
@@ -326,6 +326,28 @@ declare module '@polkadot/api-base/types/events' {
        **/
       [key: string]: AugmentedEvent<ApiType>;
     };
+    market: {
+      /**
+       * Assets were swapped successfully
+       **/
+      AssetsSwapped: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, swaps: Vec<PalletMarketAtomicSwap>], { who: SpRuntimeAccountAccountId20, swaps: Vec<PalletMarketAtomicSwap> }>;
+      /**
+       * A successful call of the `RemoveLiquidity` extrinsic will create this event.
+       **/
+      LiquidityBurned: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, amounts: ITuple<[u128, u128]>, burnedAmount: u128, totalSupply: u128], { who: SpRuntimeAccountAccountId20, poolId: u32, amounts: ITuple<[u128, u128]>, burnedAmount: u128, totalSupply: u128 }>;
+      /**
+       * A successful call of the `AddLiquidity` extrinsic will create this event.
+       **/
+      LiquidityMinted: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, amountsProvided: ITuple<[u128, u128]>, lpToken: u32, lpTokenMinted: u128, totalSupply: u128], { who: SpRuntimeAccountAccountId20, poolId: u32, amountsProvided: ITuple<[u128, u128]>, lpToken: u32, lpTokenMinted: u128, totalSupply: u128 }>;
+      /**
+       * A successful call of the `CretaPool` extrinsic will create this event.
+       **/
+      PoolCreated: AugmentedEvent<ApiType, [creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: ITuple<[u32, u32]>], { creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: ITuple<[u32, u32]> }>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
     metamask: {
       MetadataUpdated: AugmentedEvent<ApiType, [name: Option<Bytes>, version: Option<Bytes>, chainId: Option<u64>, decodeUrl: Option<Bytes>], { name: Option<Bytes>, version: Option<Bytes>, chainId: Option<u64>, decodeUrl: Option<Bytes> }>;
       /**
@@ -560,6 +582,32 @@ declare module '@polkadot/api-base/types/events' {
        * block number as the type might suggest.
        **/
       NewSession: AugmentedEvent<ApiType, [sessionIndex: u32], { sessionIndex: u32 }>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    stableSwap: {
+      /**
+       * Assets have been swapped, a successfull call to `Swap` will create this event.
+       **/
+      AssetsSwapped: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, assetIn: u32, amountIn: u128, assetOut: u32, amountOut: u128], { who: SpRuntimeAccountAccountId20, poolId: u32, assetIn: u32, amountIn: u128, assetOut: u32, amountOut: u128 }>;
+      /**
+       * A successful call of the `RemoveLiquidityImbalanced` & `RemoveLiquidity` extrinsic will create this event.
+       **/
+      LiquidityBurned: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, amounts: Vec<u128>, burnedAmount: u128, totalSupply: u128, fees: Vec<u128>], { who: SpRuntimeAccountAccountId20, poolId: u32, amounts: Vec<u128>, burnedAmount: u128, totalSupply: u128, fees: Vec<u128> }>;
+      /**
+       * A successful call of the `RemoveLiquidityOneAsset` extrinsic will create this event.
+       **/
+      LiquidityBurnedOne: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, assetId: u32, amount: u128, burnedAmount: u128, totalSupply: u128], { who: SpRuntimeAccountAccountId20, poolId: u32, assetId: u32, amount: u128, burnedAmount: u128, totalSupply: u128 }>;
+      /**
+       * A successful call of the `AddLiquidity` extrinsic will create this event.
+       **/
+      LiquidityMinted: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, amountsProvided: Vec<u128>, lpToken: u32, lpTokenMinted: u128, totalSupply: u128, fees: Vec<u128>], { who: SpRuntimeAccountAccountId20, poolId: u32, amountsProvided: Vec<u128>, lpToken: u32, lpTokenMinted: u128, totalSupply: u128, fees: Vec<u128> }>;
+      /**
+       * A successful call of the `CretaPool` extrinsic will create this event.
+       **/
+      PoolCreated: AugmentedEvent<ApiType, [creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: Vec<u32>], { creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: Vec<u32> }>;
       /**
        * Generic event
        **/
