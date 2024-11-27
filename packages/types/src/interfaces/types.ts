@@ -2,6 +2,7 @@
 /* eslint-disable */
 
 export * from './default/types.js';
+export * from './market/types.js';
 export * from './metamask/types.js';
 export * from './pos/types.js';
 export * from './rolldown/types.js';

@@ -372,6 +372,40 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        **/
       subscribeJustifications: AugmentedRpc<() => Observable<JustificationNotification>>;
     };
+    market: {
+      /**
+       * 
+       **/
+      calculate_buy_price: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, buy_asset_id: u32 | AnyNumber | Uint8Array, buy_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<u128>>>;
+      /**
+       * 
+       **/
+      calculate_expected_amount_for_minting: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, asset_id: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array) => Observable<Option<u128>>>;
+      /**
+       * 
+       **/
+      calculate_expected_lp_minted: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, amounts: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array]) => Observable<Option<u128>>>;
+      /**
+       * 
+       **/
+      calculate_sell_price: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, sell_asset_id: u32 | AnyNumber | Uint8Array, sell_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<u128>>>;
+      /**
+       * 
+       **/
+      get_burn_amount: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, lp_burn_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u128, u128]>>>>;
+      /**
+       * 
+       **/
+      get_pools: AugmentedRpc<(pool_id: Option<u32> | null | Uint8Array | u32 | AnyNumber) => Observable<Vec<RpcPoolInfo>>>;
+      /**
+       * 
+       **/
+      get_pools_for_trading: AugmentedRpc<() => Observable<Vec<RpcAssetMetadata>>>;
+      /**
+       * 
+       **/
+      get_tradeable_tokens: AugmentedRpc<() => Observable<Vec<u32>>>;
+    };
     metamask: {
       /**
        * Returns eip712 compatible SignedData V4 struct
