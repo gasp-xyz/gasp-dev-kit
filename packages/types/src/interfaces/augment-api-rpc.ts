@@ -29,7 +29,7 @@ import type { AccountId, Balance, BlockNumber, H160, H256, H64, Hash, Header, In
 import type { MigrationStatusResult, ReadProof, RuntimeVersion, TraceBlockResponse } from '@polkadot/types/interfaces/state';
 import type { ApplyExtrinsicResult, ChainProperties, ChainType, Health, NetworkState, NodeRole, PeerInfo, SyncState } from '@polkadot/types/interfaces/system';
 import type { IExtrinsic, Observable } from '@polkadot/types/types';
-import type { Chain, L1Update, RpcAssetMetadata, RpcPoolInfo, TokenId } from 'gasp-types/interfaces/default';
+import type { Chain, L1Update, RpcAssetMetadata, TokenId } from 'gasp-types/interfaces/default';
 
 export type __AugmentedRpc = AugmentedRpc<() => unknown>;
 
@@ -713,38 +713,6 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        * 
        **/
       is_sell_asset_lock_free: AugmentedRpc<(path: Vec<TokenId> | (TokenId | AnyNumber | Uint8Array)[], input_amount: Balance | AnyNumber | Uint8Array) => Observable<Option<bool>>>;
-    },
-    market: {
-      /**
-       * 
-       **/
-      calculate_buy_price: AugmentedRpc<(pool_id: TokenId | AnyNumber | Uint8Array, buy_asset_id: TokenId | AnyNumber | Uint8Array, buy_amount: Balance | AnyNumber | Uint8Array) => Observable<Option<Balance>>>;
-      /**
-       * Calculate rewards amount of liquidity token id for the user
-       **/
-      calculate_sell_price: AugmentedRpc<(pool_id: TokenId | AnyNumber | Uint8Array, asset_id: TokenId | AnyNumber | Uint8Array, amount: Balance | AnyNumber | Uint8Array) => Observable<Option<Balance>>>;
-      /**
-       **/
-      calculate_expected_amount_for_minting: AugmentedRpc<(pool_id: TokenId | AnyNumber | Uint8Array, asset_id: TokenId | AnyNumber | Uint8Array, amount: Balance | AnyNumber | Uint8Array) => Observable<Option<Balance>>>;
-      /**
-       **/
-      calculate_expected_lp_minted: AugmentedRpc<(pool_id: TokenId | AnyNumber | Uint8Array, amounts: [Balance | AnyNumber | Uint8Array, Balance | AnyNumber | Uint8Array]) => Observable<Option<Balance>>>;
-      /**
-       * Returns amounts of tokens received by burning provided lp_burn_amount in pool of provided pool id
-       **/
-      get_burn_amount: AugmentedRpc<(pool_id: TokenId | AnyNumber | Uint8Array, lp_burn_amount: Balance | AnyNumber | Uint8Array) => Observable<Option<ITuple<[Balance, Balance]>>>>;
-      /**
-       * 
-       **/
-      get_pools: AugmentedRpc<(pool_id: TokenId | AnyNumber | Uint8Array) => Observable<Vec<RpcAssetMetadata>>>;
-      /**
-       * 
-       **/
-      get_tradeable_tokens: AugmentedRpc<() => Observable<Vec<RpcPoolInfo>>>;
-      /**
-       * 
-       **/
-      get_pools_for_trading: AugmentedRpc<() => Observable<Vec<TokenId>>>;
     };
   } // RpcInterface
 } // declare module
