@@ -76,3 +76,4 @@ export { default as pos } from './pos/definitions.js';
 export { default as xyk } from './xyk/definitions.js';
 export { default as rolldown } from './rolldown/definitions.js';
 export { default as metamask } from './metamask/definitions.js';
+export { default as market } from './market/definitions.js';
