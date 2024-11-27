@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-feature-rolldown-on-idle-hook.3",
+  "version": "0.0.2-feature-rolldown-on-idle-hook.4",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {

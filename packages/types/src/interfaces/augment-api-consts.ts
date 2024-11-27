@@ -370,6 +370,28 @@ declare module '@polkadot/api-base/types/consts' {
        **/
       [key: string]: Codec;
     };
+    stableSwap: {
+      defaultApmCoeff: u128 & AugmentedConst<ApiType>;
+      /**
+       * Percentage of treasury fee that gets burned if possible.
+       **/
+      marketBnBFeePart: u128 & AugmentedConst<ApiType>;
+      /**
+       * Total fee applied to a swap.
+       * Part goes back to pool, part to treasury, and part is burned.
+       **/
+      marketTotalFee: u128 & AugmentedConst<ApiType>;
+      /**
+       * Percentage of total fee that goes into the treasury.
+       **/
+      marketTreasuryFeePart: u128 & AugmentedConst<ApiType>;
+      maxApmCoeff: u128 & AugmentedConst<ApiType>;
+      maxAssetsInPool: u32 & AugmentedConst<ApiType>;
+      /**
+       * Generic const
+       **/
+      [key: string]: Codec;
+    };
     system: {
       /**
        * Maximum number of block number to block hash mappings to keep (oldest pruned first).

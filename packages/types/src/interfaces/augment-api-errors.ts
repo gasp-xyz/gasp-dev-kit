@@ -549,6 +549,60 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       [key: string]: AugmentedError<ApiType>;
     };
+    market: {
+      /**
+       * Asset does not exists
+       **/
+      AssetDoesNotExists: AugmentedError<ApiType>;
+      /**
+       * Asset ids are not allowed to create a pool
+       **/
+      DisallowedPool: AugmentedError<ApiType>;
+      /**
+       * Excesive input amount does not meet max requirements
+       **/
+      ExcesiveInputAmount: AugmentedError<ApiType>;
+      /**
+       * Operation not available for such pool type
+       **/
+      FunctionNotAvailableForThisPoolKind: AugmentedError<ApiType>;
+      /**
+       * Asset id is not allowed
+       **/
+      FunctionNotAvailableForThisToken: AugmentedError<ApiType>;
+      /**
+       * Insufficient output amount does not meet min requirements
+       **/
+      InsufficientOutputAmount: AugmentedError<ApiType>;
+      /**
+       * Input asset id is not connected with output asset id for given pools
+       **/
+      MultiSwapPathInvalid: AugmentedError<ApiType>;
+      /**
+       * Multi swap path contains repetive pools
+       **/
+      MultiSwapSamePool: AugmentedError<ApiType>;
+      /**
+       * No such pool exists
+       **/
+      NoSuchPool: AugmentedError<ApiType>;
+      /**
+       * Not a promoted pool
+       **/
+      NotAPromotedPool: AugmentedError<ApiType>;
+      /**
+       * Pool is not paired with native currency id
+       **/
+      NotPairedWithNativeAsset: AugmentedError<ApiType>;
+      /**
+       * Trading blocked by maintenance mode
+       **/
+      TradingBlockedByMaintenanceMode: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
     metamask: {
       /**
        * there should be some updates
@@ -823,6 +877,76 @@ declare module '@polkadot/api-base/types/errors' {
        * No keys are associated with this account.
        **/
       NoKeys: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    stableSwap: {
+      /**
+       * Amplification coefficient lower then 1 or too large
+       **/
+      AmpCoeffOutOfRange: AugmentedError<ApiType>;
+      /**
+       * Provided arguments do not match in length
+       **/
+      ArgumentsLengthMismatch: AugmentedError<ApiType>;
+      /**
+       * Asset does not exist
+       **/
+      AssetDoesNotExist: AugmentedError<ApiType>;
+      /**
+       * Excesive output amount does not meet max requirements
+       **/
+      ExcesiveOutputAmount: AugmentedError<ApiType>;
+      /**
+       * Initial liquidity provision needs all assets
+       **/
+      InitialLiquidityZeroAmount: AugmentedError<ApiType>;
+      /**
+       * Insufficient input amount
+       **/
+      InsufficientInputAmount: AugmentedError<ApiType>;
+      /**
+       * Insufficient output amount does not meet min requirements
+       **/
+      InsufficientOutputAmount: AugmentedError<ApiType>;
+      /**
+       * Liquidity token creation failed
+       **/
+      LiquidityTokenCreationFailed: AugmentedError<ApiType>;
+      /**
+       * Math overflow
+       **/
+      MathOverflow: AugmentedError<ApiType>;
+      /**
+       * Asset does not exist in pool.
+       **/
+      NoSuchAssetInPool: AugmentedError<ApiType>;
+      /**
+       * No such pool exists
+       **/
+      NoSuchPool: AugmentedError<ApiType>;
+      /**
+       * Pool already exists
+       **/
+      PoolAlreadyExists: AugmentedError<ApiType>;
+      /**
+       * Pool is broken, remove liquidity
+       **/
+      PoolInvariantBroken: AugmentedError<ApiType>;
+      /**
+       * Asset ids cannot be the same
+       **/
+      SameAsset: AugmentedError<ApiType>;
+      /**
+       * Too many assets for pool creation
+       **/
+      TooManyAssets: AugmentedError<ApiType>;
+      /**
+       * Unexpected failure
+       **/
+      UnexpectedFailure: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
