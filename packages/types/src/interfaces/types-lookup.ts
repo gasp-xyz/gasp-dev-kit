@@ -2793,7 +2793,8 @@ declare module '@polkadot/types/lookup' {
     readonly isDeadAccount: boolean;
     readonly isTokenIdNotExists: boolean;
     readonly isTooManyReserves: boolean;
-    readonly type: 'BalanceTooLow' | 'AmountIntoBalanceFailed' | 'LiquidityRestrictions' | 'MaxLocksExceeded' | 'KeepAlive' | 'ExistentialDeposit' | 'DeadAccount' | 'TokenIdNotExists' | 'TooManyReserves';
+    readonly isNontransferableToken: boolean;
+    readonly type: 'BalanceTooLow' | 'AmountIntoBalanceFailed' | 'LiquidityRestrictions' | 'MaxLocksExceeded' | 'KeepAlive' | 'ExistentialDeposit' | 'DeadAccount' | 'TokenIdNotExists' | 'TooManyReserves' | 'NontransferableToken';
   }
 
   /** @name PalletTransactionPaymentReleases (312) */
@@ -3115,7 +3116,8 @@ declare module '@polkadot/types/lookup' {
     readonly isTradingBlockedByMaintenanceMode: boolean;
     readonly isMultiSwapSamePool: boolean;
     readonly isMultiSwapPathInvalid: boolean;
-    readonly type: 'NoSuchPool' | 'FunctionNotAvailableForThisToken' | 'DisallowedPool' | 'InsufficientOutputAmount' | 'ExcesiveInputAmount' | 'NotPairedWithNativeAsset' | 'NotAPromotedPool' | 'AssetDoesNotExists' | 'FunctionNotAvailableForThisPoolKind' | 'TradingBlockedByMaintenanceMode' | 'MultiSwapSamePool' | 'MultiSwapPathInvalid';
+    readonly isNontransferableToken: boolean;
+    readonly type: 'NoSuchPool' | 'FunctionNotAvailableForThisToken' | 'DisallowedPool' | 'InsufficientOutputAmount' | 'ExcesiveInputAmount' | 'NotPairedWithNativeAsset' | 'NotAPromotedPool' | 'AssetDoesNotExists' | 'FunctionNotAvailableForThisPoolKind' | 'TradingBlockedByMaintenanceMode' | 'MultiSwapSamePool' | 'MultiSwapPathInvalid' | 'NontransferableToken';
   }
 
   /** @name ParachainStakingRoundInfo (364) */

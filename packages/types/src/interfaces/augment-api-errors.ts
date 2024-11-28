@@ -583,6 +583,10 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       MultiSwapSamePool: AugmentedError<ApiType>;
       /**
+       * Asset cannot be used to create or modify a pool
+       **/
+      NontransferableToken: AugmentedError<ApiType>;
+      /**
        * No such pool exists
        **/
       NoSuchPool: AugmentedError<ApiType>;
@@ -1050,6 +1054,7 @@ declare module '@polkadot/api-base/types/errors' {
        * Failed because the maximum locks was exceeded
        **/
       MaxLocksExceeded: AugmentedError<ApiType>;
+      NontransferableToken: AugmentedError<ApiType>;
       /**
        * Failed because token with given id does not exits
        **/
