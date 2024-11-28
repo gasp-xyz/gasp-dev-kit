@@ -2613,7 +2613,7 @@ export default {
    * Lookup314: pallet_stable_swap::pallet::Error<T>
    **/
   PalletStableSwapError: {
-    _enum: ['AmpCoeffOutOfRange', 'TooManyAssets', 'PoolAlreadyExists', 'AssetDoesNotExist', 'SameAsset', 'NoSuchPool', 'ArgumentsLengthMismatch', 'PoolInvariantBroken', 'InitialLiquidityZeroAmount', 'NoSuchAssetInPool', 'UnexpectedFailure', 'InsufficientOutputAmount', 'InsufficientInputAmount', 'ExcesiveOutputAmount', 'MathOverflow', 'LiquidityTokenCreationFailed']
+    _enum: ['AmpCoeffOutOfRange', 'InitialPoolRateOutOfRange', 'TooManyAssets', 'PoolAlreadyExists', 'AssetDoesNotExist', 'SameAsset', 'NoSuchPool', 'ArgumentsLengthMismatch', 'PoolInvariantBroken', 'InitialLiquidityZeroAmount', 'NoSuchAssetInPool', 'UnexpectedFailure', 'InsufficientOutputAmount', 'InsufficientInputAmount', 'ExcesiveOutputAmount', 'MathOverflow', 'LiquidityTokenCreationFailed']
   },
   /**
    * Lookup316: pallet_xyk::pallet::Error<T>

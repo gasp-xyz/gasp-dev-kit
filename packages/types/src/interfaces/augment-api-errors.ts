@@ -903,6 +903,10 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       InitialLiquidityZeroAmount: AugmentedError<ApiType>;
       /**
+       * Initial pool rate multipliers are too large
+       **/
+      InitialPoolRateOutOfRange: AugmentedError<ApiType>;
+      /**
        * Insufficient input amount
        **/
       InsufficientInputAmount: AugmentedError<ApiType>;
