@@ -2814,6 +2814,7 @@ declare module '@polkadot/types/lookup' {
   /** @name PalletStableSwapError (314) */
   interface PalletStableSwapError extends Enum {
     readonly isAmpCoeffOutOfRange: boolean;
+    readonly isInitialPoolRateOutOfRange: boolean;
     readonly isTooManyAssets: boolean;
     readonly isPoolAlreadyExists: boolean;
     readonly isAssetDoesNotExist: boolean;
@@ -2829,7 +2830,7 @@ declare module '@polkadot/types/lookup' {
     readonly isExcesiveOutputAmount: boolean;
     readonly isMathOverflow: boolean;
     readonly isLiquidityTokenCreationFailed: boolean;
-    readonly type: 'AmpCoeffOutOfRange' | 'TooManyAssets' | 'PoolAlreadyExists' | 'AssetDoesNotExist' | 'SameAsset' | 'NoSuchPool' | 'ArgumentsLengthMismatch' | 'PoolInvariantBroken' | 'InitialLiquidityZeroAmount' | 'NoSuchAssetInPool' | 'UnexpectedFailure' | 'InsufficientOutputAmount' | 'InsufficientInputAmount' | 'ExcesiveOutputAmount' | 'MathOverflow' | 'LiquidityTokenCreationFailed';
+    readonly type: 'AmpCoeffOutOfRange' | 'InitialPoolRateOutOfRange' | 'TooManyAssets' | 'PoolAlreadyExists' | 'AssetDoesNotExist' | 'SameAsset' | 'NoSuchPool' | 'ArgumentsLengthMismatch' | 'PoolInvariantBroken' | 'InitialLiquidityZeroAmount' | 'NoSuchAssetInPool' | 'UnexpectedFailure' | 'InsufficientOutputAmount' | 'InsufficientInputAmount' | 'ExcesiveOutputAmount' | 'MathOverflow' | 'LiquidityTokenCreationFailed';
   }
 
   /** @name PalletXykError (316) */
