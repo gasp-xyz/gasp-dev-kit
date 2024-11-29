@@ -29,7 +29,7 @@ import type { AccountId, Balance, BlockNumber, H160, H256, H64, Hash, Header, In
 import type { MigrationStatusResult, ReadProof, RuntimeVersion, TraceBlockResponse } from '@polkadot/types/interfaces/state';
 import type { ApplyExtrinsicResult, ChainProperties, ChainType, Health, NetworkState, NodeRole, PeerInfo, SyncState } from '@polkadot/types/interfaces/system';
 import type { IExtrinsic, Observable } from '@polkadot/types/types';
-import type { Chain, L1Update, RpcAssetMetadata, RpcPoolInfo, TokenId } from 'gasp-types/interfaces/default';
+import type { Chain, L1Update, RpcAssetMetadata, TokenId } from 'gasp-types/interfaces/default';
 
 export type __AugmentedRpc = AugmentedRpc<() => unknown>;
 
