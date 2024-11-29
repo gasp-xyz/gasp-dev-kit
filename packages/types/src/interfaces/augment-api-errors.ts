@@ -583,6 +583,10 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       MultiSwapSamePool: AugmentedError<ApiType>;
       /**
+       * Asset cannot be used to create or modify a pool
+       **/
+      NontransferableToken: AugmentedError<ApiType>;
+      /**
        * No such pool exists
        **/
       NoSuchPool: AugmentedError<ApiType>;
@@ -826,6 +830,7 @@ declare module '@polkadot/api-base/types/errors' {
       SequencerLastUpdateStillInDisputePeriod: AugmentedError<ApiType>;
       TokenDoesNotExist: AugmentedError<ApiType>;
       TooManyRequests: AugmentedError<ApiType>;
+      UninitializedChainId: AugmentedError<ApiType>;
       UnknownAliasAccount: AugmentedError<ApiType>;
       UnsupportedAsset: AugmentedError<ApiType>;
       UpdateHashMishmatch: AugmentedError<ApiType>;
@@ -902,6 +907,10 @@ declare module '@polkadot/api-base/types/errors' {
        * Initial liquidity provision needs all assets
        **/
       InitialLiquidityZeroAmount: AugmentedError<ApiType>;
+      /**
+       * Initial pool rate multipliers are too large
+       **/
+      InitialPoolRateOutOfRange: AugmentedError<ApiType>;
       /**
        * Insufficient input amount
        **/
@@ -1046,6 +1055,7 @@ declare module '@polkadot/api-base/types/errors' {
        * Failed because the maximum locks was exceeded
        **/
       MaxLocksExceeded: AugmentedError<ApiType>;
+      NontransferableToken: AugmentedError<ApiType>;
       /**
        * Failed because token with given id does not exits
        **/

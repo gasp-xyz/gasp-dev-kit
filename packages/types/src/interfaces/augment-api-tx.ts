@@ -669,6 +669,7 @@ declare module '@polkadot/api-base/types/submittable' {
       burnLiquidity: AugmentedSubmittable<(poolId: u32 | AnyNumber | Uint8Array, liquidityBurnAmount: u128 | AnyNumber | Uint8Array, minFirstAssetAmount: u128 | AnyNumber | Uint8Array, minSecondAssetAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u128, u128, u128]>;
       /**
        * Creates a liquidity pool and an associated new `lp_token` asset
+       * For a StableSwap pool, the "stable" rate is computed from the ratio of input amounts, max rate is 1e18:1
        **/
       createPool: AugmentedSubmittable<(kind: PalletMarketPoolKind | 'Xyk' | 'StableSwap' | number | Uint8Array, firstAssetId: u32 | AnyNumber | Uint8Array, firstAssetAmount: u128 | AnyNumber | Uint8Array, secondAssetId: u32 | AnyNumber | Uint8Array, secondAssetAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletMarketPoolKind, u32, u128, u32, u128]>;
       /**
@@ -697,17 +698,29 @@ declare module '@polkadot/api-base/types/submittable' {
        * Executes a multiswap asset in a series of swap asset atomic swaps.
        * 
        * Multiswaps must fee lock instead of paying transaction fees.
+       * For a single atomic swap, both `asset_amount_in` and `min_amount_out` are considered to allow free execution without locks.
        * 
        * # Args:
        * - `swap_token_list` - This list of tokens is the route of the atomic swaps, starting with the asset sold and ends with the asset finally bought
        * - `asset_id_in`: The id of the asset sold
        * - `asset_amount_in`: The amount of the asset sold
        * - `asset_id_out`: The id of the asset received
-       * - `min_amount_out` - The minimum amount of requested asset that must be bought in order to not fail on slippage. Slippage failures still charge exchange commission.
+       * - `min_amount_out` - The minimum amount of requested asset that must be bought in order to not fail on slippage, use RPC calls to calc expected value
        **/
       multiswapAsset: AugmentedSubmittable<(swapPoolList: Vec<u32> | (u32 | AnyNumber | Uint8Array)[], assetIdIn: u32 | AnyNumber | Uint8Array, assetAmountIn: u128 | AnyNumber | Uint8Array, assetIdOut: u32 | AnyNumber | Uint8Array, minAmountOut: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<u32>, u32, u128, u32, u128]>;
       /**
-       * Buy variant of the multiswap, a precise output amount should be provided instead.
+       * Executes a multiswap asset in a series of swap asset atomic swaps.
+       * The precise output amount is provided instead.
+       * 
+       * Multiswaps must fee lock instead of paying transaction fees.
+       * For a single atomic swap, both `asset_amount_out` and `max_amount_in` are considered to allow free execution without locks.
+       * 
+       * # Args:
+       * - `swap_token_list` - This list of tokens is the route of the atomic swaps, starting with the asset sold and ends with the asset finally bought
+       * - `asset_id_out`: The id of the asset received
+       * - `asset_amount_out`: The amount of the asset received
+       * - `asset_id_in`: The id of the asset sold
+       * - `max_amount_in` - The maximum amount of sold asset in order to not fail on slippage, use RPC calls to calc expected value
        **/
       multiswapAssetBuy: AugmentedSubmittable<(swapPoolList: Vec<u32> | (u32 | AnyNumber | Uint8Array)[], assetIdOut: u32 | AnyNumber | Uint8Array, assetAmountOut: u128 | AnyNumber | Uint8Array, assetIdIn: u32 | AnyNumber | Uint8Array, maxAmountIn: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<u32>, u32, u128, u32, u128]>;
       /**
@@ -1117,6 +1130,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * only deposit recipient can initiate refund failed deposit
        **/
       refundFailedDeposit: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, requestId: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
+      setDisputePeriod: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, disputePeriodLength: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
       setManualBatchExtraFee: AugmentedSubmittable<(balance: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128]>;
       updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any } | string | Uint8Array, updateHash: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update, H256]>;
       updateL2FromL1Unsafe: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;

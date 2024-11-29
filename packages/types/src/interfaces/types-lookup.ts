@@ -319,13 +319,28 @@ declare module '@polkadot/types/lookup' {
       readonly chain: PalletRolldownMessagesChain;
       readonly hash_: H256;
     } & Struct;
+    readonly isL1ReadIgnoredBecauseOfUnknownDisputePeriod: boolean;
+    readonly asL1ReadIgnoredBecauseOfUnknownDisputePeriod: {
+      readonly chain: PalletRolldownMessagesChain;
+      readonly hash_: H256;
+    } & Struct;
     readonly isDepositFerried: boolean;
     readonly asDepositFerried: {
       readonly chain: PalletRolldownMessagesChain;
       readonly deposit: PalletRolldownMessagesDeposit;
       readonly depositHash: H256;
     } & Struct;
-    readonly type: 'L1ReadStored' | 'RequestProcessedOnL2' | 'L1ReadCanceled' | 'TxBatchCreated' | 'WithdrawalRequestCreated' | 'ManualBatchExtraFeeSet' | 'DepositRefundCreated' | 'L1ReadScheduledForExecution' | 'L1ReadIgnoredBecauseOfMaintenanceMode' | 'DepositFerried';
+    readonly isL1ReadExecuted: boolean;
+    readonly asL1ReadExecuted: {
+      readonly chain: PalletRolldownMessagesChain;
+      readonly hash_: H256;
+    } & Struct;
+    readonly isDisputePeriodSet: boolean;
+    readonly asDisputePeriodSet: {
+      readonly chain: PalletRolldownMessagesChain;
+      readonly disputePeriodLength: u128;
+    } & Struct;
+    readonly type: 'L1ReadStored' | 'RequestProcessedOnL2' | 'L1ReadCanceled' | 'TxBatchCreated' | 'WithdrawalRequestCreated' | 'ManualBatchExtraFeeSet' | 'DepositRefundCreated' | 'L1ReadScheduledForExecution' | 'L1ReadIgnoredBecauseOfMaintenanceMode' | 'L1ReadIgnoredBecauseOfUnknownDisputePeriod' | 'DepositFerried' | 'L1ReadExecuted' | 'DisputePeriodSet';
   }
 
   /** @name PalletRolldownMessagesChain (44) */
@@ -1574,7 +1589,12 @@ declare module '@polkadot/types/lookup' {
     readonly asUpdateL2FromL1Unsafe: {
       readonly requests: PalletRolldownMessagesL1Update;
     } & Struct;
-    readonly type: 'UpdateL2FromL1' | 'ForceUpdateL2FromL1' | 'CancelRequestsFromL1' | 'ForceCancelRequestsFromL1' | 'Withdraw' | 'CreateBatch' | 'SetManualBatchExtraFee' | 'RefundFailedDeposit' | 'ForceCreateBatch' | 'FerryDeposit' | 'FerryDepositUnsafe' | 'UpdateL2FromL1Unsafe';
+    readonly isSetDisputePeriod: boolean;
+    readonly asSetDisputePeriod: {
+      readonly chain: PalletRolldownMessagesChain;
+      readonly disputePeriodLength: u128;
+    } & Struct;
+    readonly type: 'UpdateL2FromL1' | 'ForceUpdateL2FromL1' | 'CancelRequestsFromL1' | 'ForceCancelRequestsFromL1' | 'Withdraw' | 'CreateBatch' | 'SetManualBatchExtraFee' | 'RefundFailedDeposit' | 'ForceCreateBatch' | 'FerryDeposit' | 'FerryDepositUnsafe' | 'UpdateL2FromL1Unsafe' | 'SetDisputePeriod';
   }
 
   /** @name PalletRolldownMessagesL1Update (150) */
@@ -2667,6 +2687,15 @@ declare module '@polkadot/types/lookup' {
     readonly type: 'NotFoundationAccount' | 'NotInMaintenanceMode' | 'AlreadyInMaintenanceMode' | 'AlreadyUpgradableInMaintenanceMode' | 'AlreadyNotUpgradableInMaintenanceMode' | 'UpgradeBlockedByMaintenance';
   }
 
+  /** @name PalletRolldownUpdateMetadata (278) */
+  interface PalletRolldownUpdateMetadata extends Struct {
+    readonly maxId: u128;
+    readonly minId: u128;
+    readonly updateSize: u128;
+    readonly sequencer: SpRuntimeAccountAccountId20;
+    readonly updateHash: H256;
+  }
+
   /** @name PalletRolldownSequencerRights (281) */
   interface PalletRolldownSequencerRights extends Struct {
     readonly readRights: u128;
@@ -2754,7 +2783,8 @@ declare module '@polkadot/types/lookup' {
     readonly isAssetRegistrationProblem: boolean;
     readonly isUpdateHashMishmatch: boolean;
     readonly isAlreadyExecuted: boolean;
-    readonly type: 'OperationFailed' | 'ReadRightsExhausted' | 'CancelRightsExhausted' | 'EmptyUpdate' | 'AddressDeserializationFailure' | 'RequestDoesNotExist' | 'NotEnoughAssets' | 'NotEnoughAssetsForFee' | 'BalanceOverflow' | 'L1AssetCreationFailed' | 'MathOverflow' | 'TooManyRequests' | 'InvalidUpdate' | 'L1AssetNotFound' | 'WrongRequestId' | 'OnlySelectedSequencerisAllowedToUpdate' | 'SequencerLastUpdateStillInDisputePeriod' | 'SequencerAwaitingCancelResolution' | 'MultipleUpdatesInSingleBlock' | 'BlockedByMaintenanceMode' | 'UnsupportedAsset' | 'InvalidRange' | 'NonExistingRequestId' | 'UnknownAliasAccount' | 'FailedDepositDoesNotExist' | 'EmptyBatch' | 'TokenDoesNotExist' | 'NotEligibleForRefund' | 'FerryHashMismatch' | 'MintError' | 'AssetRegistrationProblem' | 'UpdateHashMishmatch' | 'AlreadyExecuted';
+    readonly isUninitializedChainId: boolean;
+    readonly type: 'OperationFailed' | 'ReadRightsExhausted' | 'CancelRightsExhausted' | 'EmptyUpdate' | 'AddressDeserializationFailure' | 'RequestDoesNotExist' | 'NotEnoughAssets' | 'NotEnoughAssetsForFee' | 'BalanceOverflow' | 'L1AssetCreationFailed' | 'MathOverflow' | 'TooManyRequests' | 'InvalidUpdate' | 'L1AssetNotFound' | 'WrongRequestId' | 'OnlySelectedSequencerisAllowedToUpdate' | 'SequencerLastUpdateStillInDisputePeriod' | 'SequencerAwaitingCancelResolution' | 'MultipleUpdatesInSingleBlock' | 'BlockedByMaintenanceMode' | 'UnsupportedAsset' | 'InvalidRange' | 'NonExistingRequestId' | 'UnknownAliasAccount' | 'FailedDepositDoesNotExist' | 'EmptyBatch' | 'TokenDoesNotExist' | 'NotEligibleForRefund' | 'FerryHashMismatch' | 'MintError' | 'AssetRegistrationProblem' | 'UpdateHashMishmatch' | 'AlreadyExecuted' | 'UninitializedChainId';
   }
 
   /** @name PalletMetamaskSignatureError (301) */
@@ -2793,7 +2823,8 @@ declare module '@polkadot/types/lookup' {
     readonly isDeadAccount: boolean;
     readonly isTokenIdNotExists: boolean;
     readonly isTooManyReserves: boolean;
-    readonly type: 'BalanceTooLow' | 'AmountIntoBalanceFailed' | 'LiquidityRestrictions' | 'MaxLocksExceeded' | 'KeepAlive' | 'ExistentialDeposit' | 'DeadAccount' | 'TokenIdNotExists' | 'TooManyReserves';
+    readonly isNontransferableToken: boolean;
+    readonly type: 'BalanceTooLow' | 'AmountIntoBalanceFailed' | 'LiquidityRestrictions' | 'MaxLocksExceeded' | 'KeepAlive' | 'ExistentialDeposit' | 'DeadAccount' | 'TokenIdNotExists' | 'TooManyReserves' | 'NontransferableToken';
   }
 
   /** @name PalletTransactionPaymentReleases (312) */
@@ -2814,6 +2845,7 @@ declare module '@polkadot/types/lookup' {
   /** @name PalletStableSwapError (314) */
   interface PalletStableSwapError extends Enum {
     readonly isAmpCoeffOutOfRange: boolean;
+    readonly isInitialPoolRateOutOfRange: boolean;
     readonly isTooManyAssets: boolean;
     readonly isPoolAlreadyExists: boolean;
     readonly isAssetDoesNotExist: boolean;
@@ -2829,7 +2861,7 @@ declare module '@polkadot/types/lookup' {
     readonly isExcesiveOutputAmount: boolean;
     readonly isMathOverflow: boolean;
     readonly isLiquidityTokenCreationFailed: boolean;
-    readonly type: 'AmpCoeffOutOfRange' | 'TooManyAssets' | 'PoolAlreadyExists' | 'AssetDoesNotExist' | 'SameAsset' | 'NoSuchPool' | 'ArgumentsLengthMismatch' | 'PoolInvariantBroken' | 'InitialLiquidityZeroAmount' | 'NoSuchAssetInPool' | 'UnexpectedFailure' | 'InsufficientOutputAmount' | 'InsufficientInputAmount' | 'ExcesiveOutputAmount' | 'MathOverflow' | 'LiquidityTokenCreationFailed';
+    readonly type: 'AmpCoeffOutOfRange' | 'InitialPoolRateOutOfRange' | 'TooManyAssets' | 'PoolAlreadyExists' | 'AssetDoesNotExist' | 'SameAsset' | 'NoSuchPool' | 'ArgumentsLengthMismatch' | 'PoolInvariantBroken' | 'InitialLiquidityZeroAmount' | 'NoSuchAssetInPool' | 'UnexpectedFailure' | 'InsufficientOutputAmount' | 'InsufficientInputAmount' | 'ExcesiveOutputAmount' | 'MathOverflow' | 'LiquidityTokenCreationFailed';
   }
 
   /** @name PalletXykError (316) */
@@ -3114,7 +3146,8 @@ declare module '@polkadot/types/lookup' {
     readonly isTradingBlockedByMaintenanceMode: boolean;
     readonly isMultiSwapSamePool: boolean;
     readonly isMultiSwapPathInvalid: boolean;
-    readonly type: 'NoSuchPool' | 'FunctionNotAvailableForThisToken' | 'DisallowedPool' | 'InsufficientOutputAmount' | 'ExcesiveInputAmount' | 'NotPairedWithNativeAsset' | 'NotAPromotedPool' | 'AssetDoesNotExists' | 'FunctionNotAvailableForThisPoolKind' | 'TradingBlockedByMaintenanceMode' | 'MultiSwapSamePool' | 'MultiSwapPathInvalid';
+    readonly isNontransferableToken: boolean;
+    readonly type: 'NoSuchPool' | 'FunctionNotAvailableForThisToken' | 'DisallowedPool' | 'InsufficientOutputAmount' | 'ExcesiveInputAmount' | 'NotPairedWithNativeAsset' | 'NotAPromotedPool' | 'AssetDoesNotExists' | 'FunctionNotAvailableForThisPoolKind' | 'TradingBlockedByMaintenanceMode' | 'MultiSwapSamePool' | 'MultiSwapPathInvalid' | 'NontransferableToken';
   }
 
   /** @name ParachainStakingRoundInfo (364) */
