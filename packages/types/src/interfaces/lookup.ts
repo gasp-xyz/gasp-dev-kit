@@ -2592,7 +2592,7 @@ export default {
    * Lookup310: orml_tokens::module::Error<T>
    **/
   OrmlTokensModuleError: {
-    _enum: ['BalanceTooLow', 'AmountIntoBalanceFailed', 'LiquidityRestrictions', 'MaxLocksExceeded', 'KeepAlive', 'ExistentialDeposit', 'DeadAccount', 'TokenIdNotExists', 'TooManyReserves']
+    _enum: ['BalanceTooLow', 'AmountIntoBalanceFailed', 'LiquidityRestrictions', 'MaxLocksExceeded', 'KeepAlive', 'ExistentialDeposit', 'DeadAccount', 'TokenIdNotExists', 'TooManyReserves', 'NontransferableToken']
   },
   /**
    * Lookup312: pallet_transaction_payment::Releases
@@ -2779,7 +2779,7 @@ export default {
    * Lookup363: pallet_market::pallet::Error<T>
    **/
   PalletMarketError: {
-    _enum: ['NoSuchPool', 'FunctionNotAvailableForThisToken', 'DisallowedPool', 'InsufficientOutputAmount', 'ExcesiveInputAmount', 'NotPairedWithNativeAsset', 'NotAPromotedPool', 'AssetDoesNotExists', 'FunctionNotAvailableForThisPoolKind', 'TradingBlockedByMaintenanceMode', 'MultiSwapSamePool', 'MultiSwapPathInvalid']
+    _enum: ['NoSuchPool', 'FunctionNotAvailableForThisToken', 'DisallowedPool', 'InsufficientOutputAmount', 'ExcesiveInputAmount', 'NotPairedWithNativeAsset', 'NotAPromotedPool', 'AssetDoesNotExists', 'FunctionNotAvailableForThisPoolKind', 'TradingBlockedByMaintenanceMode', 'MultiSwapSamePool', 'MultiSwapPathInvalid', 'NontransferableToken']
   },
   /**
    * Lookup364: parachain_staking::pallet::RoundInfo<BlockNumber>
