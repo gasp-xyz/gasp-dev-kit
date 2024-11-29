@@ -68,6 +68,9 @@ export default {
       l2UpdatesToRemove: "Vec<u128>",
       timeStamp: "U256"
     },
+    PalletMarketPoolKind: {
+      _enum: ['Xyk', 'StableSwap']
+    },
     RpcPoolInfo: {
       poolId: "TokenId",
       kind: "PalletMarketPoolKind",
