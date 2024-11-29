@@ -67,7 +67,14 @@ export default {
       requestId: "RequestId",
       l2UpdatesToRemove: "Vec<u128>",
       timeStamp: "U256"
-    }
+    },
+    RpcPoolInfo: {
+      poolId: "TokenId",
+      kind: "PalletMarketPoolKind",
+      lpTokenId: "TokenId",
+      assets: "Vec<TokenId>",
+      reserves: "Vec<Balance>"
+    },
   }
 }
 
