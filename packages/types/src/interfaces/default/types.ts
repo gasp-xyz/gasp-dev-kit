@@ -3,7 +3,7 @@
 
 import type { Bytes, Compact, Enum, Struct, U256, U8aFixed, Vec, bool, u128, u32 } from '@polkadot/types-codec';
 import type { EcdsaSignature, Ed25519Signature, Sr25519Signature } from '@polkadot/types/interfaces/extrinsics';
-import type { BlockNumber, Digest, H256, H512, Hash } from '@polkadot/types/interfaces/runtime';
+import type { Balance, BlockNumber, Digest, H256, H512, Hash } from '@polkadot/types/interfaces/runtime';
 
 /** @name CancelResolution */
 export interface CancelResolution extends Struct {
@@ -87,6 +87,15 @@ export interface RpcAssetMetadata extends Struct {
   readonly decimals: u32;
   readonly name: Bytes;
   readonly symbol: Bytes;
+}
+
+/** @name RpcPoolInfo */
+export interface RpcPoolInfo extends Struct {
+  readonly poolId: TokenId;
+  readonly kind: PalletMarketPoolKind;
+  readonly lpTokenId: TokenId;
+  readonly assets: Vec<TokenId>;
+  readonly reserves: Vec<Balance>;
 }
 
 /** @name ShufflingSeed */
