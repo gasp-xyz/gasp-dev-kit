@@ -75,6 +75,13 @@ export interface Origin extends Enum {
   readonly type: 'L1' | 'L2';
 }
 
+/** @name PalletMarketPoolKind */
+export interface PalletMarketPoolKind extends Enum {
+  readonly isXyk: boolean;
+  readonly isStableSwap: boolean;
+  readonly type: 'Xyk' | 'StableSwap';
+}
+
 /** @name RequestId */
 export interface RequestId extends Struct {
   readonly origin: Origin;
