@@ -4,6 +4,7 @@
 import type { Bytes, Compact, Enum, Struct, U256, U8aFixed, Vec, bool, u128, u32 } from '@polkadot/types-codec';
 import type { EcdsaSignature, Ed25519Signature, Sr25519Signature } from '@polkadot/types/interfaces/extrinsics';
 import type { Balance, BlockNumber, Digest, H256, H512, Hash } from '@polkadot/types/interfaces/runtime';
+import { PalletMarketPoolKind } from '@polkadot/types/lookup';
 
 /** @name CancelResolution */
 export interface CancelResolution extends Struct {
