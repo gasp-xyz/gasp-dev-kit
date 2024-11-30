@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-fix-reject-old-updates.1",
+  "version": "0.0.2-fix-reject-old-updates.2",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
