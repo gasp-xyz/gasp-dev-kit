@@ -389,11 +389,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        * 
        **/
       calculate_sell_price: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, sell_asset_id: u32 | AnyNumber | Uint8Array, sell_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<u128>>>;
-       /**
-       * 
-       **/
-      calculate_sell_price_with_impact: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, sell_asset_id: u32 | AnyNumber | Uint8Array, sell_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u128, u128]>>>>;
-       /**
+      /**
        * 
        **/
       get_burn_amount: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, lp_burn_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u128, u128]>>>>;
