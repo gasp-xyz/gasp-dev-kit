@@ -1,13 +1,5 @@
 export default {
-  types: {
-    RpcPoolInfo: {
-      poolId: "TokenId",
-      kind: "PalletMarketPoolKind",
-      lpTokenId: "TokenId",
-      assets: "Vec<TokenId>",
-      reserves: "Vec<Balance>"
-    },
-  },
+  types: {},
   rpc: {
     calculate_buy_price: {
       description: "",
