@@ -294,6 +294,24 @@ export const mRpc = {
       ],
       type: "Option<u128>"
     },
+    calculate_buy_price_with_impact: {
+      description: "",
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
+        {
+          name: "buy_asset_id",
+          type: "u32"
+        },
+        {
+          name: "buy_amount",
+          type: "u128"
+        }
+      ],
+      type: "Option<(u128,u128)>"
+    },
     calculate_expected_amount_for_minting: {
       description: "",
       params: [
