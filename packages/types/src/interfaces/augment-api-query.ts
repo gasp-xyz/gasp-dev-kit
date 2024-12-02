@@ -619,10 +619,6 @@ declare module '@polkadot/api-base/types/storage' {
        **/
       blockWeight: AugmentedQuery<ApiType, () => Observable<FrameSupportDispatchPerDispatchClassWeight>, []> & QueryableStorageEntry<ApiType, []>;
       /**
-       * Should always be set!
-       **/
-      chainGenesisSalt: AugmentedQuery<ApiType, () => Observable<H256>, []> & QueryableStorageEntry<ApiType, []>;
-      /**
        * Map of block numbers to block shuffling seeds
        **/
       didStoreTxs: AugmentedQuery<ApiType, () => Observable<bool>, []> & QueryableStorageEntry<ApiType, []>;
