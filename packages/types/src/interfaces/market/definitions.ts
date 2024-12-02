@@ -69,6 +69,24 @@ export default {
       ],
       type: "Option<u128>"
     },
+    calculate_sell_price_with_impact: {
+      description: "",
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
+        {
+          name: "sell_asset_id",
+          type: "u32"
+        },
+        {
+          name: "sell_amount",
+          type: "u128"
+        }
+      ],
+      type: "Option<(u128,u128)>"
+    },
     get_pools: {
       description: "",
       params: [
