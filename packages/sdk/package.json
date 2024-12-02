@@ -1,6 +1,6 @@
 {
   "name": "gasp-sdk",
-  "version": "0.0.2-feature-use-only-fast-on-e2e.0",
+  "version": "0.0.2-feature-use-only-fast-on-e2e.1",
   "description": "GASP SDK",
   "type": "module",
   "module": "./index.js",
@@ -23,10 +23,10 @@
     "@polkadot/api": "^11.1.1"
   },
   "devDependencies": {
-    "gasp-types": "0.0.2-feature-use-only-fast-on-e2e.0"
+    "gasp-types": "0.0.2-feature-use-only-fast-on-e2e.1"
   },
   "dependencies": {
-    "gasp-type-definitions": "0.0.2-feature-use-only-fast-on-e2e.0",
+    "gasp-type-definitions": "0.0.2-feature-use-only-fast-on-e2e.1",
     "big.js": "6.2.1",
     "tslib": "^2.3.0",
     "tslog": "4.8.2",
