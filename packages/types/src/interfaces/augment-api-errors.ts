@@ -819,9 +819,11 @@ declare module '@polkadot/api-base/types/errors' {
       MintError: AugmentedError<ApiType>;
       MultipleUpdatesInSingleBlock: AugmentedError<ApiType>;
       NonExistingRequestId: AugmentedError<ApiType>;
+      NontransferableToken: AugmentedError<ApiType>;
       NotEligibleForRefund: AugmentedError<ApiType>;
       NotEnoughAssets: AugmentedError<ApiType>;
       NotEnoughAssetsForFee: AugmentedError<ApiType>;
+      NotEnoughAssetsForFerryTip: AugmentedError<ApiType>;
       OnlySelectedSequencerisAllowedToUpdate: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
       ReadRightsExhausted: AugmentedError<ApiType>;
