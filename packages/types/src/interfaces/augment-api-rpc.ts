@@ -408,7 +408,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * 
        **/
-      get_pools_for_trading: AugmentedRpc<() => Observable<Vec<RpcAssetMetadata>>>;
+      get_pools_for_trading: AugmentedRpc<() => Observable<Vec<u32>>>;
       /**
        * 
        **/
