@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-feature-stable-pool-mgx-1307.22",
+  "version": "0.0.2-feature-stable-pool-mgx-1307.23",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {

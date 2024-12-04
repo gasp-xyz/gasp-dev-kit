@@ -408,11 +408,11 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * 
        **/
-      get_tradeable_tokens: AugmentedRpc<() => Observable<Vec<RpcAssetMetadata>>>;
+      get_pools_for_trading: AugmentedRpc<() => Observable<Vec<RpcAssetMetadata>>>;
       /**
        * 
        **/
-      get_pools_for_trading: AugmentedRpc<() => Observable<Vec<u32>>>;
+      get_tradeable_tokens: AugmentedRpc<() => Observable<Vec<RpcAssetMetadata>>>;
     };
     metamask: {
       /**
