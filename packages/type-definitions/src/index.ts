@@ -407,7 +407,7 @@ export const mRpc = {
     get_tradeable_tokens: {
       description: "",
       params: [],
-      type: "Vec<u32>"
+      type: "Vec<RpcAssetMetadata<TokenId>>"
     },
     get_pools_for_trading: {
       description: "",
