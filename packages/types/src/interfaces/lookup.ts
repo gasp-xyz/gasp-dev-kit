@@ -1535,7 +1535,7 @@ export default {
         amount: 'u128',
       },
       reward_pool: {
-        pool: '(u32,u32)',
+        poolId: 'u32',
         tokenId: 'u32',
         amount: 'u128',
         scheduleEnd: 'u32',

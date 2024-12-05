@@ -1696,7 +1696,7 @@ declare module '@polkadot/types/lookup' {
     } & Struct;
     readonly isRewardPool: boolean;
     readonly asRewardPool: {
-      readonly pool: ITuple<[u32, u32]>;
+      readonly poolId: u32;
       readonly tokenId: u32;
       readonly amount: u128;
       readonly scheduleEnd: u32;
