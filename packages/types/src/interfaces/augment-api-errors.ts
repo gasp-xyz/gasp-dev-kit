@@ -724,6 +724,10 @@ declare module '@polkadot/api-base/types/errors' {
       MathOverflow: AugmentedError<ApiType>;
       MissingRewardsInfoError: AugmentedError<ApiType>;
       /**
+       * Asset cannot be used for rewards
+       **/
+      NontransferableToken: AugmentedError<ApiType>;
+      /**
        * Not a promoted pool
        **/
       NotAPromotedPool: AugmentedError<ApiType>;

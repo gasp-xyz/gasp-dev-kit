@@ -2974,7 +2974,8 @@ declare module '@polkadot/types/lookup' {
     readonly isLiquidityLockedIn3rdpartyRewards: boolean;
     readonly isNoThirdPartyPartyRewardsToClaim: boolean;
     readonly isSoloTokenPromotionForbiddenError: boolean;
-    readonly type: 'NotEnoughAssets' | 'MathOverflow' | 'NotEnoughRewardsEarned' | 'NotAPromotedPool' | 'PastTimeCalculation' | 'LiquidityCheckpointMathError' | 'CalculateRewardsMathError' | 'MathError' | 'CalculateRewardsAllMathError' | 'MissingRewardsInfoError' | 'DeprecatedExtrinsic' | 'CannotScheduleRewardsInPast' | 'PoolDoesNotExist' | 'TooManySchedules' | 'TooLittleRewards' | 'TooSmallVolume' | 'LiquidityLockedIn3rdpartyRewards' | 'NoThirdPartyPartyRewardsToClaim' | 'SoloTokenPromotionForbiddenError';
+    readonly isNontransferableToken: boolean;
+    readonly type: 'NotEnoughAssets' | 'MathOverflow' | 'NotEnoughRewardsEarned' | 'NotAPromotedPool' | 'PastTimeCalculation' | 'LiquidityCheckpointMathError' | 'CalculateRewardsMathError' | 'MathError' | 'CalculateRewardsAllMathError' | 'MissingRewardsInfoError' | 'DeprecatedExtrinsic' | 'CannotScheduleRewardsInPast' | 'PoolDoesNotExist' | 'TooManySchedules' | 'TooLittleRewards' | 'TooSmallVolume' | 'LiquidityLockedIn3rdpartyRewards' | 'NoThirdPartyPartyRewardsToClaim' | 'SoloTokenPromotionForbiddenError' | 'NontransferableToken';
   }
 
   /** @name PalletFeeLockFeeLockMetadataInfo (336) */
