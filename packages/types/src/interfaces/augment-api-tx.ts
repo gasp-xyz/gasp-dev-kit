@@ -957,7 +957,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * - schedule_end - id of the last rewarded seession. Rewards will be distributedd equally between sessions in range (now ..
        * schedule_end). Distribution starts from the *next* session till `schedule_end`.
        **/
-      rewardPool: AugmentedSubmittable<(pool: ITuple<[u32, u32]> | [u32 | AnyNumber | Uint8Array, u32 | AnyNumber | Uint8Array], tokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array, scheduleEnd: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ITuple<[u32, u32]>, u32, u128, u32]>;
+      rewardPool: AugmentedSubmittable<(poolId: u32 | AnyNumber | Uint8Array, tokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array, scheduleEnd: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u32, u128, u32]>;
       /**
        * Enables/disables pool for liquidity mining rewards
        **/
