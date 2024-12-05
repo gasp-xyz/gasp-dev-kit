@@ -807,6 +807,7 @@ declare module '@polkadot/api-base/types/errors' {
     rolldown: {
       AddressDeserializationFailure: AugmentedError<ApiType>;
       AlreadyExecuted: AugmentedError<ApiType>;
+      AlreadyFerried: AugmentedError<ApiType>;
       AssetRegistrationProblem: AugmentedError<ApiType>;
       BalanceOverflow: AugmentedError<ApiType>;
       BlockedByMaintenanceMode: AugmentedError<ApiType>;
