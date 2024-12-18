@@ -77,8 +77,6 @@ export async function signTypedData_v4(api: ApiPromise, tx: SubmittableExtrinsic
 
   const result = await api.rpc.metamask.get_eip712_sign_data(tx.toHex().slice(2));
   const data = JSON.parse(result.toString());
-
-  data.message.call = data.message.call.split("/0x")[1];
   data.message.tx = u8aToHex(raw_payload).slice(2);
   data.account = address;
   
