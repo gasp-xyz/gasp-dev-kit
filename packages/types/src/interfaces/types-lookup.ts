@@ -700,7 +700,7 @@ declare module '@polkadot/types/lookup' {
 
   /** @name PalletIssuanceIssuanceInfo (78) */
   interface PalletIssuanceIssuanceInfo extends Struct {
-    readonly cap: u128;
+    readonly linearIssuanceAmount: u128;
     readonly issuanceAtInit: u128;
     readonly linearIssuanceBlocks: u32;
     readonly liquidityMiningSplit: Perbill;
@@ -2148,6 +2148,7 @@ declare module '@polkadot/types/lookup' {
       readonly stakeAmount: u128;
       readonly aliasAccount: Option<SpRuntimeAccountAccountId20>;
       readonly stakeAction: PalletSequencerStakingStakeAction;
+      readonly sender: SpRuntimeAccountAccountId20;
     } & Struct;
     readonly isLeaveActiveSequencers: boolean;
     readonly asLeaveActiveSequencers: {
@@ -2156,6 +2157,7 @@ declare module '@polkadot/types/lookup' {
     readonly isRejoinActiveSequencers: boolean;
     readonly asRejoinActiveSequencers: {
       readonly chain: PalletRolldownMessagesChain;
+      readonly sender: SpRuntimeAccountAccountId20;
     } & Struct;
     readonly isUnstake: boolean;
     readonly asUnstake: {

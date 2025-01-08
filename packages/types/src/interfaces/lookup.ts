@@ -637,7 +637,7 @@ export default {
    * Lookup78: pallet_issuance::IssuanceInfo<Balance>
    **/
   PalletIssuanceIssuanceInfo: {
-    cap: 'u128',
+    linearIssuanceAmount: 'u128',
     issuanceAtInit: 'u128',
     linearIssuanceBlocks: 'u32',
     liquidityMiningSplit: 'Perbill',
@@ -1948,12 +1948,14 @@ export default {
         stakeAmount: 'u128',
         aliasAccount: 'Option<SpRuntimeAccountAccountId20>',
         stakeAction: 'PalletSequencerStakingStakeAction',
+        sender: 'SpRuntimeAccountAccountId20',
       },
       leave_active_sequencers: {
         chain: 'PalletRolldownMessagesChain',
       },
       rejoin_active_sequencers: {
         chain: 'PalletRolldownMessagesChain',
+        sender: 'SpRuntimeAccountAccountId20',
       },
       unstake: {
         chain: 'PalletRolldownMessagesChain',

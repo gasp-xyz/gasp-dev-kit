@@ -157,7 +157,7 @@ declare module '@polkadot/api-base/types/consts' {
       /**
        * The maximum amount of Mangata tokens
        **/
-      issuanceCap: u128 & AugmentedConst<ApiType>;
+      linearIssuanceAmount: u128 & AugmentedConst<ApiType>;
       /**
        * The number of blocks the issuance is linear
        **/
