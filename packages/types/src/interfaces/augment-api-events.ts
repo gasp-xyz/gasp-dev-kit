@@ -276,6 +276,10 @@ declare module '@polkadot/api-base/types/events' {
        **/
       IssuanceConfigInitialized: AugmentedEvent<ApiType, [PalletIssuanceIssuanceInfo]>;
       /**
+       * Issuance configuration updated
+       **/
+      IssuanceConfigSet: AugmentedEvent<ApiType, [PalletIssuanceIssuanceInfo]>;
+      /**
        * Issuance for upcoming session issued
        **/
       SessionIssuanceIssued: AugmentedEvent<ApiType, [u32, u128, u128, u128]>;
