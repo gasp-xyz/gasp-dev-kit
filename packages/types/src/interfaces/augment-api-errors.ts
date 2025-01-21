@@ -487,10 +487,6 @@ declare module '@polkadot/api-base/types/errors' {
     };
     issuance: {
       /**
-       * The issuance config has not been initialized
-       **/
-      InvalidSplitAmounts: AugmentedError<ApiType>;
-      /**
        * The issuance config has already been initialized
        **/
       IssuanceConfigAlreadyInitialized: AugmentedError<ApiType>;

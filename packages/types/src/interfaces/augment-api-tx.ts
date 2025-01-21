@@ -645,7 +645,6 @@ declare module '@polkadot/api-base/types/submittable' {
       executeTge: AugmentedSubmittable<(tgeInfos: Vec<PalletIssuanceTgeInfo> | (PalletIssuanceTgeInfo | { who?: any; amount?: any } | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<PalletIssuanceTgeInfo>]>;
       finalizeTge: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
       initIssuanceConfig: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
-      setIssuanceConfig: AugmentedSubmittable<(linearIssuanceAmount: Option<u128> | null | Uint8Array | u128 | AnyNumber, linearIssuanceBlocks: Option<u32> | null | Uint8Array | u32 | AnyNumber, liquidityMiningSplit: Option<Perbill> | null | Uint8Array | Perbill | AnyNumber, stakingSplit: Option<Perbill> | null | Uint8Array | Perbill | AnyNumber, sequencersSplit: Option<Perbill> | null | Uint8Array | Perbill | AnyNumber) => SubmittableExtrinsic<ApiType>, [Option<u128>, Option<u32>, Option<Perbill>, Option<Perbill>, Option<Perbill>]>;
       /**
        * Generic tx
        **/
