@@ -487,6 +487,10 @@ declare module '@polkadot/api-base/types/errors' {
     };
     issuance: {
       /**
+       * The issuance config has not been initialized
+       **/
+      InvalidSplitAmounts: AugmentedError<ApiType>;
+      /**
        * The issuance config has already been initialized
        **/
       IssuanceConfigAlreadyInitialized: AugmentedError<ApiType>;
@@ -1068,6 +1072,24 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       TokenIdNotExists: AugmentedError<ApiType>;
       TooManyReserves: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    transferMembers: {
+      /**
+       * Already a member.
+       **/
+      AlreadyMember: AugmentedError<ApiType>;
+      /**
+       * Not a member.
+       **/
+      NotMember: AugmentedError<ApiType>;
+      /**
+       * Too many members.
+       **/
+      TooManyMembers: AugmentedError<ApiType>;
       /**
        * Generic error
        **/

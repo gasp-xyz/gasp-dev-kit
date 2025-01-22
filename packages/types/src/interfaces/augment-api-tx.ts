@@ -645,6 +645,7 @@ declare module '@polkadot/api-base/types/submittable' {
       executeTge: AugmentedSubmittable<(tgeInfos: Vec<PalletIssuanceTgeInfo> | (PalletIssuanceTgeInfo | { who?: any; amount?: any } | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<PalletIssuanceTgeInfo>]>;
       finalizeTge: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
       initIssuanceConfig: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      setIssuanceConfig: AugmentedSubmittable<(linearIssuanceAmount: Option<u128> | null | Uint8Array | u128 | AnyNumber, linearIssuanceBlocks: Option<u32> | null | Uint8Array | u32 | AnyNumber, liquidityMiningSplit: Option<Perbill> | null | Uint8Array | Perbill | AnyNumber, stakingSplit: Option<Perbill> | null | Uint8Array | Perbill | AnyNumber, sequencersSplit: Option<Perbill> | null | Uint8Array | Perbill | AnyNumber) => SubmittableExtrinsic<ApiType>, [Option<u128>, Option<u32>, Option<Perbill>, Option<Perbill>, Option<Perbill>]>;
       /**
        * Generic tx
        **/
@@ -1487,6 +1488,59 @@ declare module '@polkadot/api-base/types/submittable' {
        * - `amount`: free balance amount to tranfer.
        **/
       transferKeepAlive: AugmentedSubmittable<(dest: SpRuntimeAccountAccountId20 | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u32, Compact<u128>]>;
+      /**
+       * Generic tx
+       **/
+      [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    };
+    transferMembers: {
+      /**
+       * Add a member `who` to the set.
+       * 
+       * May only be called from `T::AddOrigin`.
+       **/
+      addMember: AugmentedSubmittable<(who: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
+      /**
+       * Swap out the sending member for some other key `new`.
+       * 
+       * May only be called from `Signed` origin of a current member.
+       * 
+       * Prime membership is passed from the origin account to `new`, if extant.
+       **/
+      changeKey: AugmentedSubmittable<(updated: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
+      /**
+       * Remove the prime member if it exists.
+       * 
+       * May only be called from `T::PrimeOrigin`.
+       **/
+      clearPrime: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      /**
+       * Remove a member `who` from the set.
+       * 
+       * May only be called from `T::RemoveOrigin`.
+       **/
+      removeMember: AugmentedSubmittable<(who: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
+      /**
+       * Change the membership to a new set, disregarding the existing membership. Be nice and
+       * pass `members` pre-sorted.
+       * 
+       * May only be called from `T::ResetOrigin`.
+       **/
+      resetMembers: AugmentedSubmittable<(members: Vec<SpRuntimeAccountAccountId20> | (SpRuntimeAccountAccountId20 | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<SpRuntimeAccountAccountId20>]>;
+      /**
+       * Set the prime member. Must be a current member.
+       * 
+       * May only be called from `T::PrimeOrigin`.
+       **/
+      setPrime: AugmentedSubmittable<(who: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
+      /**
+       * Swap out one member `remove` for another `add`.
+       * 
+       * May only be called from `T::SwapOrigin`.
+       * 
+       * Prime membership is *not* passed from `remove` to `add`, if extant.
+       **/
+      swapMember: AugmentedSubmittable<(remove: SpRuntimeAccountAccountId20 | string | Uint8Array, add: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20]>;
       /**
        * Generic tx
        **/

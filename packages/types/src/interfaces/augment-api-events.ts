@@ -276,6 +276,10 @@ declare module '@polkadot/api-base/types/events' {
        **/
       IssuanceConfigInitialized: AugmentedEvent<ApiType, [PalletIssuanceIssuanceInfo]>;
       /**
+       * Issuance configuration updated
+       **/
+      IssuanceConfigSet: AugmentedEvent<ApiType, [PalletIssuanceIssuanceInfo]>;
+      /**
        * Issuance for upcoming session issued
        **/
       SessionIssuanceIssued: AugmentedEvent<ApiType, [u32, u128, u128, u128]>;
@@ -774,6 +778,36 @@ declare module '@polkadot/api-base/types/events' {
        * has been paid by `who`.
        **/
       TransactionFeePaid: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, tokenId: u32, actualFee: u128, tip: u128], { who: SpRuntimeAccountAccountId20, tokenId: u32, actualFee: u128, tip: u128 }>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    transferMembers: {
+      /**
+       * Phantom member, never used.
+       **/
+      Dummy: AugmentedEvent<ApiType, []>;
+      /**
+       * One of the members' keys changed.
+       **/
+      KeyChanged: AugmentedEvent<ApiType, []>;
+      /**
+       * The given member was added; see the transaction for who.
+       **/
+      MemberAdded: AugmentedEvent<ApiType, []>;
+      /**
+       * The given member was removed; see the transaction for who.
+       **/
+      MemberRemoved: AugmentedEvent<ApiType, []>;
+      /**
+       * The membership was reset; see the transaction for who the new set is.
+       **/
+      MembersReset: AugmentedEvent<ApiType, []>;
+      /**
+       * Two members were swapped; see the transaction for who.
+       **/
+      MembersSwapped: AugmentedEvent<ApiType, []>;
       /**
        * Generic event
        **/

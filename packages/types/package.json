@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-feature-merge-node.7",
+  "version": "0.0.2-feature-merge-node.8",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
