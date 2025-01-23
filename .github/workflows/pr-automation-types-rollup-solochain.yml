@@ -13,6 +13,11 @@ on:
         type: string
         required: false
         default: "mangata-finance/mangata-node"
+      nodeRepositoryRevision:
+        description: "Revision of the repository where gasp-node code is stored"
+        type: string
+        required: false
+        default: ""
       nodeCodebaseWorkingDirectory:
         description: "Working directory where gasp-node code is stored"
         type: string
@@ -92,12 +97,12 @@ jobs:
           ref: ${{ github.ref }}
       - uses: nrwl/nx-set-shas@v4
 
-      - name: Clone mangata node repository
+      - name: Clone gasp-node repository
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.inputs.nodeRepository }}
           path: mangata-repo
-          ref: ${{ env.INPUTS_BRANCH }}
+          ref: ${{ github.event.inputs.nodeRepositoryRevision || env.INPUTS_BRANCH }}
 
       - name: Setup Node version and cache dependencies
         uses: actions/setup-node@v4
