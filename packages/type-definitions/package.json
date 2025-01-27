@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-eth-rollup-develop.93",
+  "version": "0.0.2-feat-setup-sequencer-prometheus-metrics-collection-GASP-1836.0",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
