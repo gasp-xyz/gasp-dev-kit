@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-eth-rollup-develop.108",
+  "version": "0.0.2-chore-GASP-1938-update-holesky-v3-and-setup-staging.0",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
