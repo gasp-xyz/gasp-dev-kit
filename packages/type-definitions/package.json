@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-eth-rollup-develop.114",
+  "version": "0.0.2-feat-GASP-1656-rework-tvl-and-volume-history.0",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
