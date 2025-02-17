@@ -157,7 +157,7 @@ declare module '@polkadot/api-base/types/consts' {
       /**
        * The maximum amount of Mangata tokens
        **/
-      issuanceCap: u128 & AugmentedConst<ApiType>;
+      linearIssuanceAmount: u128 & AugmentedConst<ApiType>;
       /**
        * The number of blocks the issuance is linear
        **/
@@ -345,7 +345,6 @@ declare module '@polkadot/api-base/types/consts' {
       [key: string]: Codec;
     };
     rolldown: {
-      disputePeriodLength: u128 & AugmentedConst<ApiType>;
       merkleRootAutomaticBatchPeriod: u128 & AugmentedConst<ApiType>;
       merkleRootAutomaticBatchSize: u128 & AugmentedConst<ApiType>;
       requestsPerBlock: u128 & AugmentedConst<ApiType>;

@@ -645,6 +645,7 @@ declare module '@polkadot/api-base/types/submittable' {
       executeTge: AugmentedSubmittable<(tgeInfos: Vec<PalletIssuanceTgeInfo> | (PalletIssuanceTgeInfo | { who?: any; amount?: any } | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<PalletIssuanceTgeInfo>]>;
       finalizeTge: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
       initIssuanceConfig: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      setIssuanceConfig: AugmentedSubmittable<(linearIssuanceAmount: Option<u128> | null | Uint8Array | u128 | AnyNumber, linearIssuanceBlocks: Option<u32> | null | Uint8Array | u32 | AnyNumber, liquidityMiningSplit: Option<Perbill> | null | Uint8Array | Perbill | AnyNumber, stakingSplit: Option<Perbill> | null | Uint8Array | Perbill | AnyNumber, sequencersSplit: Option<Perbill> | null | Uint8Array | Perbill | AnyNumber) => SubmittableExtrinsic<ApiType>, [Option<u128>, Option<u32>, Option<Perbill>, Option<Perbill>, Option<Perbill>]>;
       /**
        * Generic tx
        **/
@@ -669,6 +670,7 @@ declare module '@polkadot/api-base/types/submittable' {
       burnLiquidity: AugmentedSubmittable<(poolId: u32 | AnyNumber | Uint8Array, liquidityBurnAmount: u128 | AnyNumber | Uint8Array, minFirstAssetAmount: u128 | AnyNumber | Uint8Array, minSecondAssetAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u128, u128, u128]>;
       /**
        * Creates a liquidity pool and an associated new `lp_token` asset
+       * For a StableSwap pool, the "stable" rate is computed from the ratio of input amounts, max rate is 1e18:1
        **/
       createPool: AugmentedSubmittable<(kind: PalletMarketPoolKind | 'Xyk' | 'StableSwap' | number | Uint8Array, firstAssetId: u32 | AnyNumber | Uint8Array, firstAssetAmount: u128 | AnyNumber | Uint8Array, secondAssetId: u32 | AnyNumber | Uint8Array, secondAssetAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletMarketPoolKind, u32, u128, u32, u128]>;
       /**
@@ -697,17 +699,29 @@ declare module '@polkadot/api-base/types/submittable' {
        * Executes a multiswap asset in a series of swap asset atomic swaps.
        * 
        * Multiswaps must fee lock instead of paying transaction fees.
+       * For a single atomic swap, both `asset_amount_in` and `min_amount_out` are considered to allow free execution without locks.
        * 
        * # Args:
        * - `swap_token_list` - This list of tokens is the route of the atomic swaps, starting with the asset sold and ends with the asset finally bought
        * - `asset_id_in`: The id of the asset sold
        * - `asset_amount_in`: The amount of the asset sold
        * - `asset_id_out`: The id of the asset received
-       * - `min_amount_out` - The minimum amount of requested asset that must be bought in order to not fail on slippage. Slippage failures still charge exchange commission.
+       * - `min_amount_out` - The minimum amount of requested asset that must be bought in order to not fail on slippage, use RPC calls to calc expected value
        **/
       multiswapAsset: AugmentedSubmittable<(swapPoolList: Vec<u32> | (u32 | AnyNumber | Uint8Array)[], assetIdIn: u32 | AnyNumber | Uint8Array, assetAmountIn: u128 | AnyNumber | Uint8Array, assetIdOut: u32 | AnyNumber | Uint8Array, minAmountOut: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<u32>, u32, u128, u32, u128]>;
       /**
-       * Buy variant of the multiswap, a precise output amount should be provided instead.
+       * Executes a multiswap asset in a series of swap asset atomic swaps.
+       * The precise output amount is provided instead.
+       * 
+       * Multiswaps must fee lock instead of paying transaction fees.
+       * For a single atomic swap, both `asset_amount_out` and `max_amount_in` are considered to allow free execution without locks.
+       * 
+       * # Args:
+       * - `swap_token_list` - This list of tokens is the route of the atomic swaps, starting with the asset sold and ends with the asset finally bought
+       * - `asset_id_out`: The id of the asset received
+       * - `asset_amount_out`: The amount of the asset received
+       * - `asset_id_in`: The id of the asset sold
+       * - `max_amount_in` - The maximum amount of sold asset in order to not fail on slippage, use RPC calls to calc expected value
        **/
       multiswapAssetBuy: AugmentedSubmittable<(swapPoolList: Vec<u32> | (u32 | AnyNumber | Uint8Array)[], assetIdOut: u32 | AnyNumber | Uint8Array, assetAmountOut: u128 | AnyNumber | Uint8Array, assetIdIn: u32 | AnyNumber | Uint8Array, maxAmountIn: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<u32>, u32, u128, u32, u128]>;
       /**
@@ -944,7 +958,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * - schedule_end - id of the last rewarded seession. Rewards will be distributedd equally between sessions in range (now ..
        * schedule_end). Distribution starts from the *next* session till `schedule_end`.
        **/
-      rewardPool: AugmentedSubmittable<(pool: ITuple<[u32, u32]> | [u32 | AnyNumber | Uint8Array, u32 | AnyNumber | Uint8Array], tokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array, scheduleEnd: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ITuple<[u32, u32]>, u32, u128, u32]>;
+      rewardPool: AugmentedSubmittable<(poolId: u32 | AnyNumber | Uint8Array, tokenId: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array, scheduleEnd: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32, u32, u128, u32]>;
       /**
        * Enables/disables pool for liquidity mining rewards
        **/
@@ -1117,6 +1131,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * only deposit recipient can initiate refund failed deposit
        **/
       refundFailedDeposit: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, requestId: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
+      setDisputePeriod: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, disputePeriodLength: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128]>;
       setManualBatchExtraFee: AugmentedSubmittable<(balance: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u128]>;
       updateL2FromL1: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any } | string | Uint8Array, updateHash: H256 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update, H256]>;
       updateL2FromL1Unsafe: AugmentedSubmittable<(requests: PalletRolldownMessagesL1Update | { chain?: any; pendingDeposits?: any; pendingCancelResolutions?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesL1Update]>;
@@ -1152,8 +1167,8 @@ declare module '@polkadot/api-base/types/submittable' {
        * Candiate can also choose to call `rejoin_active_sequencers` later when there are free seats to
        * join active set
        **/
-      provideSequencerStake: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, stakeAmount: u128 | AnyNumber | Uint8Array, aliasAccount: Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string, stakeAction: PalletSequencerStakingStakeAction | 'StakeOnly' | 'StakeAndJoinActiveSet' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128, Option<SpRuntimeAccountAccountId20>, PalletSequencerStakingStakeAction]>;
-      rejoinActiveSequencers: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain]>;
+      provideSequencerStake: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, stakeAmount: u128 | AnyNumber | Uint8Array, aliasAccount: Option<SpRuntimeAccountAccountId20> | null | Uint8Array | SpRuntimeAccountAccountId20 | string, stakeAction: PalletSequencerStakingStakeAction | 'StakeOnly' | 'StakeAndJoinActiveSet' | number | Uint8Array, sender: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128, Option<SpRuntimeAccountAccountId20>, PalletSequencerStakingStakeAction, SpRuntimeAccountAccountId20]>;
+      rejoinActiveSequencers: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, sender: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>;
       setSequencerConfiguration: AugmentedSubmittable<(chain: PalletRolldownMessagesChain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, minimalStakeAmount: u128 | AnyNumber | Uint8Array, slashFineAmount: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [PalletRolldownMessagesChain, u128, u128]>;
       /**
        * Allows to configure alias_account for active sequencer. This extrinisic can only be called
@@ -1473,6 +1488,59 @@ declare module '@polkadot/api-base/types/submittable' {
        * - `amount`: free balance amount to tranfer.
        **/
       transferKeepAlive: AugmentedSubmittable<(dest: SpRuntimeAccountAccountId20 | string | Uint8Array, currencyId: u32 | AnyNumber | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, u32, Compact<u128>]>;
+      /**
+       * Generic tx
+       **/
+      [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    };
+    transferMembers: {
+      /**
+       * Add a member `who` to the set.
+       * 
+       * May only be called from `T::AddOrigin`.
+       **/
+      addMember: AugmentedSubmittable<(who: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
+      /**
+       * Swap out the sending member for some other key `new`.
+       * 
+       * May only be called from `Signed` origin of a current member.
+       * 
+       * Prime membership is passed from the origin account to `new`, if extant.
+       **/
+      changeKey: AugmentedSubmittable<(updated: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
+      /**
+       * Remove the prime member if it exists.
+       * 
+       * May only be called from `T::PrimeOrigin`.
+       **/
+      clearPrime: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      /**
+       * Remove a member `who` from the set.
+       * 
+       * May only be called from `T::RemoveOrigin`.
+       **/
+      removeMember: AugmentedSubmittable<(who: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
+      /**
+       * Change the membership to a new set, disregarding the existing membership. Be nice and
+       * pass `members` pre-sorted.
+       * 
+       * May only be called from `T::ResetOrigin`.
+       **/
+      resetMembers: AugmentedSubmittable<(members: Vec<SpRuntimeAccountAccountId20> | (SpRuntimeAccountAccountId20 | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<SpRuntimeAccountAccountId20>]>;
+      /**
+       * Set the prime member. Must be a current member.
+       * 
+       * May only be called from `T::PrimeOrigin`.
+       **/
+      setPrime: AugmentedSubmittable<(who: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20]>;
+      /**
+       * Swap out one member `remove` for another `add`.
+       * 
+       * May only be called from `T::SwapOrigin`.
+       * 
+       * Prime membership is *not* passed from `remove` to `add`, if extant.
+       **/
+      swapMember: AugmentedSubmittable<(remove: SpRuntimeAccountAccountId20 | string | Uint8Array, add: SpRuntimeAccountAccountId20 | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SpRuntimeAccountAccountId20, SpRuntimeAccountAccountId20]>;
       /**
        * Generic tx
        **/

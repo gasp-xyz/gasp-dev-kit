@@ -3,11 +3,26 @@ name: PR automation types rollup solochain
 on:
   workflow_dispatch:
     inputs:
-      parachainDocker:
-        description: "Name of the parachain docker reference"
+      nodeDockerImageTag:
+        description: "gasp-node docker image tag"
         type: string
         required: false
-        default: "mangatasolutions/rollup-node:a5060642ee6f68c18b258f53593639b8a343e4b6"
+        default: "a5060642ee6f68c18b258f53593639b8a343e4b6"
+      nodeRepository:
+        description: "Name of the repository where gasp-node code is stored"
+        type: string
+        required: false
+        default: "mangata-finance/mangata-node"
+      nodeRepositoryRevision:
+        description: "Revision of the repository where gasp-node code is stored"
+        type: string
+        required: false
+        default: ""
+      nodeCodebaseWorkingDirectory:
+        description: "Working directory where gasp-node code is stored"
+        type: string
+        required: false
+        default: "mangata-repo"
       branch:
         description: "Branch where to run workflow"
         type: string
@@ -82,12 +97,12 @@ jobs:
           ref: ${{ github.ref }}
       - uses: nrwl/nx-set-shas@v4
 
-      - name: Clone mangata node repository
+      - name: Clone gasp-node repository
         uses: actions/checkout@v4
         with:
-          repository: mangata-finance/mangata-node
+          repository: ${{ github.event.inputs.nodeRepository }}
           path: mangata-repo
-          ref: ${{ env.INPUTS_BRANCH }}
+          ref: ${{ github.event.inputs.nodeRepositoryRevision || env.INPUTS_BRANCH }}
 
       - name: Setup Node version and cache dependencies
         uses: actions/setup-node@v4
@@ -96,20 +111,20 @@ jobs:
           cache: "npm"
 
       - name: Install WASM toolchain
-        uses: dtolnay/rust-toolchain@v1
+        uses: actions-rust-lang/setup-rust-toolchain@v1.10.1
         with:
           toolchain: nightly
-          targets: wasm32-unknown-unknown
+          target: wasm32-unknown-unknown
 
       - name: Install websocat
         run: cargo install websocat
 
       - name: Run the Node
-        working-directory: mangata-repo
+        working-directory: ${{ github.event.inputs.nodeCodebaseWorkingDirectory }}
         env:
-          NODE_IMAGE: ${{ github.event.inputs.parachainDocker || 'mangatasolutions/rollup-node:53c527a67582de8b7099d76d86c44c200e053f2b' }}
+          ROLLUP_NODE_VERSION: ${{ github.event.inputs.nodeDockerImageTag }}
         run: |
-          echo "Starting nodes with image: ${NODE_IMAGE}"
+          echo "Starting nodes with image: ${ROLLUP_NODE_VERSION}"
           docker compose up -d
           docker ps
 

@@ -487,6 +487,10 @@ declare module '@polkadot/api-base/types/errors' {
     };
     issuance: {
       /**
+       * The issuance config has not been initialized
+       **/
+      InvalidSplitAmounts: AugmentedError<ApiType>;
+      /**
        * The issuance config has already been initialized
        **/
       IssuanceConfigAlreadyInitialized: AugmentedError<ApiType>;
@@ -582,6 +586,10 @@ declare module '@polkadot/api-base/types/errors' {
        * Multi swap path contains repetive pools
        **/
       MultiSwapSamePool: AugmentedError<ApiType>;
+      /**
+       * Asset cannot be used to create or modify a pool
+       **/
+      NontransferableToken: AugmentedError<ApiType>;
       /**
        * No such pool exists
        **/
@@ -720,6 +728,10 @@ declare module '@polkadot/api-base/types/errors' {
       MathOverflow: AugmentedError<ApiType>;
       MissingRewardsInfoError: AugmentedError<ApiType>;
       /**
+       * Asset cannot be used for rewards
+       **/
+      NontransferableToken: AugmentedError<ApiType>;
+      /**
        * Not a promoted pool
        **/
       NotAPromotedPool: AugmentedError<ApiType>;
@@ -799,6 +811,7 @@ declare module '@polkadot/api-base/types/errors' {
     rolldown: {
       AddressDeserializationFailure: AugmentedError<ApiType>;
       AlreadyExecuted: AugmentedError<ApiType>;
+      AlreadyFerried: AugmentedError<ApiType>;
       AssetRegistrationProblem: AugmentedError<ApiType>;
       BalanceOverflow: AugmentedError<ApiType>;
       BlockedByMaintenanceMode: AugmentedError<ApiType>;
@@ -815,9 +828,11 @@ declare module '@polkadot/api-base/types/errors' {
       MintError: AugmentedError<ApiType>;
       MultipleUpdatesInSingleBlock: AugmentedError<ApiType>;
       NonExistingRequestId: AugmentedError<ApiType>;
+      NontransferableToken: AugmentedError<ApiType>;
       NotEligibleForRefund: AugmentedError<ApiType>;
       NotEnoughAssets: AugmentedError<ApiType>;
       NotEnoughAssetsForFee: AugmentedError<ApiType>;
+      NotEnoughAssetsForFerryTip: AugmentedError<ApiType>;
       OnlySelectedSequencerisAllowedToUpdate: AugmentedError<ApiType>;
       OperationFailed: AugmentedError<ApiType>;
       ReadRightsExhausted: AugmentedError<ApiType>;
@@ -826,6 +841,7 @@ declare module '@polkadot/api-base/types/errors' {
       SequencerLastUpdateStillInDisputePeriod: AugmentedError<ApiType>;
       TokenDoesNotExist: AugmentedError<ApiType>;
       TooManyRequests: AugmentedError<ApiType>;
+      UninitializedChainId: AugmentedError<ApiType>;
       UnknownAliasAccount: AugmentedError<ApiType>;
       UnsupportedAsset: AugmentedError<ApiType>;
       UpdateHashMishmatch: AugmentedError<ApiType>;
@@ -902,6 +918,10 @@ declare module '@polkadot/api-base/types/errors' {
        * Initial liquidity provision needs all assets
        **/
       InitialLiquidityZeroAmount: AugmentedError<ApiType>;
+      /**
+       * Initial pool rate multipliers are too large
+       **/
+      InitialPoolRateOutOfRange: AugmentedError<ApiType>;
       /**
        * Insufficient input amount
        **/
@@ -1046,11 +1066,30 @@ declare module '@polkadot/api-base/types/errors' {
        * Failed because the maximum locks was exceeded
        **/
       MaxLocksExceeded: AugmentedError<ApiType>;
+      NontransferableToken: AugmentedError<ApiType>;
       /**
        * Failed because token with given id does not exits
        **/
       TokenIdNotExists: AugmentedError<ApiType>;
       TooManyReserves: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    transferMembers: {
+      /**
+       * Already a member.
+       **/
+      AlreadyMember: AugmentedError<ApiType>;
+      /**
+       * Not a member.
+       **/
+      NotMember: AugmentedError<ApiType>;
+      /**
+       * Too many members.
+       **/
+      TooManyMembers: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
