@@ -1,6 +1,6 @@
 {
   "name": "gasp-sdk",
-  "version": "0.0.2-feature-stable-pool-mgx-1307.19",
+  "version": "0.0.2-eth-rollup-develop.114",
   "description": "GASP SDK",
   "type": "module",
   "module": "./index.js",
