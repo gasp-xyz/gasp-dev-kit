@@ -52,7 +52,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version-file: ".nvmrc"
           cache: "npm"
 
       - run: npm ci
@@ -107,7 +107,7 @@ jobs:
       - name: Setup Node version and cache dependencies
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version-file: ".nvmrc"
           cache: "npm"
 
       - name: Install WASM toolchain
@@ -182,7 +182,7 @@ jobs:
       - name: Setup Node version and cache dependencies
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version-file: ".nvmrc"
           cache: "npm"
 
       - name: Type definitions version for branch
@@ -252,7 +252,7 @@ jobs:
       - name: Setup Node version and cache dependencies
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version-file: ".nvmrc"
           cache: "npm"
       - name: Show released versions
         id: show-versions
