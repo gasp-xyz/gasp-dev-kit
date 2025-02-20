@@ -67,7 +67,17 @@ export default {
       requestId: "RequestId",
       l2UpdatesToRemove: "Vec<u128>",
       timeStamp: "U256"
-    }
+    },
+    PalletMarketPoolKind: {
+      _enum: ['Xyk', 'StableSwap']
+    },
+    RpcPoolInfo: {
+      poolId: "TokenId",
+      kind: "PalletMarketPoolKind",
+      lpTokenId: "TokenId",
+      assets: "Vec<TokenId>",
+      reserves: "Vec<Balance>"
+    },
   }
 }
 
@@ -76,3 +86,4 @@ export { default as pos } from './pos/definitions.js';
 export { default as xyk } from './xyk/definitions.js';
 export { default as rolldown } from './rolldown/definitions.js';
 export { default as metamask } from './metamask/definitions.js';
+export { default as market } from './market/definitions.js';

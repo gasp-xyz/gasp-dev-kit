@@ -68,7 +68,17 @@ export const mTypes = {
     requestId: "RequestId",
     l2UpdatesToRemove: "Vec<u128>",
     timeStamp: "U256"
-  }
+  },
+  PalletMarketPoolKind: {
+    _enum: ['Xyk', 'StableSwap']
+  },
+  RpcPoolInfo: {
+    poolId: "TokenId",
+    kind: "PalletMarketPoolKind",
+    lpTokenId: "TokenId",
+    assets: "Vec<TokenId>",
+    reserves: "Vec<Balance>"
+  },
 };
 
 export const mRpc = {
@@ -265,6 +275,146 @@ export const mRpc = {
       type: "Vec<TokenId>"
     }
   },
+  market: {
+    calculate_buy_price: {
+      description: "",
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
+        {
+          name: "buy_asset_id",
+          type: "u32"
+        },
+        {
+          name: "buy_amount",
+          type: "u128"
+        }
+      ],
+      type: "Option<u128>"
+    },
+    calculate_buy_price_with_impact: {
+      description: "",
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
+        {
+          name: "buy_asset_id",
+          type: "u32"
+        },
+        {
+          name: "buy_amount",
+          type: "u128"
+        }
+      ],
+      type: "Option<(u128,u128)>"
+    },
+    calculate_expected_amount_for_minting: {
+      description: "",
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
+        {
+          name: "asset_id",
+          type: "u32"
+        },
+        {
+          name: "amount",
+          type: "u128"
+        }
+      ],
+      type: "Option<u128>"
+    },
+    calculate_expected_lp_minted: {
+      description: "",
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
+        {
+          name: "amounts",
+          type: "(u128, u128)"
+        },
+      ],
+      type: "Option<u128>"
+    },
+    calculate_sell_price: {
+      description: "",
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
+        {
+          name: "sell_asset_id",
+          type: "u32"
+        },
+        {
+          name: "sell_amount",
+          type: "u128"
+        }
+      ],
+      type: "Option<u128>"
+    },
+    calculate_sell_price_with_impact: {
+      description: "",
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
+        {
+          name: "sell_asset_id",
+          type: "u32"
+        },
+        {
+          name: "sell_amount",
+          type: "u128"
+        }
+      ],
+      type: "Option<(u128,u128)>"
+    },
+    get_pools: {
+      description: "",
+      params: [
+        {
+          name: "pool_id",
+          type: "Option<u32>"
+        },
+      ],
+      type: "Vec<RpcPoolInfo>"
+    },
+    get_burn_amount: {
+      description: "",
+      params: [
+        {
+          name: "pool_id",
+          type: "u32"
+        },
+        {
+          name: "lp_burn_amount",
+          type: "u128"
+        },
+      ],
+      type: "Option<(u128,u128)>"
+    },
+    get_tradeable_tokens: {
+      description: "",
+      params: [],
+      type: "Vec<RpcAssetMetadata>"
+    },
+    get_pools_for_trading: {
+      description: "",
+      params: [],
+      type: "Vec<u32>"
+    },
+  },
   pos: {
     calculate_native_rewards_amount: {
       description: "Calculates amount of available native rewards",
@@ -396,7 +546,7 @@ export const mRpc = {
         {
           name: 'range',
           type: '(u128, u128)',
-        },{
+        }, {
           name: 'tx_id',
           type: 'u128',
         },
@@ -451,7 +601,7 @@ export const mRpc = {
       ],
       type: "String"
     }
-  }
+  },
 };
 
 export const mangataTypesBundleForPolkadotApps: OverrideBundleDefinition = {

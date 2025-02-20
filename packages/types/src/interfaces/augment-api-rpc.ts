@@ -29,7 +29,7 @@ import type { AccountId, Balance, BlockNumber, H160, H256, H64, Hash, Header, In
 import type { MigrationStatusResult, ReadProof, RuntimeVersion, TraceBlockResponse } from '@polkadot/types/interfaces/state';
 import type { ApplyExtrinsicResult, ChainProperties, ChainType, Health, NetworkState, NodeRole, PeerInfo, SyncState } from '@polkadot/types/interfaces/system';
 import type { IExtrinsic, Observable } from '@polkadot/types/types';
-import type { Chain, L1Update, RpcAssetMetadata, TokenId } from 'gasp-types/interfaces/default';
+import type { Chain, L1Update, RpcAssetMetadata, RpcPoolInfo, TokenId } from 'gasp-types/interfaces/default';
 
 export type __AugmentedRpc = AugmentedRpc<() => unknown>;
 
@@ -371,6 +371,48 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        * Subscribes to grandpa justifications
        **/
       subscribeJustifications: AugmentedRpc<() => Observable<JustificationNotification>>;
+    };
+    market: {
+      /**
+       * 
+       **/
+      calculate_buy_price: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, buy_asset_id: u32 | AnyNumber | Uint8Array, buy_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<u128>>>;
+      /**
+       * 
+       **/
+      calculate_buy_price_with_impact: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, buy_asset_id: u32 | AnyNumber | Uint8Array, buy_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u128, u128]>>>>;
+      /**
+       * 
+       **/
+      calculate_expected_amount_for_minting: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, asset_id: u32 | AnyNumber | Uint8Array, amount: u128 | AnyNumber | Uint8Array) => Observable<Option<u128>>>;
+      /**
+       * 
+       **/
+      calculate_expected_lp_minted: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, amounts: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array]) => Observable<Option<u128>>>;
+      /**
+       * 
+       **/
+      calculate_sell_price: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, sell_asset_id: u32 | AnyNumber | Uint8Array, sell_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<u128>>>;
+      /**
+       * 
+       **/
+      calculate_sell_price_with_impact: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, sell_asset_id: u32 | AnyNumber | Uint8Array, sell_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u128, u128]>>>>;
+      /**
+       * 
+       **/
+      get_burn_amount: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, lp_burn_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u128, u128]>>>>;
+      /**
+       * 
+       **/
+      get_pools: AugmentedRpc<(pool_id: Option<u32> | null | Uint8Array | u32 | AnyNumber) => Observable<Vec<RpcPoolInfo>>>;
+      /**
+       * 
+       **/
+      get_pools_for_trading: AugmentedRpc<() => Observable<Vec<u32>>>;
+      /**
+       * 
+       **/
+      get_tradeable_tokens: AugmentedRpc<() => Observable<Vec<RpcAssetMetadata>>>;
     };
     metamask: {
       /**
