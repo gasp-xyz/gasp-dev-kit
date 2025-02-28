@@ -579,6 +579,10 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       InsufficientOutputAmount: AugmentedError<ApiType>;
       /**
+       * Math Overflow
+       **/
+      MathOverflow: AugmentedError<ApiType>;
+      /**
        * Input asset id is not connected with output asset id for given pools
        **/
       MultiSwapPathInvalid: AugmentedError<ApiType>;
@@ -599,13 +603,29 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       NotAPromotedPool: AugmentedError<ApiType>;
       /**
+       * Not enough assets for fee lock
+       **/
+      NotEnoughAssetsForFeeLock: AugmentedError<ApiType>;
+      /**
+       * Not enough assets for fees,
+       **/
+      NotEnoughAssetsForFees: AugmentedError<ApiType>;
+      /**
        * Pool is not paired with native currency id
        **/
       NotPairedWithNativeAsset: AugmentedError<ApiType>;
       /**
+       * Swap prevalidation
+       **/
+      SwapPrevalidation: AugmentedError<ApiType>;
+      /**
        * Trading blocked by maintenance mode
        **/
       TradingBlockedByMaintenanceMode: AugmentedError<ApiType>;
+      /**
+       * Unexpected failure
+       **/
+      UnexpectedFailure: AugmentedError<ApiType>;
       /**
        * Generic error
        **/

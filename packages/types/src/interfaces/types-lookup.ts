@@ -774,7 +774,16 @@ declare module '@polkadot/types/lookup' {
       readonly burnedAmount: u128;
       readonly totalSupply: u128;
     } & Struct;
-    readonly type: 'AssetsSwapped' | 'PoolCreated' | 'LiquidityMinted' | 'LiquidityBurned';
+    readonly isSwapFailed: boolean;
+    readonly asSwapFailed: {
+      readonly error: SpRuntimeModuleError;
+    } & Struct;
+    readonly isSwapFeesFallbackFailed: boolean;
+    readonly asSwapFeesFallbackFailed: {
+      readonly id: u32;
+      readonly error: SpRuntimeModuleError;
+    } & Struct;
+    readonly type: 'AssetsSwapped' | 'PoolCreated' | 'LiquidityMinted' | 'LiquidityBurned' | 'SwapFailed' | 'SwapFeesFallbackFailed';
   }
 
   /** @name PalletMarketAtomicSwap (85) */
@@ -3164,7 +3173,18 @@ declare module '@polkadot/types/lookup' {
     readonly isMultiSwapSamePool: boolean;
     readonly isMultiSwapPathInvalid: boolean;
     readonly isNontransferableToken: boolean;
-    readonly type: 'NoSuchPool' | 'FunctionNotAvailableForThisToken' | 'DisallowedPool' | 'InsufficientOutputAmount' | 'ExcesiveInputAmount' | 'NotPairedWithNativeAsset' | 'NotAPromotedPool' | 'AssetDoesNotExists' | 'FunctionNotAvailableForThisPoolKind' | 'TradingBlockedByMaintenanceMode' | 'MultiSwapSamePool' | 'MultiSwapPathInvalid' | 'NontransferableToken';
+    readonly isMathOverflow: boolean;
+    readonly asMathOverflow: {
+      readonly id: u8;
+    } & Struct;
+    readonly isUnexpectedFailure: boolean;
+    readonly asUnexpectedFailure: {
+      readonly id: u8;
+    } & Struct;
+    readonly isSwapPrevalidation: boolean;
+    readonly isNotEnoughAssetsForFees: boolean;
+    readonly isNotEnoughAssetsForFeeLock: boolean;
+    readonly type: 'NoSuchPool' | 'FunctionNotAvailableForThisToken' | 'DisallowedPool' | 'InsufficientOutputAmount' | 'ExcesiveInputAmount' | 'NotPairedWithNativeAsset' | 'NotAPromotedPool' | 'AssetDoesNotExists' | 'FunctionNotAvailableForThisPoolKind' | 'TradingBlockedByMaintenanceMode' | 'MultiSwapSamePool' | 'MultiSwapPathInvalid' | 'NontransferableToken' | 'MathOverflow' | 'UnexpectedFailure' | 'SwapPrevalidation' | 'NotEnoughAssetsForFees' | 'NotEnoughAssetsForFeeLock';
   }
 
   /** @name ParachainStakingRoundInfo (367) */

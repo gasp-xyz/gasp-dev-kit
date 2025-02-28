@@ -705,7 +705,14 @@ export default {
         poolId: 'u32',
         amounts: '(u128,u128)',
         burnedAmount: 'u128',
-        totalSupply: 'u128'
+        totalSupply: 'u128',
+      },
+      SwapFailed: {
+        error: 'SpRuntimeModuleError',
+      },
+      SwapFeesFallbackFailed: {
+        id: 'u32',
+        error: 'SpRuntimeModuleError'
       }
     }
   },
@@ -2821,7 +2828,30 @@ export default {
    * Lookup366: pallet_market::pallet::Error<T>
    **/
   PalletMarketError: {
-    _enum: ['NoSuchPool', 'FunctionNotAvailableForThisToken', 'DisallowedPool', 'InsufficientOutputAmount', 'ExcesiveInputAmount', 'NotPairedWithNativeAsset', 'NotAPromotedPool', 'AssetDoesNotExists', 'FunctionNotAvailableForThisPoolKind', 'TradingBlockedByMaintenanceMode', 'MultiSwapSamePool', 'MultiSwapPathInvalid', 'NontransferableToken']
+    _enum: {
+      NoSuchPool: 'Null',
+      FunctionNotAvailableForThisToken: 'Null',
+      DisallowedPool: 'Null',
+      InsufficientOutputAmount: 'Null',
+      ExcesiveInputAmount: 'Null',
+      NotPairedWithNativeAsset: 'Null',
+      NotAPromotedPool: 'Null',
+      AssetDoesNotExists: 'Null',
+      FunctionNotAvailableForThisPoolKind: 'Null',
+      TradingBlockedByMaintenanceMode: 'Null',
+      MultiSwapSamePool: 'Null',
+      MultiSwapPathInvalid: 'Null',
+      NontransferableToken: 'Null',
+      MathOverflow: {
+        id: 'u8',
+      },
+      UnexpectedFailure: {
+        id: 'u8',
+      },
+      SwapPrevalidation: 'Null',
+      NotEnoughAssetsForFees: 'Null',
+      NotEnoughAssetsForFeeLock: 'Null'
+    }
   },
   /**
    * Lookup367: parachain_staking::pallet::RoundInfo<BlockNumber>

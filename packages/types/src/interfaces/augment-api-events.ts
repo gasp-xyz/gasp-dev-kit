@@ -348,6 +348,14 @@ declare module '@polkadot/api-base/types/events' {
        **/
       PoolCreated: AugmentedEvent<ApiType, [creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: ITuple<[u32, u32]>], { creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: ITuple<[u32, u32]> }>;
       /**
+       * Swap failed with error
+       **/
+      SwapFailed: AugmentedEvent<ApiType, [error: SpRuntimeModuleError], { error: SpRuntimeModuleError }>;
+      /**
+       * Swap fees falback failed
+       **/
+      SwapFeesFallbackFailed: AugmentedEvent<ApiType, [id: u32, error: SpRuntimeModuleError], { id: u32, error: SpRuntimeModuleError }>;
+      /**
        * Generic event
        **/
       [key: string]: AugmentedEvent<ApiType>;
