@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-feat-implement-independent-service-versioning-on-release-GASP-1783.36",
+  "version": "0.0.2-feat-implement-independent-service-versioning-on-release-GASP-1783.37",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
