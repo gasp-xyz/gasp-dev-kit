@@ -39,6 +39,7 @@ permissions:
 
 env:
   INPUTS_BRANCH: ${{ github.event.inputs.branch || github.ref_name }}
+  CACHE_VERSION: 1
 
 jobs:
   release-type-definitions:
@@ -50,14 +51,21 @@ jobs:
           ref: ${{ github.event.inputs.branch }}
       - uses: nrwl/nx-set-shas@v4
 
-      - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
-          cache-dependency-path: "package-lock.json"
-
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-
       - run: npm ci
+
       - run: npx nx run gasp-type-definitions:lint
 
       - name: NPM version bump type definitions
@@ -106,22 +114,6 @@ jobs:
           path: mangata-repo
           ref: ${{ github.event.inputs.nodeRepositoryRevision || env.INPUTS_BRANCH }}
 
-      - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "npm"
-          cache-dependency-path: "package-lock.json"
-
-      - name: Install WASM toolchain
-        uses: actions-rust-lang/setup-rust-toolchain@v1.10.1
-        with:
-          toolchain: nightly
-          target: wasm32-unknown-unknown
-
-      - name: Install websocat
-        run: cargo install websocat
-
       - name: Run the Node
         working-directory: ${{ github.event.inputs.nodeCodebaseWorkingDirectory }}
         env:
@@ -131,9 +123,28 @@ jobs:
           docker compose up -d
           docker ps
 
-      - name: Sleep for 1 minutes
-        run: sleep 60s
+      - name: Install WASM toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1.10.1
+        with:
+          toolchain: nightly
+          target: wasm32-unknown-unknown
 
+      - name: Install websocat
+        run: cargo install websocat
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-
       - run: npm ci
 
       - run: npx nx run gasp-types:generate-metadata-solochain
@@ -182,12 +193,20 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
-          cache-dependency-path: "package-lock.json"
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-
+      - run: npm ci
 
       - name: Type definitions version for branch
         run: |
@@ -208,8 +227,6 @@ jobs:
         working-directory: packages/sdk
         run: |
           sed -i "s/\"gasp-type-definitions\": \".*\"/\"gasp-type-definitions\": \"${{env.BRANCH_TYPE_DEFINITIONS_VERSION}}\"/" package.json
-
-      - run: npm i
 
       - run: npx nx run gasp-sdk:lint
 
@@ -257,8 +274,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
-          cache-dependency-path: "package-lock.json"
 
       - name: Show released versions
         id: show-versions
