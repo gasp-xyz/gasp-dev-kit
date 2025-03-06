@@ -61,9 +61,9 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-type-definitions-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-
+            ${{ runner.os }}-${{ env.CACHE_VERSION }}-type-definitions-
       - run: npm ci
 
       - run: npx nx run gasp-type-definitions:lint
@@ -142,9 +142,9 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-types-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-
+            ${{ runner.os }}-${{ env.CACHE_VERSION }}-types-
       - run: npm ci
 
       - run: npx nx run gasp-types:generate-metadata-solochain
@@ -203,9 +203,9 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-sdk-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-${{ env.CACHE_VERSION }}-node-
+            ${{ runner.os }}-${{ env.CACHE_VERSION }}-sdk-
       - run: npm ci
 
       - name: Type definitions version for branch
