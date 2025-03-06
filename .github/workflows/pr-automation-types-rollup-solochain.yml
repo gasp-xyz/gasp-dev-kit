@@ -85,9 +85,9 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-type-definitions-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-nodejs-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-${{ env.CACHE_VERSION }}-type-definitions-
+            ${{ runner.os }}-${{ env.CACHE_VERSION }}-nodejs-
       - run: npm ci
       
       - run: npx nx run gasp-type-definitions:lint
