@@ -97,14 +97,14 @@ jobs:
       #########################################################
       # Release type definitions
       #########################################################
-      - name: NPM version bump type definitions
+      - name: '[gasp-type-definitions] NPM version bump'
         working-directory: packages/type-definitions
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
   
-      - name: git add and commit new version
+      - name: '[gasp-type-definitions] git add and commit new version'
         run: |
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance
@@ -112,10 +112,10 @@ jobs:
           git commit -m "chore: updated type definitions to new prerelease version"
           git push
   
-      - name: Build type definitions
+      - name: '[gasp-type-definitions] Build type definitions'
         run: npx nx run gasp-type-definitions:build
   
-      - name: Publish type definitions to NPM
+      - name: '[gasp-type-definitions] Publish type definitions to NPM'
         working-directory: dist/packages/type-definitions
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -129,20 +129,22 @@ jobs:
       #########################################################
       # Release types
       #########################################################
-      - run: npx nx run gasp-types:generate-metadata-solochain
-      - run: npx nx run gasp-types:build-types
+      - name: '[gasp-types] Generate metadata for solochain'
+        run: npx nx run gasp-types:generate-metadata-solochain
+      - name: '[gasp-types] Build types'
+        run: npx nx run gasp-types:build-types
       
-      - name: NPM version bump
+      - name: '[gasp-types] NPM version bump'
         working-directory: packages/types
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
       
-      - name: Remove Cloned Repository
+      - name: '[gasp-types] Remove Cloned Repository'
         run: rm -rf mangata-repo
       
-      - name: git add and commit new version
+      - name: '[gasp-types] git add and commit new version'
         run: |
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance
@@ -150,10 +152,10 @@ jobs:
           git commit -m "chore: updated to new prerelease version"
           git push origin ${{ env.INPUTS_BRANCH }}
       
-      - name: Build types
+      - name: '[gasp-types] Build types'
         run: npx nx run gasp-types:build
       
-      - name: Publish to NPM
+      - name: '[gasp-types] Publish to NPM'
         working-directory: dist/packages/types
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -167,34 +169,34 @@ jobs:
       #########################################################
       # Release sdk
       #########################################################
-      - name: Type definitions version for branch
+      - name: '[gasp-sdk] Type definitions version for branch'
         run: |
           branchTypeDefinitionsVersion=$(npm show gasp-type-definitions dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
           echo "BRANCH_TYPE_DEFINITIONS_VERSION=$branchTypeDefinitionsVersion" >> $GITHUB_ENV
       
-      - name: Types version for branch
+      - name: '[gasp-sdk] Types version for branch'
         run: |
           branchTypesVersion=$(npm show gasp-types dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
           echo "BRANCH_TYPES_VERSION=$branchTypesVersion" >> $GITHUB_ENV
       
-      - name: Update types dependency version
+      - name: '[gasp-sdk] Update types dependency version'
         working-directory: packages/sdk
         run: |
           sed -i "s/\"gasp-types\": \".*\"/\"gasp-types\": \"${{env.BRANCH_TYPES_VERSION}}\"/" package.json
       
-      - name: Update type definitions dependency version
+      - name: '[gasp-sdk] Update type definitions dependency version'
         working-directory: packages/sdk
         run: |
           sed -i "s/\"gasp-type-definitions\": \".*\"/\"gasp-type-definitions\": \"${{env.BRANCH_TYPE_DEFINITIONS_VERSION}}\"/" package.json
       
-      - name: NPM version bump
+      - name: '[gasp-sdk] NPM version bump'
         working-directory: packages/sdk
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
       
-      - name: git add and commit new version
+      - name: '[gasp-sdk] git add and commit new version'
         run: |
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance 
@@ -202,10 +204,10 @@ jobs:
           git commit -m "chore: updated sdk to new prerelease version"
           git push
       
-      - name: Build sdk
+      - name: '[gasp-sdk] Build sdk'
         run: npx nx run gasp-sdk:build
       
-      - name: Publish to NPM
+      - name: '[gasp-sdk] Publish to NPM'
         working-directory: dist/packages/sdk
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -216,7 +218,10 @@ jobs:
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public
 
-      - name: Show released versions
+      #########################################################
+      # Show released versions
+      #########################################################
+      - name: '[gasp-sdk] Show released versions'
         id: show-versions
         run: |
           echo "Version of gasp-type-definitions:"
