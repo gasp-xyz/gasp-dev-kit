@@ -709,6 +709,7 @@ declare module '@polkadot/api-base/types/errors' {
       InsufficientBalance: AugmentedError<ApiType>;
       InvalidSchedule: AugmentedError<ApiType>;
       MathError: AugmentedError<ApiType>;
+      NoSuchPool: AugmentedError<ApiType>;
       NoWritingSameValue: AugmentedError<ApiType>;
       PendingCandidateRequestAlreadyExists: AugmentedError<ApiType>;
       PendingCandidateRequestNotDueYet: AugmentedError<ApiType>;
@@ -930,6 +931,10 @@ declare module '@polkadot/api-base/types/errors' {
        * Asset does not exist
        **/
       AssetDoesNotExist: AugmentedError<ApiType>;
+      /**
+       * EqAssets exceeded bound
+       **/
+      EqAssetExceededBound: AugmentedError<ApiType>;
       /**
        * Excesive output amount does not meet max requirements
        **/

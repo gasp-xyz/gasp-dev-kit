@@ -608,6 +608,10 @@ declare module '@polkadot/api-base/types/events' {
        **/
       AssetsSwapped: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, assetIn: u32, amountIn: u128, assetOut: u32, amountOut: u128], { who: SpRuntimeAccountAccountId20, poolId: u32, assetIn: u32, amountIn: u128, assetOut: u32, amountOut: u128 }>;
       /**
+       * EqAssets map for an asset was updated
+       **/
+      EqAssetsUpdated: AugmentedEvent<ApiType, [assetId: u32, eqAssets: Vec<u32>], { assetId: u32, eqAssets: Vec<u32> }>;
+      /**
        * A successful call of the `RemoveLiquidityImbalanced` & `RemoveLiquidity` extrinsic will create this event.
        **/
       LiquidityBurned: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, amounts: Vec<u128>, burnedAmount: u128, totalSupply: u128, fees: Vec<u128>], { who: SpRuntimeAccountAccountId20, poolId: u32, amounts: Vec<u128>, burnedAmount: u128, totalSupply: u128, fees: Vec<u128> }>;
