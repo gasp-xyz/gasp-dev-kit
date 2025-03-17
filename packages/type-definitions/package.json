@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-eth-rollup-develop.182",
+  "version": "0.0.2-chore-remove-helmfile-deployment-configurations-GASP-2059.0",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
