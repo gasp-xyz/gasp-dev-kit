@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-feat-new-chains-integration-GASP-2054.3",
+  "version": "0.0.2-feat-new-chains-integration-GASP-2054.4",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
