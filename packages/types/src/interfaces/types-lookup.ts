@@ -348,7 +348,10 @@ declare module '@polkadot/types/lookup' {
     readonly isEthereum: boolean;
     readonly isArbitrum: boolean;
     readonly isBase: boolean;
-    readonly type: 'Ethereum' | 'Arbitrum' | 'Base';
+    readonly isMonad: boolean;
+    readonly isMegaEth: boolean;
+    readonly isSonic: boolean;
+    readonly type: 'Ethereum' | 'Arbitrum' | 'Base' | 'Monad' | 'MegaEth' | 'Sonic';
   }
 
   /** @name PalletRolldownL1RequestProcessingError (48) */
@@ -2332,7 +2335,13 @@ declare module '@polkadot/types/lookup' {
     readonly asArbitrum: U8aFixed;
     readonly isBase: boolean;
     readonly asBase: U8aFixed;
-    readonly type: 'Ethereum' | 'Arbitrum' | 'Base';
+    readonly isMonad: boolean;
+    readonly asMonad: U8aFixed;
+    readonly isMegaEth: boolean;
+    readonly asMegaEth: U8aFixed;
+    readonly isSonic: boolean;
+    readonly asSonic: U8aFixed;
+    readonly type: 'Ethereum' | 'Arbitrum' | 'Base' | 'Monad' | 'MegaEth' | 'Sonic';
   }
 
   /** @name PalletTreasuryCall (214) */
