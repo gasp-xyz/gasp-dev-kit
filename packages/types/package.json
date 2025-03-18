@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-ci-fix-gasp-avs-workflow-e2e-tests.3",
+  "version": "0.0.2-ci-fix-gasp-avs-workflow-e2e-tests.4",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
