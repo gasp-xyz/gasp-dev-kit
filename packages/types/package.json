@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-refactor-contract-deployment-GASP-1573.7",
+  "version": "0.0.2-refactor-contract-deployment-GASP-1573.8",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
