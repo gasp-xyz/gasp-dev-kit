@@ -331,7 +331,7 @@ export default {
    * Lookup44: pallet_rolldown::messages::Chain
    **/
   PalletRolldownMessagesChain: {
-    _enum: ['Ethereum', 'Arbitrum', 'Base']
+    _enum: ['Ethereum', 'Arbitrum', 'Base', 'Monad', 'MegaEth', 'Sonic']
   },
   /**
    * Lookup48: pallet_rolldown::L1RequestProcessingError
@@ -2135,7 +2135,10 @@ export default {
     _enum: {
       Ethereum: '[u8;20]',
       Arbitrum: '[u8;20]',
-      Base: '[u8;20]'
+      Base: '[u8;20]',
+      Monad: '[u8;20]',
+      MegaEth: '[u8;20]',
+      Sonic: '[u8;20]'
     }
   },
   /**
