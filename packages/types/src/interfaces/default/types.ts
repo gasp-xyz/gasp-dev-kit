@@ -18,7 +18,10 @@ export interface Chain extends Enum {
   readonly isEthereum: boolean;
   readonly isArbitrum: boolean;
   readonly isBase: boolean;
-  readonly type: 'Ethereum' | 'Arbitrum' | 'Base';
+  readonly isMonad: boolean;
+  readonly isMegaEth: boolean;
+  readonly isSonic: boolean;
+  readonly type: 'Ethereum' | 'Arbitrum' | 'Base' | 'Monad' | 'MegaEth' | 'Sonic';
 }
 
 /** @name Deposit */
