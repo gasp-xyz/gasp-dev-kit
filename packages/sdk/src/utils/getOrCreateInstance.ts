@@ -1,3 +1,4 @@
+import "gasp-types"
 import { ApiPromise, WsProvider } from "@polkadot/api";
 import { options } from "./options";
 
