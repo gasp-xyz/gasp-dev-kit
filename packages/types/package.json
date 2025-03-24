@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-ci-output-docker-logs-on-e2e-job-failure-in-another-step.1",
+  "version": "0.0.2-ci-output-docker-logs-on-e2e-job-failure-in-another-step.2",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
