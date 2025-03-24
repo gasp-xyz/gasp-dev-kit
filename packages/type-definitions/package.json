@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-ci-output-docker-logs-on-e2e-job-failure-in-another-step.1",
+  "version": "0.0.2-ci-output-docker-logs-on-e2e-job-failure-in-another-step.2",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
