@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-feat-use-ws-url.0",
+  "version": "0.0.2-feat-use-ws-url.1",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
