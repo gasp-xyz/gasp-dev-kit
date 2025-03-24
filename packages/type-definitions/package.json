@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-ci-fix-gasp-node-e2e-tests-image-reference-usage.0",
+  "version": "0.0.2-ci-fix-gasp-node-e2e-tests-image-reference-usage.1",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
