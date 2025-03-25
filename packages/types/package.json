@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-chore-gasp-e2e-update-20250325-nocache.1",
+  "version": "0.0.2-chore-gasp-e2e-update-20250325-nocache.2",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
