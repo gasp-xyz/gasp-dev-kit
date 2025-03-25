@@ -8,7 +8,7 @@ import type { SignatureOptions, IExtrinsicEra } from '@polkadot/types/types';
 import { GenericExtrinsicPayloadV4 } from '@polkadot/types';
 import { Call } from '@polkadot/types/interfaces';
 import type { HexString } from '@polkadot/util/types';
-import { signTypedData, type Config } from '@wagmi/core';
+import { signTypedData as _signTypedData, type Config } from '@wagmi/core';
 
 interface SigningResult {
   header: Header | null;
@@ -22,12 +22,19 @@ export interface SignTypedData_v4 {
   signature: HexString | null;
 }
 
-function makeEraOptions(api: ApiPromise, registry: Registry, partialOptions: Partial<SignatureOptions>, signingInfo: SigningResult) {
+function makeEraOptions(
+  api: ApiPromise,
+  registry: Registry,
+  partialOptions: Partial<SignatureOptions>,
+  signingInfo: SigningResult
+) {
   const { header, mortalLength, nonce } = signingInfo;
 
   if (!header) {
     if (partialOptions.era && !partialOptions.blockHash) {
-      throw new Error('Expected blockHash to be passed alongside non-immortal era options');
+      throw new Error(
+        'Expected blockHash to be passed alongside non-immortal era options'
+      );
     }
     if (isNumber(partialOptions.era)) {
       // since we have no header, it is immortal, remove any option overrides
@@ -49,8 +56,11 @@ function makeEraOptions(api: ApiPromise, registry: Registry, partialOptions: Par
   });
 }
 
-function makeSignOptions(api: ApiPromise, partialOptions: Partial<SignatureOptions>, extras: Partial<SignatureOptions>): SignatureOptions {
-
+function makeSignOptions(
+  api: ApiPromise,
+  partialOptions: Partial<SignatureOptions>,
+  extras: Partial<SignatureOptions>
+): SignatureOptions {
   return objectSpread(
     { blockHash: api.genesisHash, genesisHash: api.genesisHash },
     partialOptions,
@@ -59,32 +69,46 @@ function makeSignOptions(api: ApiPromise, partialOptions: Partial<SignatureOptio
       runtimeVersion: api.runtimeVersion,
       signedExtensions: api.registry.signedExtensions,
       version: undefined,
-    },
+    }
   );
 }
 
-export async function signTypedData_v4(api: ApiPromise, tx: SubmittableExtrinsic<"promise">, config: Config, address?: string): Promise<SignTypedData_v4> {
+export async function signTypedData(
+  api: ApiPromise,
+  tx: SubmittableExtrinsic<'promise'>,
+  config: Config,
+  address?: string
+): Promise<SignTypedData_v4> {
   const options: Partial<SignatureOptions> = {};
 
   if (!address) {
     throw new Error('No address found');
   }
 
-  const signingInfo = await api.derive.tx.signingInfo(address, options.nonce, options.era);
+  const signingInfo = await api.derive.tx.signingInfo(
+    address,
+    options.nonce,
+    options.era
+  );
   const eraOptions = makeEraOptions(api, api.registry, options, signingInfo);
-  const payload = tx.inner.signature.createPayload(tx.method as Call, eraOptions);
+  const payload = tx.inner.signature.createPayload(
+    tx.method as Call,
+    eraOptions
+  );
   const raw_payload = payload.toU8a({ method: true });
 
-  const result = await api.rpc.metamask.get_eip712_sign_data(tx.toHex().slice(2));
+  const result = await api.rpc.metamask.get_eip712_sign_data(
+    tx.toHex().slice(2)
+  );
   const data = JSON.parse(result.toString());
   data.message.tx = u8aToHex(raw_payload).slice(2);
   data.account = address;
-  
-  const signature = await signTypedData(config, data);
+
+  const signature = await _signTypedData(config, data);
 
   return {
     address,
     payload,
-    signature: signature || null
-  }
+    signature: signature || null,
+  };
 }

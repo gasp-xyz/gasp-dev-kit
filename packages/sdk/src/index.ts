@@ -1,18 +1,19 @@
-export { signTx } from "./utils/signTx";
+export { sendTx, signTx } from './utils/signTx';
+export { signTypedData } from './utils/signTypedData';
 
-export { Mangata } from "./mangata";
+export { Mangata } from './mangata';
 
-export * from "./utils/bigConstants";
-export * from "./utils/bnConstants";
-export * from "./utils/bnUtility";
-export * from "./utils/toFixed";
-export * from "./utils/isMultiSwapAssetTransactionSuccessful";
-export * from "./utils/isBuyAssetTransactionSuccessful"
-export * from "./utils/isSellAssetTransactionSuccessful"
-export { setLoggerOptions } from "./utils/mangataLogger";
+export * from './utils/bigConstants';
+export * from './utils/bnConstants';
+export * from './utils/bnUtility';
+export * from './utils/toFixed';
+export * from './utils/isMultiSwapAssetTransactionSuccessful';
+export * from './utils/isBuyAssetTransactionSuccessful';
+export * from './utils/isSellAssetTransactionSuccessful';
+export { setLoggerOptions } from './utils/mangataLogger';
 
-export * from "./types/common";
-export * from "./types/query";
-export * from "./types/tokens";
-export * from "./types/xyk";
-export * from "./types/utility";
+export * from './types/common';
+export * from './types/query';
+export * from './types/tokens';
+export * from './types/xyk';
+export * from './types/utility';
