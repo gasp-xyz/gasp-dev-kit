@@ -17,7 +17,7 @@ import { truncatedString } from './truncatedString';
 import { getTxError } from './getTxError';
 import { logger } from './mangataLogger';
 import { hexToU8a } from '@polkadot/util';
-import { signTypedData_v4 } from './signTypedData';
+import { signTypedData } from './signTypedData';
 
 const subscribeToExtrinsic = async (
   api: ApiPromise,
@@ -145,6 +145,55 @@ const subscribeToExtrinsic = async (
   }
 };
 
+export const sendTx = async (
+  api: ApiPromise,
+  tx: SubmittableExtrinsic<'promise'>,
+  userAddress: string,
+  txOptions?: Partial<TxOptions>
+): Promise<MangataGenericEvent[]> => {
+  /* eslint-disable no-async-promise-executor */
+  return new Promise<MangataGenericEvent[]>(async (resolve, reject) => {
+    const nonce = await getTxNonce(api, userAddress, txOptions);
+
+    logger.debug(
+      `submitting Tx[${tx.hash.toString()}]who: ${userAddress} nonce: ${nonce.toString()} `
+    );
+
+    try {
+      const subscriptionState = { isSubscribed: false };
+
+      const unsub = await api.rpc.author.submitAndWatchExtrinsic(
+        tx,
+        async (status) => {
+          await subscribeToExtrinsic(
+            api,
+            tx,
+            { status },
+            userAddress,
+            txOptions,
+            subscriptionState,
+            resolve,
+            reject,
+            unsub
+          );
+        }
+      );
+    } catch (error: any) {
+      const nonce = await api.rpc.system.accountNextIndex(userAddress);
+      const currentNonce: BN = nonce.toBn();
+      dbInstance.setNonce(userAddress, currentNonce);
+
+      reject({
+        data:
+          error.message ||
+          error.description ||
+          error.data?.toString() ||
+          error.toString(),
+      });
+    }
+  });
+};
+
 export const signTx = async (
   api: ApiPromise,
   tx: SubmittableExtrinsic<'promise'>,
@@ -166,12 +215,7 @@ export const signTx = async (
       const subscriptionState = { isSubscribed: false };
 
       if (txOptions?.wagmiConfig) {
-        const transaction = api.createType(
-          'Extrinsic',
-          { method: tx.method },
-          { version: tx.version }
-        );
-        const signRes = await signTypedData_v4(
+        const signRes = await signTypedData(
           api,
           tx,
           txOptions?.wagmiConfig,
@@ -179,26 +223,25 @@ export const signTx = async (
         );
 
         if (!signRes) {
-          reject('SignTypedData error');
+          reject('Signature error');
           return;
         }
 
         const { payload, signature, address } = signRes;
 
-        const created_signature = api.createType('EthereumSignature', hexToU8a(signature));
-        
-        transaction.addSignature(
-          address,
-          created_signature,
-          payload.toHex()
+        const created_signature = api.createType(
+          'EthereumSignature',
+          hexToU8a(signature)
         );
 
+        tx.addSignature(address, created_signature, payload.toHex());
+
         const unsub = await api.rpc.author.submitAndWatchExtrinsic(
-          transaction,
+          tx,
           async (status) => {
             await subscribeToExtrinsic(
               api,
-              transaction,
+              tx,
               { status },
               extractedAccount,
               txOptions,
