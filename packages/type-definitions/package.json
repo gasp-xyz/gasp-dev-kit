@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-eth-rollup-develop.210",
+  "version": "0.0.2-feat-remove-defunct-code-GASP-2150.0",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
