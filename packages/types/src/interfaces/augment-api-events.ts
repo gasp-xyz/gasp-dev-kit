@@ -334,7 +334,7 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * Assets were swapped successfully
        **/
-      AssetsSwapped: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, swaps: Vec<PalletMarketAtomicSwap>], { who: SpRuntimeAccountAccountId20, swaps: Vec<PalletMarketAtomicSwap> }>;
+      AssetsSwapped: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, totalAmountIn: u128, swaps: Vec<PalletMarketAtomicSwap>], { who: SpRuntimeAccountAccountId20, totalAmountIn: u128, swaps: Vec<PalletMarketAtomicSwap> }>;
       /**
        * A successful call of the `RemoveLiquidity` extrinsic will create this event.
        **/

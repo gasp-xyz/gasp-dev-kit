@@ -688,6 +688,7 @@ export default {
     _enum: {
       AssetsSwapped: {
         who: 'SpRuntimeAccountAccountId20',
+        totalAmountIn: 'u128',
         swaps: 'Vec<PalletMarketAtomicSwap>',
       },
       PoolCreated: {

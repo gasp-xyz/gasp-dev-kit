@@ -756,6 +756,7 @@ declare module '@polkadot/types/lookup' {
     readonly isAssetsSwapped: boolean;
     readonly asAssetsSwapped: {
       readonly who: SpRuntimeAccountAccountId20;
+      readonly totalAmountIn: u128;
       readonly swaps: Vec<PalletMarketAtomicSwap>;
     } & Struct;
     readonly isPoolCreated: boolean;
