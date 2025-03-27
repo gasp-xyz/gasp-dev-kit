@@ -2849,7 +2849,8 @@ export default {
       },
       SwapPrevalidation: 'Null',
       NotEnoughAssetsForFees: 'Null',
-      NotEnoughAssetsForFeeLock: 'Null'
+      NotEnoughAssetsForFeeLock: 'Null',
+      InsufficientInputAmount: 'Null'
     }
   },
   /**

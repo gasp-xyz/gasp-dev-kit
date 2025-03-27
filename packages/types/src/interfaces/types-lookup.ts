@@ -3191,7 +3191,8 @@ declare module '@polkadot/types/lookup' {
     readonly isSwapPrevalidation: boolean;
     readonly isNotEnoughAssetsForFees: boolean;
     readonly isNotEnoughAssetsForFeeLock: boolean;
-    readonly type: 'NoSuchPool' | 'FunctionNotAvailableForThisToken' | 'DisallowedPool' | 'InsufficientOutputAmount' | 'ExcesiveInputAmount' | 'NotPairedWithNativeAsset' | 'NotAPromotedPool' | 'AssetDoesNotExists' | 'FunctionNotAvailableForThisPoolKind' | 'TradingBlockedByMaintenanceMode' | 'MultiSwapSamePool' | 'MultiSwapPathInvalid' | 'NontransferableToken' | 'MathOverflow' | 'UnexpectedFailure' | 'SwapPrevalidation' | 'NotEnoughAssetsForFees' | 'NotEnoughAssetsForFeeLock';
+    readonly isInsufficientInputAmount: boolean;
+    readonly type: 'NoSuchPool' | 'FunctionNotAvailableForThisToken' | 'DisallowedPool' | 'InsufficientOutputAmount' | 'ExcesiveInputAmount' | 'NotPairedWithNativeAsset' | 'NotAPromotedPool' | 'AssetDoesNotExists' | 'FunctionNotAvailableForThisPoolKind' | 'TradingBlockedByMaintenanceMode' | 'MultiSwapSamePool' | 'MultiSwapPathInvalid' | 'NontransferableToken' | 'MathOverflow' | 'UnexpectedFailure' | 'SwapPrevalidation' | 'NotEnoughAssetsForFees' | 'NotEnoughAssetsForFeeLock' | 'InsufficientInputAmount';
   }
 
   /** @name ParachainStakingRoundInfo (367) */

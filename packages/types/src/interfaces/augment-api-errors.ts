@@ -575,6 +575,10 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       FunctionNotAvailableForThisToken: AugmentedError<ApiType>;
       /**
+       * Insufficient input amount
+       **/
+      InsufficientInputAmount: AugmentedError<ApiType>;
+      /**
        * Insufficient output amount does not meet min requirements
        **/
       InsufficientOutputAmount: AugmentedError<ApiType>;
