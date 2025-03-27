@@ -452,7 +452,7 @@ export const mRpc = {
           type: "Balance"
         },
       ],
-      type: "Result<MultiswapSellInfo, SpRuntimeDispatchError>"
+      type: "Result<MultiswapSellInfo, DispatchError>"
     },
     get_multiswap_buy_info: {
       description: "",
@@ -478,7 +478,7 @@ export const mRpc = {
           type: "Balance"
         },
       ],
-      type: "Result<MultiswapBuyInfo, SpRuntimeDispatchError>"
+      type: "Result<MultiswapBuyInfo, DispatchError>"
     },
   },
   pos: {

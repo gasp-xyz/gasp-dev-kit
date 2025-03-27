@@ -163,7 +163,7 @@ export default {
           type: "Balance"
         },
       ],
-      type: "Result<MultiswapSellInfo, SpRuntimeDispatchError>"
+      type: "Result<MultiswapSellInfo, DispatchError>"
     },
     get_multiswap_buy_info: {
       description: "",
@@ -189,7 +189,7 @@ export default {
           type: "Balance"
         },
       ],
-      type: "Result<MultiswapBuyInfo, SpRuntimeDispatchError>"
+      type: "Result<MultiswapBuyInfo, DispatchError>"
     },
   }
 }
