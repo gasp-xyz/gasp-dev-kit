@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-ci-add-cache-disablement-capabilites-for-release-workflows.7",
+  "version": "0.0.2-ci-add-cache-disablement-capabilites-for-release-workflows.8",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
