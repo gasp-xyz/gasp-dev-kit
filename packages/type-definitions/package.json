@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-eth-rollup-develop.224",
+  "version": "0.0.2-feature-gasp-node-multiswap-mods-fix-fees.0",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
