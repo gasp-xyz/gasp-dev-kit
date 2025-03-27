@@ -334,7 +334,7 @@ declare module '@polkadot/api-base/types/events' {
       /**
        * Assets were swapped successfully
        **/
-      AssetsSwapped: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, swaps: Vec<PalletMarketAtomicSwap>], { who: SpRuntimeAccountAccountId20, swaps: Vec<PalletMarketAtomicSwap> }>;
+      AssetsSwapped: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, totalAmountIn: u128, swaps: Vec<PalletMarketAtomicSwap>], { who: SpRuntimeAccountAccountId20, totalAmountIn: u128, swaps: Vec<PalletMarketAtomicSwap> }>;
       /**
        * A successful call of the `RemoveLiquidity` extrinsic will create this event.
        **/
@@ -347,6 +347,14 @@ declare module '@polkadot/api-base/types/events' {
        * A successful call of the `CretaPool` extrinsic will create this event.
        **/
       PoolCreated: AugmentedEvent<ApiType, [creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: ITuple<[u32, u32]>], { creator: SpRuntimeAccountAccountId20, poolId: u32, lpToken: u32, assets: ITuple<[u32, u32]> }>;
+      /**
+       * Swap failed with error
+       **/
+      SwapFailed: AugmentedEvent<ApiType, [error: SpRuntimeModuleError], { error: SpRuntimeModuleError }>;
+      /**
+       * Swap fees falback failed
+       **/
+      SwapFeesFallbackFailed: AugmentedEvent<ApiType, [id: u32, error: SpRuntimeModuleError], { id: u32, error: SpRuntimeModuleError }>;
       /**
        * Generic event
        **/
@@ -599,6 +607,10 @@ declare module '@polkadot/api-base/types/events' {
        * Assets have been swapped, a successfull call to `Swap` will create this event.
        **/
       AssetsSwapped: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, poolId: u32, assetIn: u32, amountIn: u128, assetOut: u32, amountOut: u128], { who: SpRuntimeAccountAccountId20, poolId: u32, assetIn: u32, amountIn: u128, assetOut: u32, amountOut: u128 }>;
+      /**
+       * EqAssets map for an asset was updated
+       **/
+      EqAssetsUpdated: AugmentedEvent<ApiType, [assetId: u32, eqAssets: Vec<u32>], { assetId: u32, eqAssets: Vec<u32> }>;
       /**
        * A successful call of the `RemoveLiquidityImbalanced` & `RemoveLiquidity` extrinsic will create this event.
        **/

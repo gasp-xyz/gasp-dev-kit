@@ -387,6 +387,8 @@ declare module '@polkadot/api-base/types/consts' {
       marketTreasuryFeePart: u128 & AugmentedConst<ApiType>;
       maxApmCoeff: u128 & AugmentedConst<ApiType>;
       maxAssetsInPool: u32 & AugmentedConst<ApiType>;
+      maxEqAssets: u32 & AugmentedConst<ApiType>;
+      nativeCurrencyId: u32 & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
