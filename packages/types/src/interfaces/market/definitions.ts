@@ -139,5 +139,57 @@ export default {
       params: [],
       type: "Vec<u32>"
     },
+    get_multiswap_sell_info: {
+      description: "",
+      params: [
+        {
+          name: "swap_pool_list",
+          type: "Vec<TokenId>"
+        },
+        {
+          name: "asset_id_in",
+          type: "TokenId"
+        },
+        {
+          name: "asset_amount_in",
+          type: "Balance"
+        },
+        {
+          name: "asset_id_out",
+          type: "TokenId"
+        },
+        {
+          name: "min_amount_out",
+          type: "Balance"
+        },
+      ],
+      type: "Result<MultiswapSellInfo, SpRuntimeDispatchError>"
+    },
+    get_multiswap_buy_info: {
+      description: "",
+      params: [
+        {
+          name: "swap_pool_list",
+          type: "Vec<TokenId>"
+        },
+        {
+          name: "asset_id_out",
+          type: "TokenId"
+        },
+        {
+          name: "asset_amount_out",
+          type: "Balance"
+        },
+        {
+          name: "asset_id_in",
+          type: "TokenId"
+        },
+        {
+          name: "max_amount_in",
+          type: "Balance"
+        },
+      ],
+      type: "Result<MultiswapBuyInfo, SpRuntimeDispatchError>"
+    },
   }
 }

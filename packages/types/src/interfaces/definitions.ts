@@ -78,6 +78,20 @@ export default {
       assets: "Vec<TokenId>",
       reserves: "Vec<Balance>"
     },
+    MultiswapSellInfo: {
+      total_amount_in: "Balance",
+      swap_amount_in: "Balance",
+      amount_out: "Balance",
+      fees: "Balance",
+      is_lockless: "bool",
+    },
+    MultiswapBuyInfo: {
+      total_amount_in: "Balance",
+      swap_amount_in: "Balance",
+      amount_out: "Balance",
+      fees: "Balance",
+      is_lockless: "bool",
+    },
   }
 }
 
