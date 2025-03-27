@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-feat-prepare-stash-for-kubernetes-GASP-1936.2",
+  "version": "0.0.2-feat-prepare-stash-for-kubernetes-GASP-1936.3",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
