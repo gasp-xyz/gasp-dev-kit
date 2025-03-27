@@ -7,7 +7,7 @@ import '@polkadot/rpc-core/types/jsonrpc';
 
 import type { AugmentedRpc } from '@polkadot/rpc-core/types';
 import type { Metadata, StorageKey } from '@polkadot/types';
-import type { Bytes, HashMap, Json, Null, Option, Text, U256, U64, Vec, bool, f64, u128, u32, u64 } from '@polkadot/types-codec';
+import type { Bytes, HashMap, Json, Null, Option, Result, Text, U256, U64, Vec, bool, f64, u128, u32, u64 } from '@polkadot/types-codec';
 import type { AnyNumber, Codec, ITuple } from '@polkadot/types-codec/types';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
 import type { EpochAuthorship } from '@polkadot/types/interfaces/babe';
@@ -29,7 +29,7 @@ import type { AccountId, Balance, BlockNumber, H160, H256, H64, Hash, Header, In
 import type { MigrationStatusResult, ReadProof, RuntimeVersion, TraceBlockResponse } from '@polkadot/types/interfaces/state';
 import type { ApplyExtrinsicResult, ChainProperties, ChainType, Health, NetworkState, NodeRole, PeerInfo, SyncState } from '@polkadot/types/interfaces/system';
 import type { IExtrinsic, Observable } from '@polkadot/types/types';
-import type { Chain, L1Update, RpcAssetMetadata, RpcPoolInfo, TokenId } from 'gasp-types/interfaces/default';
+import type { Chain, L1Update, MultiswapBuyInfo, MultiswapSellInfo, RpcAssetMetadata, RpcPoolInfo, TokenId } from 'gasp-types/interfaces/default';
 
 export type __AugmentedRpc = AugmentedRpc<() => unknown>;
 
@@ -401,6 +401,14 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        * 
        **/
       get_burn_amount: AugmentedRpc<(pool_id: u32 | AnyNumber | Uint8Array, lp_burn_amount: u128 | AnyNumber | Uint8Array) => Observable<Option<ITuple<[u128, u128]>>>>;
+      /**
+       * 
+       **/
+      get_multiswap_buy_info: AugmentedRpc<(swap_pool_list: Vec<TokenId> | (TokenId | AnyNumber | Uint8Array)[], asset_id_out: TokenId | AnyNumber | Uint8Array, asset_amount_out: Balance | AnyNumber | Uint8Array, asset_id_in: TokenId | AnyNumber | Uint8Array, max_amount_in: Balance | AnyNumber | Uint8Array) => Observable<Result<MultiswapBuyInfo, SpRuntimeDispatchError>>>;
+      /**
+       * 
+       **/
+      get_multiswap_sell_info: AugmentedRpc<(swap_pool_list: Vec<TokenId> | (TokenId | AnyNumber | Uint8Array)[], asset_id_in: TokenId | AnyNumber | Uint8Array, asset_amount_in: Balance | AnyNumber | Uint8Array, asset_id_out: TokenId | AnyNumber | Uint8Array, min_amount_out: Balance | AnyNumber | Uint8Array) => Observable<Result<MultiswapSellInfo, SpRuntimeDispatchError>>>;
       /**
        * 
        **/

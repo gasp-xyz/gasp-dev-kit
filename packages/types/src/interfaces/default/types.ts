@@ -69,6 +69,24 @@ export interface MultiSignature extends Enum {
   readonly type: 'Ed25519' | 'Sr25519' | 'Ecdsa' | 'Eth';
 }
 
+/** @name MultiswapBuyInfo */
+export interface MultiswapBuyInfo extends Struct {
+  readonly total_amount_in: Balance;
+  readonly swap_amount_in: Balance;
+  readonly amount_out: Balance;
+  readonly fees: Balance;
+  readonly is_lockless: bool;
+}
+
+/** @name MultiswapSellInfo */
+export interface MultiswapSellInfo extends Struct {
+  readonly total_amount_in: Balance;
+  readonly swap_amount_in: Balance;
+  readonly amount_out: Balance;
+  readonly fees: Balance;
+  readonly is_lockless: bool;
+}
+
 /** @name Origin */
 export interface Origin extends Enum {
   readonly isL1: boolean;
