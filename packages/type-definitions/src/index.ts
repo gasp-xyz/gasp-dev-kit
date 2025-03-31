@@ -80,18 +80,18 @@ export const mTypes = {
     reserves: "Vec<Balance>"
   },
   MultiswapSellInfo: {
-    total_amount_in: "Balance",
-    swap_amount_in: "Balance",
-    amount_out: "Balance",
+    totalAmountIn: "Balance",
+    swapAmountIn: "Balance",
+    amountOut: "Balance",
     fees: "Balance",
-    is_lockless: "bool",
+    isLockless: "bool",
   },
   MultiswapBuyInfo: {
-    total_amount_in: "Balance",
-    swap_amount_in: "Balance",
-    amount_out: "Balance",
+    totalAmountIn: "Balance",
+    swapAmountIn: "Balance",
+    amountOut: "Balance",
     fees: "Balance",
-    is_lockless: "bool",
+    isLockless: "bool",
   },
 };
 
@@ -452,7 +452,7 @@ export const mRpc = {
           type: "Balance"
         },
       ],
-      type: "Result<MultiswapSellInfo, DispatchError>"
+      type: "MultiswapSellInfo"
     },
     get_multiswap_buy_info: {
       description: "",
@@ -478,7 +478,7 @@ export const mRpc = {
           type: "Balance"
         },
       ],
-      type: "Result<MultiswapBuyInfo, DispatchError>"
+      type: "MultiswapBuyInfo"
     },
   },
   pos: {
