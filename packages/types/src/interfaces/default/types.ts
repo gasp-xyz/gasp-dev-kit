@@ -71,20 +71,20 @@ export interface MultiSignature extends Enum {
 
 /** @name MultiswapBuyInfo */
 export interface MultiswapBuyInfo extends Struct {
-  readonly total_amount_in: Balance;
-  readonly swap_amount_in: Balance;
-  readonly amount_out: Balance;
+  readonly totalAmountIn: Balance;
+  readonly swapAmountIn: Balance;
+  readonly amountOut: Balance;
   readonly fees: Balance;
-  readonly is_lockless: bool;
+  readonly isLockless: bool;
 }
 
 /** @name MultiswapSellInfo */
 export interface MultiswapSellInfo extends Struct {
-  readonly total_amount_in: Balance;
-  readonly swap_amount_in: Balance;
-  readonly amount_out: Balance;
+  readonly totalAmountIn: Balance;
+  readonly swapAmountIn: Balance;
+  readonly amountOut: Balance;
   readonly fees: Balance;
-  readonly is_lockless: bool;
+  readonly isLockless: bool;
 }
 
 /** @name Origin */
