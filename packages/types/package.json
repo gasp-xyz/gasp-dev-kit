@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-feat-contract-upgradability-GASP-2176.5",
+  "version": "0.0.2-feat-contract-upgradability-GASP-2176.6",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
