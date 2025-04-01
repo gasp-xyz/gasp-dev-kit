@@ -50,7 +50,7 @@ export const mTypes = {
     _enum: ['L1', 'L2']
   },
   Chain: {
-    _enum: ['Ethereum', 'Arbitrum', 'Base']
+    _enum: ['Ethereum', 'Arbitrum', 'Base', 'Monad', 'MegaEth', 'Sonic']
   },
   CancelResolution: {
     requestId: "RequestId",
