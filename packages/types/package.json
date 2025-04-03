@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-perf-rolldown-optimization-GASP-1994.2",
+  "version": "0.0.2-perf-rolldown-optimization-GASP-1994.3",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
