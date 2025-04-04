@@ -1,6 +1,6 @@
 {
   "name": "gasp-sdk",
-  "version": "0.0.2-feature-gasp-node-multiswap-mods.25",
+  "version": "0.0.2-feature-gasp-node-multiswap-mods.26",
   "description": "GASP SDK",
   "type": "module",
   "module": "./index.js",
@@ -23,10 +23,10 @@
     "@polkadot/api": "^11.1.1"
   },
   "devDependencies": {
-    "gasp-types": "0.0.2-feature-gasp-node-multiswap-mods.27"
+    "gasp-types": "0.0.2-feature-gasp-node-multiswap-mods.28"
   },
   "dependencies": {
-    "gasp-type-definitions": "0.0.2-feature-gasp-node-multiswap-mods.27",
+    "gasp-type-definitions": "0.0.2-feature-gasp-node-multiswap-mods.28",
     "big.js": "6.2.1",
     "tslib": "^2.3.0",
     "tslog": "4.8.2",
