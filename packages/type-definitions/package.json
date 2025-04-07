@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-eth-rollup-develop.233",
+  "version": "0.0.2-feat-GASP-1967-track-withdrawal-ferried.0",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
