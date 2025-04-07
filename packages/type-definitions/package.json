@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-feat-GASP-1967-start-tracking-withdrawal-ferried-event.0",
+  "version": "0.0.2-feat-GASP-1967-start-tracking-withdrawal-ferried-event.1",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
