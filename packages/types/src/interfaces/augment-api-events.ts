@@ -141,6 +141,7 @@ declare module '@polkadot/api-base/types/events' {
       FeeLocked: AugmentedEvent<ApiType, [who: SpRuntimeAccountAccountId20, lockAmount: u128, totalLocked: u128], { who: SpRuntimeAccountAccountId20, lockAmount: u128, totalLocked: u128 }>;
       FeeLockMetadataUpdated: AugmentedEvent<ApiType, []>;
       FeeLockUnlocked: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, u128]>;
+      TokenValueThresholdsUpdated: AugmentedEvent<ApiType, []>;
       /**
        * Generic event
        **/

@@ -313,6 +313,7 @@ declare module '@polkadot/api-base/types/submittable' {
     feeLock: {
       unlockFee: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
       updateFeeLockMetadata: AugmentedSubmittable<(periodLength: Option<u32> | null | Uint8Array | u32 | AnyNumber, feeLockAmount: Option<u128> | null | Uint8Array | u128 | AnyNumber, swapValueThreshold: Option<u128> | null | Uint8Array | u128 | AnyNumber, shouldBeWhitelisted: Option<Vec<ITuple<[u32, bool]>>> | null | Uint8Array | Vec<ITuple<[u32, bool]>> | ([u32 | AnyNumber | Uint8Array, bool | boolean | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [Option<u32>, Option<u128>, Option<u128>, Option<Vec<ITuple<[u32, bool]>>>]>;
+      updateTokenValueThreshold: AugmentedSubmittable<(tokenValueThresholds: Vec<ITuple<[u32, Option<u128>]>> | ([u32 | AnyNumber | Uint8Array, Option<u128> | null | Uint8Array | u128 | AnyNumber])[]) => SubmittableExtrinsic<ApiType>, [Vec<ITuple<[u32, Option<u128>]>>]>;
       /**
        * Generic tx
        **/
