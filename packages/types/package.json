@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-eth-rollup-develop.233",
+  "version": "0.0.2-feat-stash-add-sonic-support.0",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
