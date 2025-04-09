@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-feat-GASP-2149-add-support-for-sonic.0",
+  "version": "0.0.2-feat-GASP-2149-add-support-for-sonic.1",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
