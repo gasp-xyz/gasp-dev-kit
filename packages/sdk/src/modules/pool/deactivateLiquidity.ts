@@ -1,15 +1,20 @@
 import { Signer } from '../../types/common';
 import { FeeMetadata } from '../core/Fee';
-import { ModuleContext, SubmitHandler, SubmittableTx } from '../core/BaseModule';
+import {
+  ModuleContext,
+  SubmitHandler,
+  SubmittableTx,
+} from '../core/BaseModule';
+import BN from 'bn.js';
 
 export interface DeactivateNativeRewardsLiquidityParams {
   asset: string;
   account: string;
-  amount: string;
+  amount: BN | string;
 }
 
 export interface DeactivateNativeRewardsLiquidityResult extends FeeMetadata {
-  amount: string;
+  amount: BN;
   asset: string;
 }
 
@@ -33,7 +38,7 @@ export const deactivateNativeRewardsLiquidity = (
     account,
     parseResponse: (data) => ({
       asset: data[1].toString(),
-      amount: data[2].toString(),
+      amount: new BN(data[2]),
     }),
     eventType: api.events.proofOfStake.LiquidityDeactivated,
   });

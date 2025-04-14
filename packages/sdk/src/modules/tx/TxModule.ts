@@ -1,5 +1,5 @@
 import { Signer } from '../../types/common';
-import { BaseModule } from './BaseModule';
+import { BaseModule } from '../core/BaseModule';
 import { Tx, TxOptions } from './Tx';
 
 interface CreateTxModuleParams {

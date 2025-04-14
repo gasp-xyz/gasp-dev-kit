@@ -4,9 +4,9 @@ import { GenericExtrinsic } from '@polkadot/types';
 import { ExtrinsicSubscriptionData, Signer } from '../../types/common';
 import { FrameSystemEventRecord } from '@polkadot/types/lookup';
 import { GaspError } from '../../error/GaspError';
-import { ExtrinsicTracker } from './ExtrinsicTracker';
-import { Logger } from './Logger';
-import { FeeInfo } from './Fee';
+import { ExtrinsicTracker } from '../core/ExtrinsicTracker';
+import { Logger } from '../core/Logger';
+import { FeeInfo } from '../core/Fee';
 import BN from 'bn.js';
 
 export interface TxOptions {

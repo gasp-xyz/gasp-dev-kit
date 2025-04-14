@@ -81,12 +81,10 @@ export class BaseModule {
       api,
       logger,
     };
-
-    this.signer = sdk.signer;
   }
 
   protected getSigner(customSigner?: Signer): Signer {
-    const config = customSigner ?? this.signer;
+    const config = customSigner ?? this.context.sdk.signer;
 
     if (!config) {
       throw new GaspError('No signer provided', GaspError.error.ARGS_ERROR);

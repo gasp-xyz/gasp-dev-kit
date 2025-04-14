@@ -52,8 +52,6 @@ import { Gasp } from 'gasp-sdk';
 
 const sdk = await Gasp.create('wss://rollup-prod-rpc.gasp.xyz/', {
     debug: true,
-    // Optionally, pass a signer so it's not required in every call
-    signer,
     // Optionally, pass a custom logger instance if needed
     logger,
 }).catch((e) => {
@@ -65,7 +63,7 @@ const sdk = await Gasp.create('wss://rollup-prod-rpc.gasp.xyz/', {
 
 #### Signer
 
-The SDK allows you to pass a signer instance during initialization. This is useful if you want to avoid passing the signer for every call. The signer should implement the necessary methods for signing transactions.
+The SDK allows you to pass a signer instance after the initialization. This is useful if you want to avoid passing the signer for every call. The signer should implement the necessary methods for signing transactions.
 
 To use signer provided by the SDK, you can initialize it as follows:
 
@@ -73,12 +71,11 @@ To use signer provided by the SDK, you can initialize it as follows:
 import { Gasp } from 'gasp-sdk';
 
 const pk = '...';
-const signer = Gasp.defaultSigner.create(pk);
-
-const sdk = await Gasp.create('...', { signer });
+const sdk = await Gasp.create('wss://rollup-prod-rpc.gasp.xyz/');
+sdk.setSigner(sdk.signers.ethers.create(pk))
 ```
 
-In case you want to use your own signer, you can implement the `Signer` interface and pass it to the SDK. Example implementation can be found [here](./packages/sdk/src/modules/core/EthersSigner.ts).
+In case you want to use your own signer, you can implement the `Signer` interface and pass it to the SDK. Example implementation can be found [here](./packages/sdk/src/modules/signer/EthersSigner.ts).
 
 #### Logger
 
@@ -130,9 +127,9 @@ The Pool module enables operations related to liquidity pools
 ```ts
 import { Gasp, PoolType } from 'gasp-sdk';
 
-const sdk = await Gasp.create('wss://rollup-prod-rpc.gasp.xyz/', {
-    signer: Gasp.defaultSigner.create('...'),
-});
+const sdk = await Gasp.create('wss://rollup-prod-rpc.gasp.xyz/');
+
+sdk.setSigner(sdk.signers.ethers.create('...'));
 
 // Retrieve pools information
 const pools = await sdk.pool.getPools();
@@ -166,7 +163,7 @@ import { Gasp, PoolType } from 'gasp-sdk';
 
 const sdk = await Gasp.create('wss://rollup-prod-rpc.gasp.xyz/');
 
-const signer = Gasp.defaultSigner.create('...');
+const signer = sdk.signers.ethers.create('...');
 
 // Create a new pool
 const result = await sdk.rewards

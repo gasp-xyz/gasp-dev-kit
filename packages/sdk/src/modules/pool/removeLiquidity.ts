@@ -5,20 +5,21 @@ import {
   SubmittableTx,
 } from '../core/BaseModule';
 import { Signer } from '../../types/common';
+import BN from 'bn.js';
 
 export interface RemoveLiquidityParams {
   pool: string;
   amount: string;
-  minFirstAssetAmount: string;
-  minSecondAssetAmount: string;
+  minFirstAssetAmount: BN | string;
+  minSecondAssetAmount: BN | string;
   account: string;
 }
 
 export interface RemoveLiquidityResult extends FeeMetadata {
   pool: string;
-  removedLpAmount: string;
-  mintedFirstAssetAmount: string;
-  mintedSecondAssetAmount: string;
+  removedLpAmount: BN;
+  mintedFirstAssetAmount: BN;
+  mintedSecondAssetAmount: BN;
 }
 
 export const removeLiquidity = (
@@ -49,9 +50,9 @@ export const removeLiquidity = (
     account,
     parseResponse: (data) => ({
       pool: data.poolId.toString(),
-      removedLpAmount: data.burnedAmount.toString(),
-      mintedFirstAssetAmount: data.amounts[0].toString(),
-      mintedSecondAssetAmount: data.amounts[1].toString(),
+      removedLpAmount: new BN(data.burnedAmount),
+      mintedFirstAssetAmount: new BN(data.amounts[0]),
+      mintedSecondAssetAmount: new BN(data.amounts[1]),
     }),
     eventType: api.events.market.LiquidityBurned,
   });

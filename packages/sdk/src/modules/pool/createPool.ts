@@ -7,13 +7,14 @@ import {
   SubmitHandler,
   SubmittableTx,
 } from '../core/BaseModule';
+import BN from 'bn.js';
 
 export interface CreatePoolParams {
   type: PoolType;
   firstAssetId: string;
-  firstAssetAmount: string;
+  firstAssetAmount: BN | string;
   secondAssetId: string;
-  secondAssetAmount: string;
+  secondAssetAmount: BN | string;
   account: string;
 }
 

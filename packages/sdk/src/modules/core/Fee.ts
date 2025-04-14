@@ -1,8 +1,9 @@
 import { FrameSystemEventRecord } from '@polkadot/types/lookup';
+import BN from 'bn.js';
 
 export interface FeeInfo {
   asset: string;
-  amount: string;
+  amount: BN;
 }
 
 export interface FeeMetadata {
@@ -23,7 +24,7 @@ export class Fee {
 
     return {
       asset: asset.toString(),
-      amount: amount.toString(),
+      amount: new BN(amount.toString()),
     };
   }
 }

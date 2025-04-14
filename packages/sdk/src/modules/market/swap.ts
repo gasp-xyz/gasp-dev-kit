@@ -4,13 +4,14 @@ import { AtomicSwap } from './types';
 import { ModuleContext, ResponseHandler } from '../core/BaseModule';
 import { Signer } from '../../types/common';
 import { GaspError } from '../../error/GaspError';
+import BN from 'bn.js';
 
 export interface SwapParams {
   account: string;
   assetIn: string;
   assetOut: string;
-  amountIn: string;
-  minAmountOut?: string;
+  amountIn: BN | string;
+  minAmountOut?: BN | string;
   route?: string[];
 }
 
@@ -75,8 +76,8 @@ export const swap = async (
         kind: swap.kind.toString() as PoolType,
         assetIn: swap.amountIn.toString(),
         assetOut: swap.amountOut.toString(),
-        amountIn: swap.amountIn.toString(),
-        amountOut: swap.amountOut.toString(),
+        amountIn: new BN(swap.amountIn),
+        amountOut: new BN(swap.amountOut),
       })),
     })
   );

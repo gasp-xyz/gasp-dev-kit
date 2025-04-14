@@ -1,8 +1,8 @@
 import { GaspError } from '../../error/GaspError';
 import { InvestedPool } from './types';
 import { PalletProofOfStakeRewardInfo } from '@polkadot/types/lookup';
-import { BN } from '@polkadot/util';
 import { ModuleContext } from '../core/BaseModule';
+import BN from 'bn.js';
 
 export interface GetInvestedPoolsParams {
   account: string;
@@ -63,12 +63,11 @@ export const getInvestedPools = async (
       );
     }
 
-    const activatedTokens = rewardsInfo.activatedAmount.toString();
+    const activatedTokens = new BN(rewardsInfo.activatedAmount);
 
     const nonActivatedTokens = new BN(balance)
       .add(reserveStatus.stakedUnactivatedReserves)
-      .add(reserveStatus.unspentReserves)
-      .toString();
+      .add(reserveStatus.unspentReserves);
 
     return {
       ...pool,

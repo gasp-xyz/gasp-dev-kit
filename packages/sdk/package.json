@@ -23,6 +23,7 @@
     "gasp-type-definitions": "0.0.2-eth-rollup-develop.246",
     "@polkadot/api": "11.1.1",
     "big.js": "6.2.1",
+    "bn.js": "^5.2.1",
     "ethers": "^6.13.5",
     "gasp-types": "0.0.2-eth-rollup-develop.242",
     "tslib": "^2.3.0",
@@ -40,5 +41,8 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "private": false
+  "private": false,
+  "optionalDependencies": {
+    "@wagmi/core": "^2.16.7"
+  }
 }

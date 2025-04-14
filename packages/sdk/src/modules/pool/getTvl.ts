@@ -1,5 +1,5 @@
 import { GaspError } from '../../error/GaspError';
-import { BN } from '@polkadot/util';
+import BN from 'bn.js';
 import { ModuleContext } from '../core/BaseModule';
 
 export interface GetPoolTvlParams {
@@ -34,7 +34,7 @@ export const getTvl = async (
   });
 
   const parsedTvl = poolAssets.map<[string, BN]>((asset, index) => {
-    return [asset.toString(), tvl[index].toBn()];
+    return [asset.toString(), new BN(tvl[index])];
   });
 
   return {

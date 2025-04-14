@@ -1,6 +1,7 @@
 import { Pool } from './types';
 import { ModuleContext } from '../core/BaseModule';
 import { GaspError } from '../../error/GaspError';
+import BN from 'bn.js';
 
 export interface GetPoolParams {
   pool: string;
@@ -48,7 +49,7 @@ export const getPool = async (
     isPromoted: promotedPoolIds.has(pool.toString()),
     firstAsset: pool[0].toString(),
     secondAsset: pool[1].toString(),
-    firstAssetAmount: amounts[0].toString(),
-    secondAssetAmount: amounts[1].toString(),
+    firstAssetAmount: new BN(amounts[0]),
+    secondAssetAmount: new BN(amounts[1]),
   };
 };

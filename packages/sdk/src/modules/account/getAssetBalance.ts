@@ -1,6 +1,7 @@
 import { GaspError } from '../../error/GaspError';
 import { Balance } from './types';
 import { ModuleContext } from '../core/BaseModule';
+import { BN } from 'bn.js';
 
 export interface GetAssetBalanceParams {
   account: string;
@@ -22,9 +23,9 @@ export const getAssetBalance = async (
   return {
     asset,
     balance: {
-      free: res.free.toString(),
-      reserved: res.reserved.toString(),
-      frozen: res.frozen.toString(),
+      free: new BN(res.free),
+      reserved: new BN(res.reserved),
+      frozen: new BN(res.frozen),
     },
   };
 };

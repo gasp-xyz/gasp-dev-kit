@@ -1,6 +1,7 @@
 import { GaspError } from '../../error/GaspError';
 import { Pool } from './types';
 import { ModuleContext } from '../core/BaseModule';
+import BN from 'bn.js';
 
 export const getPools = async ({ api }: ModuleContext): Promise<Pool[]> => {
   const [poolIds, lpAssets, amounts, promoted] = await Promise.all([
@@ -46,10 +47,11 @@ export const getPools = async ({ api }: ModuleContext): Promise<Pool[]> => {
     const poolId = key.args[0].toString();
     const tokens = value.unwrapOr(null);
     if (!tokens) {
-      throw new GaspError('Error parsing pools', GaspError.error.PARSING_ERROR, [
-        key.toHuman(),
-        value.toHuman(),
-      ]);
+      throw new GaspError(
+        'Error parsing pools',
+        GaspError.error.PARSING_ERROR,
+        [key.toHuman(), value.toHuman()]
+      );
     }
 
     const firstAsset = tokens[0].toString();
@@ -61,9 +63,11 @@ export const getPools = async ({ api }: ModuleContext): Promise<Pool[]> => {
       id: poolId,
       isPromoted,
       firstAsset,
-      firstAssetAmount: poolAmounts.get(poolId)?.get(firstAsset) || '0',
+      firstAssetAmount: new BN(poolAmounts.get(poolId)?.get(firstAsset) ?? '0'),
       secondAsset,
-      secondAssetAmount: poolAmounts.get(poolId)?.get(secondAsset) || '0',
+      secondAssetAmount: new BN(
+        poolAmounts.get(poolId)?.get(secondAsset) ?? '0'
+      ),
     };
   });
 

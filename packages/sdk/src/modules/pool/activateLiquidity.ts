@@ -9,16 +9,17 @@ import {
   ActivateLiquidityReserveSource,
   ReserveSource,
 } from '../core/ReserveSource';
+import BN from 'bn.js';
 
 export interface ActivateNativeRewardsLiquidityParams {
   asset: string;
   account: string;
-  amount: string;
+  amount: BN | string;
   balanceFrom?: ActivateLiquidityReserveSource;
 }
 
 export interface ActivateNativeRewardsLiquidityResult extends FeeMetadata {
-  amount: string;
+  amount: BN;
   asset: string;
 }
 
@@ -48,7 +49,7 @@ export const activateNativeRewardsLiquidity = (
     account,
     parseResponse: (data) => ({
       asset: data[1].toString(),
-      amount: data[2].toString(),
+      amount: new BN(data[2]),
     }),
     eventType: api.events.proofOfStake.LiquidityActivated,
   });

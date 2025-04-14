@@ -5,19 +5,20 @@ import {
   SubmitHandler,
   SubmittableTx,
 } from '../core/BaseModule';
+import BN from 'bn.js';
 
 export interface TransferParams {
   sender: string;
   recipient: string;
   asset: string;
-  amount: string;
+  amount: BN | string;
 }
 
 export interface TransferResult extends FeeMetadata {
   asset: string;
   from: string;
   to: string;
-  amount: string;
+  amount: BN;
 }
 
 export const transfer = (
@@ -36,7 +37,7 @@ export const transfer = (
       asset: data.currencyId.toString(),
       from: data.from.toString(),
       to: data.to.toString(),
-      amount: data.amount.toString(),
+      amount: new BN(data.amount),
     }),
     eventType: api.events.tokens.Transfer,
   });

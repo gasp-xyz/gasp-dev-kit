@@ -5,20 +5,21 @@ import {
   SubmitHandler,
   SubmittableTx,
 } from '../core/BaseModule';
+import BN from 'bn.js';
 
 export interface AddLiquidityParams {
   pool: string;
   asset: string;
-  amount: string;
-  maxOtherAssetAmount: string;
+  amount: BN | string;
+  maxOtherAssetAmount: BN | string;
   account: string;
 }
 
 export interface AddLiquidityResult extends FeeMetadata {
   pool: string;
-  firstAssetAmount: string;
-  secondAssetAmount: string;
-  lpMinted: string;
+  firstAssetAmount: BN;
+  secondAssetAmount: BN;
+  lpMinted: BN;
 }
 
 export const addLiquidity = (
@@ -43,9 +44,9 @@ export const addLiquidity = (
     account,
     parseResponse: (data) => ({
       pool: data.poolId.toString(),
-      firstAssetAmount: data.amountsProvided[0].toString(),
-      secondAssetAmount: data.amountsProvided[1].toString(),
-      lpMinted: data.lpTokenMinted.toString(),
+      firstAssetAmount: new BN(data.amountsProvided[0]),
+      secondAssetAmount: new BN(data.amountsProvided[1]),
+      lpMinted: new BN(data.lpTokenMinted),
     }),
     eventType: api.events.market.LiquidityMinted,
   });

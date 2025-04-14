@@ -1,16 +1,17 @@
 import { GaspError } from '../../error/GaspError';
 import { ModuleContext } from '../core/BaseModule';
+import BN from 'bn.js';
 
 export interface CalculateBuyPriceParams {
-  inputReserve: string;
-  outputReserve: string;
-  amount: string;
+  inputReserve: BN | string;
+  outputReserve: BN | string;
+  amount: BN | string;
 }
 
 export const calculateBuyPrice = async (
   { api }: ModuleContext,
   { inputReserve, outputReserve, amount }: CalculateBuyPriceParams
-): Promise<string> => {
+): Promise<BN> => {
   const price = await api.rpc.xyk
     .calculate_buy_price(inputReserve, outputReserve, amount)
     .catch((e) => {
@@ -21,5 +22,5 @@ export const calculateBuyPrice = async (
       );
     });
 
-  return price.toString();
+  return new BN(price);
 };

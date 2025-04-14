@@ -2,6 +2,7 @@ import { Signer } from '../../types/common';
 import { FeeMetadata } from '../core/Fee';
 import { ModuleContext } from '../core/BaseModule';
 import { GaspError } from '../../error/GaspError';
+import BN from 'bn.js';
 
 export interface ClaimAllNativeRewardsParams {
   account: string;
@@ -9,7 +10,7 @@ export interface ClaimAllNativeRewardsParams {
 
 export interface ClaimAllNativeRewardsResult extends FeeMetadata {
   pool: string;
-  amount: string;
+  amount: BN;
 }
 
 export const claimAllNativeRewards = async (

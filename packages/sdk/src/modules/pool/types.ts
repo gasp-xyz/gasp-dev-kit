@@ -1,4 +1,4 @@
-import { BN } from '@polkadot/util';
+import BN from 'bn.js';
 
 export interface PoolTvl {
   pool: string;
@@ -12,14 +12,14 @@ export enum PoolType {
 
 export interface Pool {
   firstAsset: string;
-  firstAssetAmount: string;
+  firstAssetAmount: BN;
   secondAsset: string;
-  secondAssetAmount: string;
+  secondAssetAmount: BN;
   id: string;
   isPromoted: boolean;
 }
 
 export interface InvestedPool extends Pool {
-  activatedTokens: string;
-  nonActivatedTokens: string;
+  activatedTokens: BN;
+  nonActivatedTokens: BN;
 }

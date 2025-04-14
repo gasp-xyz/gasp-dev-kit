@@ -1,14 +1,15 @@
 import type { ISubmittableResult } from '@polkadot/types/types';
-
 import type { ExtrinsicStatus } from '@polkadot/types/interfaces';
+import type { GenericExtrinsic } from '@polkadot/types';
+
+import { TxSignParams } from '../modules';
 
 export interface ExtrinsicSubscriptionData extends Partial<ISubmittableResult> {
   status: ExtrinsicStatus;
 }
 
 export interface Signer {
-  signTypedData: (data: any) => Promise<string>;
-  config?: SignerConfig;
+  sign: (params: TxSignParams) => Promise<GenericExtrinsic>;
 }
 
 interface SignerConfigBase {

@@ -8,13 +8,12 @@ import { RewardsModule } from './modules/rewards/Rewards';
 import { RolldownModule } from './modules/rolldown/Rolldown';
 import { Signer } from './types/common';
 import { GaspLogger, Logger, emptyLogger } from './modules/core/Logger';
-import { TxModule } from './modules/core/TxModule';
-import { EthersSigner } from './modules/core/EthersSigner';
+import { TxModule } from './modules/tx/TxModule';
 import { GaspError } from './error/GaspError';
+import { SignerModule } from './modules/signer/Signer';
 
 interface SDKConfig {
   debug?: boolean;
-  signer?: Signer;
   logger?: Logger;
 }
 
@@ -27,12 +26,13 @@ export class Gasp {
   public readonly rolldown: RolldownModule;
 
   public readonly tx: TxModule;
+  public readonly signers: SignerModule;
 
   public readonly api: ApiPromise;
 
-  static readonly defaultSigner = EthersSigner;
+  public signer?: Signer;
 
-  constructor(api: ApiPromise, logger: Logger, readonly signer?: Signer) {
+  private constructor(api: ApiPromise, logger: Logger) {
     this.pool = new PoolModule(this, api, logger);
     this.account = new AccountModule(this, api, logger);
     this.asset = new AssetModule(this, api, logger);
@@ -41,8 +41,13 @@ export class Gasp {
     this.rolldown = new RolldownModule(this, api, logger);
 
     this.tx = new TxModule(this, api, logger);
+    this.signers = new SignerModule(this, api, logger);
 
     this.api = api;
+  }
+
+  setSigner(signer: Signer) {
+    this.signer = signer;
   }
 
   static async create(_urls: string[] | string, config?: SDKConfig) {
@@ -60,6 +65,6 @@ export class Gasp {
       ? config?.logger ?? new GaspLogger()
       : emptyLogger;
 
-    return new Gasp(api, logger, config?.signer);
+    return new Gasp(api, logger);
   }
 }

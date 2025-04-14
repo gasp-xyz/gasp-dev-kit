@@ -1,8 +1,10 @@
+import BN from 'bn.js';
+
 export interface Balance {
   asset: string;
   balance: {
-    free: string;
-    reserved: string;
-    frozen: string;
+    free: BN;
+    reserved: BN;
+    frozen: BN;
   };
 }

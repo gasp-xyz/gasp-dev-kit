@@ -5,6 +5,7 @@ import {
   SubmitHandler,
   SubmittableTx,
 } from '../core/BaseModule';
+import BN from 'bn.js';
 
 export type Chain = 'Arbitrum' | 'Ethereum' | 'Base' | 'Sonic';
 
@@ -14,8 +15,8 @@ export interface WithdrawParams {
   recipient?: string;
   // TODO
   chain: Chain;
-  amount: string;
-  ferryTip?: string;
+  amount: BN | string;
+  ferryTip?: BN | string;
 }
 
 export interface WithdrawResult extends FeeMetadata {
@@ -23,9 +24,9 @@ export interface WithdrawResult extends FeeMetadata {
   requestId: string;
   recipient: string;
   tokenAddress: string;
-  amount: string;
+  amount: BN;
   hash: string;
-  ferryTip: string;
+  ferryTip: BN;
 }
 
 export const withdraw = (
@@ -61,9 +62,9 @@ export const withdraw = (
       requestId: data.requestId.toString(),
       recipient: data.recipient.toString(),
       tokenAddress: data.tokenAddress.toString(),
-      amount: data.amount.toString(),
+      amount: new BN(data.amount),
       hash: data.hash_.toString(),
-      ferryTip: data.ferryTip.toString(),
+      ferryTip: new BN(data.ferryTip),
     }),
     eventType: api.events.rolldown.WithdrawalRequestCreated,
   });

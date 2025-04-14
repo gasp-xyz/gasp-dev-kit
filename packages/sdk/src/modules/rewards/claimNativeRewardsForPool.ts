@@ -5,6 +5,7 @@ import {
   SubmitHandler,
   SubmittableTx,
 } from '../core/BaseModule';
+import BN from 'bn.js';
 
 export interface ClaimNativeRewardsForPoolParams {
   pool: string;
@@ -13,7 +14,7 @@ export interface ClaimNativeRewardsForPoolParams {
 
 export interface ClaimNativeRewardsForPoolResult extends FeeMetadata {
   pool: string;
-  amount: string;
+  amount: BN;
 }
 
 export const claimNativeRewardsForPool = (
@@ -33,7 +34,7 @@ export const claimNativeRewardsForPool = (
     account,
     parseResponse: ([, id, amount]) => ({
       pool: id.toString(),
-      amount: amount.toString(),
+      amount: new BN(amount),
     }),
     eventType: api.events.proofOfStake.RewardsClaimed,
   });

@@ -86,7 +86,12 @@ export class AssetModule extends BaseModule {
    * console.log(result);
    *  ```
    */
-  transfer(params: TransferParams, signer: Signer) {
-    return transfer(this.context, params, signer, this.submitTx);
+  transfer(params: TransferParams, signer?: Signer) {
+    return transfer(
+      this.context,
+      params,
+      this.getSigner(signer),
+      this.submitTx
+    );
   }
 }

@@ -1,10 +1,11 @@
 import { PoolType } from "../pool";
+import BN from "bn.js";
 
 export interface AtomicSwap {
   poolId: string;
   kind: PoolType;
   assetIn: string;
   assetOut: string;
-  amountIn: string;
-  amountOut: string;
+  amountIn: BN;
+  amountOut: BN;
 }
