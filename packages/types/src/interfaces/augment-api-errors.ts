@@ -575,9 +575,17 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       FunctionNotAvailableForThisToken: AugmentedError<ApiType>;
       /**
+       * Insufficient input amount
+       **/
+      InsufficientInputAmount: AugmentedError<ApiType>;
+      /**
        * Insufficient output amount does not meet min requirements
        **/
       InsufficientOutputAmount: AugmentedError<ApiType>;
+      /**
+       * Math Overflow
+       **/
+      MathOverflow: AugmentedError<ApiType>;
       /**
        * Input asset id is not connected with output asset id for given pools
        **/
@@ -599,13 +607,29 @@ declare module '@polkadot/api-base/types/errors' {
        **/
       NotAPromotedPool: AugmentedError<ApiType>;
       /**
+       * Not enough assets for fee lock
+       **/
+      NotEnoughAssetsForFeeLock: AugmentedError<ApiType>;
+      /**
+       * Not enough assets for fees,
+       **/
+      NotEnoughAssetsForFees: AugmentedError<ApiType>;
+      /**
        * Pool is not paired with native currency id
        **/
       NotPairedWithNativeAsset: AugmentedError<ApiType>;
       /**
+       * Swap prevalidation
+       **/
+      SwapPrevalidation: AugmentedError<ApiType>;
+      /**
        * Trading blocked by maintenance mode
        **/
       TradingBlockedByMaintenanceMode: AugmentedError<ApiType>;
+      /**
+       * Unexpected failure
+       **/
+      UnexpectedFailure: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
@@ -689,6 +713,7 @@ declare module '@polkadot/api-base/types/errors' {
       InsufficientBalance: AugmentedError<ApiType>;
       InvalidSchedule: AugmentedError<ApiType>;
       MathError: AugmentedError<ApiType>;
+      NoSuchPool: AugmentedError<ApiType>;
       NoWritingSameValue: AugmentedError<ApiType>;
       PendingCandidateRequestAlreadyExists: AugmentedError<ApiType>;
       PendingCandidateRequestNotDueYet: AugmentedError<ApiType>;
@@ -910,6 +935,10 @@ declare module '@polkadot/api-base/types/errors' {
        * Asset does not exist
        **/
       AssetDoesNotExist: AugmentedError<ApiType>;
+      /**
+       * EqAssets exceeded bound
+       **/
+      EqAssetExceededBound: AugmentedError<ApiType>;
       /**
        * Excesive output amount does not meet max requirements
        **/
