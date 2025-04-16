@@ -19,19 +19,17 @@
     "type": "git",
     "url": "https://github.com/mangata-finance/gasp-dev-kit"
   },
-  "peerDependencies": {
-    "@polkadot/api": "^11.1.1"
-  },
-  "devDependencies": {
-    "gasp-types": "0.0.2-eth-rollup-develop.241"
-  },
   "dependencies": {
     "gasp-type-definitions": "0.0.2-eth-rollup-develop.246",
+    "@polkadot/api": "11.1.1",
     "big.js": "6.2.1",
+    "bn.js": "^5.2.1",
+    "ethers": "^6.13.5",
+    "gasp-types": "0.0.2-eth-rollup-develop.242",
     "tslib": "^2.3.0",
     "tslog": "4.8.2",
-    "viem": "^2.17.4",
-    "wagmi": "^2.10.10"
+    "tsup": "^7.2.0",
+    "viem": "^2.17.4"
   },
   "exports": {
     ".": {
@@ -43,5 +41,8 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "private": false
+  "private": false,
+  "optionalDependencies": {
+    "@wagmi/core": "^2.16.7"
+  }
 }

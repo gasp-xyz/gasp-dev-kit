@@ -1,482 +1,237 @@
-<h2 align="center">Mangata Finance SDK</h2>
+<h2 align="center" id="introduction">Gasp SDK</h2>
 
 <p align="center">
-    The Mangata SDK is comprehensive toolset designed for facilitating seamless communication with the Mangata Substrate node.
+    Gasp SDK is comprehensive toolset designed for facilitating seamless communication with the Gasp node.
 </p>
 
-![Artwork](https://blog.mangata.finance/assets/posts/themis-cover.png)
+![npm](https://img.shields.io/npm/v/gasp-sdk)
+![Issues](https://img.shields.io/github/issues/mangata-finance/gasp-dev-kit)
+![Pull Request](https://img.shields.io/github/issues-pr/mangata-finance/gasp-dev-kit)
+![GitHub last commit](https://img.shields.io/github/last-commit/mangata-finance/gasp-dev-kit)
 
-![npm](https://img.shields.io/npm/v/%40mangata-finance%2Fsdk)
-![Issues](https://img.shields.io/github/issues/mangata-finance/mangata-dev-kit)
-![Pull Request](https://img.shields.io/github/issues-pr/mangata-finance/mangata-dev-kit)
-![GitHub last commit](https://img.shields.io/github/last-commit/mangata-finance/mangata-dev-kit)
-![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fmangata-finance%2Fmangata-dev-kit%2Fbadge%3Fref%3Ddevelop&style=flat)
+## Table of Contents
 
-# Getting Started
+-   [Introduction](#introduction)
+-   [Table of Contents](#table-of-contents)
+-   [Installation & Setup](#installation--setup)
+-   [Quick Start / Getting Started](#quick-start--getting-started)
+-   [Usage & Examples](#usage--examples)
+-   [Core SDK Components & Available Features](#core-sdk-components--available-features)
 
-The Mangata SDK is the TypeScript library that offers a wide range of convenient methods for effortlessly buying and selling assets on the Mangata DEX. Its primary objective is to streamline the development process for client applications, specifically targeting algorithmic traders and frontend interface builders. By utilizing the Mangata SDK, developers can significantly reduce time and effort required to integrate with the platform.
+## Installation & Setup
 
-## Installation
+### Supported Languages & Frameworks
 
-```sh
-# with npm
-npm i @mangata-finance/sdk
+The Gasp SDK is built for **TypeScript/JavaScript** and is designed to work seamlessly in both Node.js and browser environments. All examples are provided in TypeScript, but you can easily use them in JavaScript as well.
 
-# with yarn
-yarn add @mangata-finance/sdk
+### Prerequisites
+
+Before installing the SDK, ensure you have the following:
+
+-   A supported version of [Node.js](https://nodejs.org/) (v20 or above) installed.
+-   A package manager such as [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/).
+
+### Installation
+
+You can install the SDK via npm or yarn:
+
+```bash
+## Using npm
+npm install gasp-sdk
+
+## Using yarn
+yarn add gasp-sdk
 ```
 
-## Migration from v1 to v2
+### Setup
 
-To migrate from v1 to v2, certain modifications need to be made. This guide aims to help you refactor your codebase. We have divided the methods into specific groups:
+After installation, import and initialize the SDK in your project:
 
-1. xTokens
-2. xyk
-3. rpc
-4. tokens
-5. submitableExtrinsic
-6. query
-7. fee
-8. util
+```ts
+import { Gasp } from 'gasp-sdk';
 
-The **buyAsset** and **sellAsset** methods have been removed and replaced by **multiswapBuyAsset** and **multiswapSellAsset** respectively.
+const sdk = await Gasp.create('wss://rollup-prod-rpc.gasp.xyz/', {
+    debug: true,
+    // Optionally, pass a custom logger instance if needed
+    logger,
+}).catch((e) => {
+    console.error('Error creating Gasp SDK instance:', e);
+});
+```
 
-We also made a change by transitioning from using arguments for functions to using objects as parameters.
-Example:
+### Additional Configuration
 
-```js
-// V1:
-await instance.createPool(
-  testUser,
-  firstTokenId,
-  new BN("10000000000000000000000"),
-  secondTokenId,
-  new BN("10000000000000000000000"),
-  txOptions: {
-    extrinsicStatus: (data) => {
-      console.log(data)
-    }
-  }
-);
+#### Signer
 
+The SDK allows you to pass a signer instance after the initialization. This is useful if you want to avoid passing the signer for every call. The signer should implement the necessary methods for signing transactions.
 
-// V2:
-const args: CreatePool = {
-  account: testUser,
-  firstTokenId: firstTokenId!,
-  secondTokenId: secondTokenId!,
-  firstTokenAmount: new BN("10000000000000000000000"),
-  secondTokenAmount: new BN("10000000000000000000000"),
-  txOptions: {
-    extrinsicStatus: (data) => {
-      console.log(data)
-    }
-  }
+To use signer provided by the SDK, you can initialize it as follows:
+
+```ts
+import { Gasp } from 'gasp-sdk';
+
+const pk = '...';
+const sdk = await Gasp.create('wss://rollup-prod-rpc.gasp.xyz/');
+sdk.setSigner(sdk.signers.ethers.create(pk))
+```
+
+In case you want to use your own signer, you can implement the `Signer` interface and pass it to the SDK. Example implementation can be found [here](./packages/sdk/src/modules/signer/EthersSigner.ts).
+
+#### Logger
+
+The SDK uses a logger to output debug and error messages. When you enable debug mode (by setting `debug: true`), the SDK will output detailed logs. By default, if you don't provide a custom logger, the SDK uses its built-in logger.
+
+If you prefer to integrate with your own logging system, you can supply a custom logger by implementing the necessary logging methods (e.g., `debug`, `error`) and passing it via the `logger` property.
+
+Example with a custom logger:
+
+```javascript
+const customLogger = {
+    debug: (...args) => console.log('[Custom Debug]', ...args),
+    error: (...args) => console.error('[Custom Error]', ...args),
+    // Implement other logging methods as needed.
 };
-await instance.xyk.createPool(args);
+
+const config = {
+    debug: true,
+    logger: customLogger,
+};
+
+const sdk = await Gasp.create('...', config);
 ```
 
-We no longer support the implementation of depositing to Mangata within the SDK. However, we do provide the necessary raw methods for depositing, which should be implemented separately outside of the SDK. For specific examples of how to deposit to Mangata using the SDK, please refer to the provided examples.
+## Usage & Examples
 
-To obtain an instance of the Mangata node, please follow this step:
+Once you have successfully created an instance of the Gasp SDK, you can access its different modules to interact with the Gasp node. Below are some example use cases to help you get started.
 
-```js
-// V1:
-const mangata = Mangata.getInstance(["wss://kusama-archive.mangata.online"]);
+### Accessing the Account Module
 
-// V2:
-import { MangataInstance } from "@mangata-finance/sdk"
-const mangata: MangataInstance = Mangata.instance(["wss://kusama-archive.mangata.online"]);
+The Account module allows you to manage and retrieve account-related information.
+
+```ts
+// Retrieve account balances
+import { Gasp } from 'gasp-sdk';
+
+const sdk = await Gasp.create('wss://rollup-prod-rpc.gasp.xyz/');
+
+const account = '0x...';
+const balances = await sdk.account.getBalances({ account });
+
+console.log('balances', balances);
 ```
 
-Method **getAmountOfTokenIdInPool** has been renamed to **getAmountOfTokensInPool**
+### Working with the Pool Module
 
-```js
-// V1:
-const amount = await mangata.getAmountOfTokenIdInPool("0", "4")
+The Pool module enables operations related to liquidity pools
 
-// V2:
-const amount = await mangata.query.getAmountOfTokensInPool("0", "4")
+```ts
+import { Gasp, PoolType } from 'gasp-sdk';
+
+const sdk = await Gasp.create('wss://rollup-prod-rpc.gasp.xyz/');
+
+sdk.setSigner(sdk.signers.ethers.create('...'));
+
+// Retrieve pools information
+const pools = await sdk.pool.getPools();
+
+console.log('pools', pools);
+
+// Create a new pool
+const tx = sdk.pool.createPool({
+    type: PoolType.Xyk,
+    firstAssetId: '0',
+    firstAssetAmount: '1000000000000000000',
+    secondAssetId: '1',
+    secondAssetAmount: '100000000000000',
+    account: '0x...',
+});
+
+// Before submitting the transaction, it is possible to check the fee information
+const feeInfo = await tx.paymentInfo();
+console.log('feeInfo', feeInfo);
+
+const result = await tx.execute();
+console.log('result', result);
 ```
 
-Please replace the existing "buyAsset" and "sellAsset" methods with the newly introduced "multiswapBuyAsset" and "multiswapSellAsset" methods.
+### Using the Rewards Module
 
-```js
-// V1:
-await mangata.buyAsset(
-  account: string | KeyringPair,
-  soldAssetId: string,
-  boughtAssetId: string,
-  amount: BN,
-  maxAmountIn: BN,
-  txOptions?: TxOptions
-)
+The Rewards module allows you to manage and retrieve information about rewards.
 
-// V2:
-const args: MultiswapBuyAsset = {
-  account: Account;
-  tokenIds: TokenId[];
-  amount: TokenAmount;
-  maxAmountIn: TokenAmount;
-  txOptions?: Partial<TxOptions> | undefined;
+```ts
+import { Gasp, PoolType } from 'gasp-sdk';
+
+const sdk = await Gasp.create('wss://rollup-prod-rpc.gasp.xyz/');
+
+const signer = sdk.signers.ethers.create('...');
+
+// Create a new pool
+const result = await sdk.rewards
+    .claimNativeRewardsForPool(
+        {
+            pool: '160',
+            account: '0x...',
+        },
+        { signer } // You can always pass the signer to every call as a second parameter
+    )
+    .execute();
+
+console.log('result', result);
+```
+
+---
+
+### Core SDK Components & Available Features
+
+The SDK is built around several core components that offer a comprehensive toolset for interacting with the Gasp node:
+
+-   [**Account Module:**](./packages/sdk/src/modules/account/Account.ts)
+    Manage account details, retrieve balances, and obtain nonce values.
+
+-   [**Pool Module:**](./packages/sdk/src/modules/pool/Pool.ts)
+    Query and manage liquidity pool information.
+
+-   [**Asset Module:**](./packages/sdk/src/modules/asset/Asset.ts)
+    Access and manage asset-related data.
+
+-   [**Market Module:**](./packages/sdk/src/modules/market/Market.ts)
+    Retrieve market data and execute trading operations.
+
+-   [**Rewards Module:**](./packages/sdk/src/modules/rewards/Rewards.ts)
+    Claim rewards for your account.
+
+-   [**Rolldown Module:**](./packages/sdk/src/modules/rolldown/Rolldown.ts)
+    Withdraw your assets from Gasp chain.
+
+---
+
+### Error Handling
+
+The Gasp SDK implements robust error handling to ensure developers can effectively manage exceptions and edge cases. Key points include:
+
+-   **Custom Error Class:**  
+    The SDK utilizes custom error class (`GaspError`) to provide meaningful error messages and error codes.
+
+-   **Error Types:**
+
+    -   **Initialization Errors:** Thrown when the SDK fails to initialize (e.g., network issues or invalid configuration).
+    -   **Validation Errors:** Raised when required parameters are missing or invalid.
+    -   **Transaction Errors:** Detailed errors related to transaction submission failures.
+    -   **Argument Errors:** Raised when the arguments passed to a function are invalid or not as expected.
+    -   **Parsing Errors:** Raised when the SDK fails to parse a response from the Gasp node.
+
+```typescript
+try {
+    const result = await sdk.account.getAssetBalance({
+        account: '0x123',
+        asset: '0',
+    });
+    console.log(result);
+} catch (error) {
+    if (error instanceof GaspError) {
+        console.error(`SDK Error [${error.code}]: ${error.message}`);
+    } else {
+        console.error('An unexpected error occurred:', error);
+    }
 }
-await mangata.xyk.multiswapBuyAsset(args)
-```
-
-To illustrate how to retrieve asset information, you need to determine its corresponding section within the SDK. The method **getAssetInfo** is located within the query block.
-
-```js
-// V1:
-const assetInfo = await mangata.getAssetInfo()
-
-// V2:
-const assetInfo = await mangata.query.getAssetInfo()
-```
-
-# Basic use case
-
-Here is a quick example to get you started, **all you need is Mangata instance**:
-
-Support: Only ESM
-
-```js
-import { Mangata } from "@mangata-finance/sdk";
-
-async function main() {
-  // Connect to the mainnet (also testnet, mainnet)
-  const mangata = Mangata.instance(["wss://kusama-archive.mangata.online"]);
-
-  // Retrieve the chainName, nodeName & nodeVersion information
-  const [chain, nodeName, nodeVersion] = await Promise.all([
-    mangata.rpc.getChain(),
-    mangata.rpc.getNodeName(),
-    mangata.rpc.getNodeVersion()
-  ]);
-
-  console.log(
-    `You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`
-  );
-}
-
-main()
-  .catch(console.error)
-  .finally(() => process.exit());
-```
-
-For available methods please visit [docs](https://docs.mangata.finance/sdk/)
-
-# Documentation
-
-```js
-import {
-  Mangata,
-  MangataInstance,
-  MainTokens,
-  PoolWithShare,
-  TokenId,
-  Token,
-  PoolWithRatio,
-  TokenBalance,
-  TokenInfo
-} from "../";
-import { BN } from "@polkadot/util";
-
-const ENDPOINT = "wss://kusama-archive.mangata.online";
-const KSM_TOKEN = "4";
-const MGX_TOKEN = "0";
-const ADDRESS = "5CP5sgWw94GoQCGvm4qeNgKTw41Scnk2F41uPe4SSAPVPoCU";
-const LPTOKENKSMANDMGX = "5";
-
-const main = async () => {
-  const mangata: MangataInstance = Mangata.instance([ENDPOINT]);
-  /**
-   * Retrieves the amount of tokens in a liquidity pool for a given pair of
-   * tokens.
-   * @param {string} firstTokenId
-   * @param {string} secondTokenId
-   *
-   * @returns {BN | Array}
-   */
-
-  const amountOfTokens: BN[] = await mangata.query.getAmountOfTokensInPool(
-    KSM_TOKEN,
-    MGX_TOKEN
-  );
-
-  /**
-   * Retrieves information about the assets.
-   *
-   * @returns {MainTokens}
-   */
-  const assetInfo: MainTokens = await mangata.query.getAssetsInfo();
-
-  /**
-   * Retrieves the current block number.
-   *
-   * @returns {string}
-   */
-  const blockNumber: string = await mangata.query.getBlockNumber();
-
-  /**
-   * Retrieves the pools in which the specified address has invested
-   *
-   * @returns {PoolWithShare | Array}
-   */
-
-  const investedPools: PoolWithShare[] = await mangata.query.getInvestedPools(
-    ADDRESS
-  );
-
-  /**
-   * Retrieves the liquidity pool information for a specific liquidity token * ID.
-   *
-   * @returns {TokenId | Array}
-   */
-
-  const liquidityPool: TokenId[] = await mangata.query.getLiquidityPool(
-    LPTOKENKSMANDMGX
-  );
-
-  /**
-   * Retrieves the liquidity token ID for a given pair of tokens.
-   *
-   * @returns {TokenId}
-   */
-  const liquidityTokenId: TokenId = await mangata.query.getLiquidityTokenId(
-    KSM_TOKEN,
-    MGX_TOKEN
-  );
-
-  /**
-   * Retrieves the liquidity token IDs.
-   *
-   * @returns {TokenId | Array}
-   */
-  const liquidityTokenIds: TokenId[] =
-    await mangata.query.getLiquidityTokenIds();
-
-  /**
-   * Retrieves the liquidity tokens.
-   *
-   * @returns {MainTokens}
-   */
-  const liquidityTokens: MainTokens = await mangata.query.getLiquidityTokens();
-
-  /**
-   * Retrieves the nonce of the specified address.
-   *
-   * @returns {BN}
-   */
-  const nonce: BN = await mangata.query.getNonce(ADDRESS);
-
-  /**
-   * Retrieves the tokens owned by a specific address.
-   *
-   * @returns {[id: TokenId]: Token}}
-   */
-  const ownedTokens: {
-    [id: TokenId]: Token
-  } = await mangata.query.getOwnedTokens(ADDRESS);
-
-  /**
-   * Retrieves the detailed information about a specific pool.
-   *
-   * @returns {PoolWithRatio}
-   */
-  const pool: PoolWithRatio = await mangata.query.getPool(LPTOKENKSMANDMGX);
-
-  /**
-   * Retrieves information about all the available pools.
-   *
-   * @returns {PoolWithRatio | Array}
-   */
-  const pools: PoolWithRatio[] = await mangata.query.getPools();
-
-  /**
-   * Retrieves the token balance for a specific address and token ID.
-   *
-   * @returns {TokenBalance}
-   */
-  const tokenBalance: TokenBalance = await mangata.query.getTokenBalance(
-    MGX_TOKEN,
-    ADDRESS
-  );
-
-  /**
-   * Retrieves detailed information about a specific token.
-   *
-   * @returns {TokenInfo}
-   */
-  const tokenInfo: TokenInfo = await mangata.query.getTokenInfo(MGX_TOKEN);
-
-  /**
-   * Retrieves the total issuance of a specific token.
-   *
-   * @returns {BN}
-   */
-  const issuance: BN = await mangata.query.getTotalIssuance(MGX_TOKEN);
-
-  /**
-   * Retrieves the total issuance of all tokens.
-   *
-   * @returns {Record<string, BN>}
-   */
-  const totalIssuanceOfTokens: Record<string, BN> =
-    await mangata.query.getTotalIssuanceOfTokens();
-
-  /**
-   * Calculates the buy price based on the reserve parameters
-   *
-   * @returns {BN}
-   */
-  const argsReserve: Reserve = {
-    inputReserve: new BN("1000000000000000000"),
-    outputReserve: new BN("10000000000000000000"),
-    amount: new BN("10000")
-  };
-  const price: BN = await mangata.rpc.calculateBuyPrice(argsReserve);
-
-  /**
-   * Calculates the buy price based on the asset's ID.
-   *
-   * @returns {BN}
-   */
-  const price: BN = await mangata.rpc.calculateBuyPriceId(
-    KSM_TOKEN,
-    MGX_TOKEN,
-    new BN("10000")
-  );
-
-  /**
-   * Calculates the rewards amount based on the rewards parameters.
-   *
-   * @returns {BN}
-   */
-  const argsRewards: Rewards = {
-    address: ADDRESS,
-    liquidityTokenId: LPTOKENKSMANDMGX
-  };
-  const rewards: BN = await mangata.rpc.calculateRewardsAmount(argsRewards);
-
-  /**
-   * Calculates the sell price based on the reserve parameters.
-   *
-   * @returns {BN}
-   */
-  const argsReserve: Reserve = {
-    inputReserve: new BN("1000000000000000000"),
-    outputReserve: new BN("10000000000000000000"),
-    amount: new BN("10000")
-  };
-  const price: BN = await mangata.rpc.calculateSellPrice(argsReserve);
-
-  /**
-   * Calculates the sell price based on the asset's ID.
-   *
-   * @returns {BN}
-   */
-  const price: BN = await mangata.rpc.calculateSellPriceId(
-    KSM_TOKEN,
-    MGX_TOKEN,
-    new BN("10000")
-  );
-};
-
-main()
-  .catch(console.error)
-  .finally(() => process.exit());
-```
-
-# Transactions
-
-```js
-import {
-  Mangata,
-  MangataInstance
-  TransferTokens,
-  MangataGenericEvent,
-  MangataGenericEvent,
-  MultiswapBuyAsset,
-  Batch,
-  MintLiquidity
-} from "@mangata-finance/sdk";
-import { BN } from "@polkadot/util";
-import { Keyring } from "@polkadot/api";
-import { v4 as uuidv4 } from "uuid";
-import { ISubmittableResult } from "@polkadot/types/types";
-const mangata: MangataInstance = Mangata.instance([ENDPOINT]);
-
-const keyring = new Keyring({ type: "sr25519" });
-const testUser = "//testUser_" + uuidv4();
-const account = keyring.createFromUri(testUser);
-keyring.addPair(account);
-
-const args: TransferTokens = {
-  account: account,
-  tokenId: MGX_TOKEN,
-  address: ADDRESS,
-  amount: new BN(100e18), // 100 MGX
-  txOptions: {
-    statusCallback: (status: ISubmittableResult) => {
-      // Here you can check for status of your transaction
-      console.log(status);
-    },
-    extrinsicStatus: (result: MangataGenericEvent[]) => {
-      // here will be the result of your transaction
-      console.log(result);
-    }
-  }
-};
-await mangata.tokens.transferTokens(args);
-
-const args: MultiswapBuyAsset = {
-  account,
-  tokenIds: [MGX_TOKEN, KSM_TOKEN],
-  amount: new BN(1000e18), // 100 MGX
-  maxAmountIn: new BN(60000e18),
-  txOptions: {
-    statusCallback: (status: ISubmittableResult) => {
-      // Here you can check for status of your transaction
-      console.log(status);
-    },
-    extrinsicStatus: (result: MangataGenericEvent[]) => {
-      // here will be the result of your transaction
-      console.log(result);
-    }
-  }
-};
-await mangata.xyk.multiswapBuyAsset(args);
-
-const argsBuy: MultiswapBuyAsset = {
-  account,
-  tokenIds: [MGX_TOKEN, KSM_TOKEN],
-  amount: new BN(1000e18), // 100 MGX
-  maxAmountIn: new BN(60000e18)
-};
-const tx1 = await mangata.submitableExtrinsic.multiswapBuyAsset(argsBuy);
-
-const argsMint: MintLiquidity = {
-  account,
-  firstTokenId: KSM_TOKEN,
-  secondTokenId: MGX_TOKEN,
-  firstTokenAmount: new BN(100e12),
-  expectedSecondTokenAmount: new BN(1000e18)
-};
-const tx2 = await mangata.submitableExtrinsic.mintLiquidity(argsMint);
-
-const args: Batch = {
-  account,
-  calls: [tx1, tx2],
-  txOptions: {
-    statusCallback: (status: ISubmittableResult) => {
-      // Here you can check for status of your transaction
-      console.log(status);
-    },
-    extrinsicStatus: (result: MangataGenericEvent[]) => {
-      // here will be the result of your transaction
-      console.log(result);
-    }
-  }
-};
-await mangata.batch(args);
 ```

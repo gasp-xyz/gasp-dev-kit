@@ -9,7 +9,7 @@
       "options": {
         "cwd": "packages/sdk",
         "commands": [
-          "tsup ./src/index.ts --dts --format esm --clean --splitting false --tsconfig tsconfig.lib.json --outDir dist/packages/sdk",
+          "tsup --config tsup.config.ts",
           "mkdir -p ../../dist/packages/sdk",
           "cp dist/packages/sdk/index.js ../../dist/packages/sdk/",
           "cp dist/packages/sdk/index.d.ts ../../dist/packages/sdk/",
@@ -24,9 +24,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "packages/sdk/**/*.ts"
-        ]
+        "lintFilePatterns": ["packages/sdk/**/*.ts"]
       }
     },
     "test": {
