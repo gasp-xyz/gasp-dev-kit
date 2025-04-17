@@ -890,6 +890,7 @@ declare module '@polkadot/api-base/types/errors' {
       SequencerIsNotInActiveSet: AugmentedError<ApiType>;
       SequencerRoundRewardsDNE: AugmentedError<ApiType>;
       TestUnstakingError: AugmentedError<ApiType>;
+      UninitializedChainId: AugmentedError<ApiType>;
       UnknownChainId: AugmentedError<ApiType>;
       /**
        * Generic error

@@ -3360,7 +3360,8 @@ declare module '@polkadot/types/lookup' {
     readonly isAliasAccountIsActiveSequencer: boolean;
     readonly isSequencerAccountIsActiveSequencerAlias: boolean;
     readonly isSequencerRoundRewardsDNE: boolean;
-    readonly type: 'OperationFailed' | 'MathOverflow' | 'SequencerIsNotInActiveSet' | 'SequencerAlreadyInActiveSet' | 'CantUnstakeWhileInActiveSet' | 'NotEnoughSequencerStake' | 'MaxSequencersLimitReached' | 'TestUnstakingError' | 'UnknownChainId' | 'NoStakeToUnStake' | 'AddressInUse' | 'AliasAccountIsActiveSequencer' | 'SequencerAccountIsActiveSequencerAlias' | 'SequencerRoundRewardsDNE';
+    readonly isUninitializedChainId: boolean;
+    readonly type: 'OperationFailed' | 'MathOverflow' | 'SequencerIsNotInActiveSet' | 'SequencerAlreadyInActiveSet' | 'CantUnstakeWhileInActiveSet' | 'NotEnoughSequencerStake' | 'MaxSequencersLimitReached' | 'TestUnstakingError' | 'UnknownChainId' | 'NoStakeToUnStake' | 'AddressInUse' | 'AliasAccountIsActiveSequencer' | 'SequencerAccountIsActiveSequencerAlias' | 'SequencerRoundRewardsDNE' | 'UninitializedChainId';
   }
 
   /** @name SpCoreCryptoKeyTypeId (417) */
