@@ -9,7 +9,7 @@ import type { ApiTypes, AugmentedEvent } from '@polkadot/api-base/types';
 import type { Bytes, Null, Option, Result, Struct, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 import type { H256, Perbill } from '@polkadot/types/interfaces/runtime';
-import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletMarketAtomicSwap, PalletRolldownBatchSource, PalletRolldownL1RequestProcessingError, PalletRolldownMessagesChain, PalletRolldownMessagesDeposit, PalletRolldownMessagesRequestId, PalletSequencerStakingPayoutRounds, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
+import type { FrameSupportDispatchDispatchInfo, FrameSupportTokensMiscBalanceStatus, OrmlTraitsAssetRegistryAssetMetadata, PalletIssuanceIssuanceInfo, PalletIssuanceTgeInfo, PalletMarketAtomicSwap, PalletRolldownBatchSource, PalletRolldownL1RequestProcessingError, PalletRolldownMessagesDeposit, PalletRolldownMessagesRequestId, PalletSequencerStakingPayoutRounds, ParachainStakingCandidateBondRequest, ParachainStakingDelegationRequest, ParachainStakingDelegatorAdded, ParachainStakingPayoutRounds, RollupRuntimeRuntimeConfigConfigPalletProxyProxyType, SpConsensusGrandpaAppPublic, SpRuntimeAccountAccountId20, SpRuntimeDispatchError, SpRuntimeModuleError } from '@polkadot/types/lookup';
 
 export type __AugmentedEvent<ApiType extends ApiTypes> = AugmentedEvent<ApiType>;
 
@@ -550,25 +550,25 @@ declare module '@polkadot/api-base/types/events' {
       [key: string]: AugmentedEvent<ApiType>;
     };
     rolldown: {
-      DepositFerried: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, deposit: PalletRolldownMessagesDeposit, depositHash: H256], { chain: PalletRolldownMessagesChain, deposit: PalletRolldownMessagesDeposit, depositHash: H256 }>;
-      DepositRefundCreated: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, refundedRequestId: PalletRolldownMessagesRequestId, ferry: Option<SpRuntimeAccountAccountId20>], { chain: PalletRolldownMessagesChain, refundedRequestId: PalletRolldownMessagesRequestId, ferry: Option<SpRuntimeAccountAccountId20> }>;
-      DisputePeriodSet: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, disputePeriodLength: u128], { chain: PalletRolldownMessagesChain, disputePeriodLength: u128 }>;
-      L1ReadCanceled: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId], { chain: PalletRolldownMessagesChain, canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId }>;
-      L1ReadExecuted: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, hash_: H256], { chain: PalletRolldownMessagesChain, hash_: H256 }>;
-      L1ReadIgnoredBecauseOfMaintenanceMode: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, hash_: H256], { chain: PalletRolldownMessagesChain, hash_: H256 }>;
-      L1ReadIgnoredBecauseOfUnknownDisputePeriod: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, hash_: H256], { chain: PalletRolldownMessagesChain, hash_: H256 }>;
-      L1ReadScheduledForExecution: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, hash_: H256], { chain: PalletRolldownMessagesChain, hash_: H256 }>;
-      L1ReadStored: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, sequencer: SpRuntimeAccountAccountId20, disputePeriodEnd: u128, range: {
+      DepositFerried: AugmentedEvent<ApiType, [chain: u64, deposit: PalletRolldownMessagesDeposit, depositHash: H256], { chain: u64, deposit: PalletRolldownMessagesDeposit, depositHash: H256 }>;
+      DepositRefundCreated: AugmentedEvent<ApiType, [chain: u64, refundedRequestId: PalletRolldownMessagesRequestId, ferry: Option<SpRuntimeAccountAccountId20>], { chain: u64, refundedRequestId: PalletRolldownMessagesRequestId, ferry: Option<SpRuntimeAccountAccountId20> }>;
+      DisputePeriodSet: AugmentedEvent<ApiType, [chain: u64, disputePeriodLength: u128], { chain: u64, disputePeriodLength: u128 }>;
+      L1ReadCanceled: AugmentedEvent<ApiType, [chain: u64, canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId], { chain: u64, canceledSequencerUpdate: u128, assignedId: PalletRolldownMessagesRequestId }>;
+      L1ReadExecuted: AugmentedEvent<ApiType, [chain: u64, hash_: H256], { chain: u64, hash_: H256 }>;
+      L1ReadIgnoredBecauseOfMaintenanceMode: AugmentedEvent<ApiType, [chain: u64, hash_: H256], { chain: u64, hash_: H256 }>;
+      L1ReadIgnoredBecauseOfUnknownDisputePeriod: AugmentedEvent<ApiType, [chain: u64, hash_: H256], { chain: u64, hash_: H256 }>;
+      L1ReadScheduledForExecution: AugmentedEvent<ApiType, [chain: u64, hash_: H256], { chain: u64, hash_: H256 }>;
+      L1ReadStored: AugmentedEvent<ApiType, [chain: u64, sequencer: SpRuntimeAccountAccountId20, disputePeriodEnd: u128, range: {
     readonly start: u128;
     readonly end: u128;
-  } & Struct, hash_: H256], { chain: PalletRolldownMessagesChain, sequencer: SpRuntimeAccountAccountId20, disputePeriodEnd: u128, range: {
+  } & Struct, hash_: H256], { chain: u64, sequencer: SpRuntimeAccountAccountId20, disputePeriodEnd: u128, range: {
     readonly start: u128;
     readonly end: u128;
   } & Struct, hash_: H256 }>;
       ManualBatchExtraFeeSet: AugmentedEvent<ApiType, [u128]>;
-      RequestProcessedOnL2: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, requestId: u128, status: Result<Null, PalletRolldownL1RequestProcessingError>], { chain: PalletRolldownMessagesChain, requestId: u128, status: Result<Null, PalletRolldownL1RequestProcessingError> }>;
-      TxBatchCreated: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, source: PalletRolldownBatchSource, assignee: SpRuntimeAccountAccountId20, batchId: u128, range: ITuple<[u128, u128]>], { chain: PalletRolldownMessagesChain, source: PalletRolldownBatchSource, assignee: SpRuntimeAccountAccountId20, batchId: u128, range: ITuple<[u128, u128]> }>;
-      WithdrawalRequestCreated: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, requestId: PalletRolldownMessagesRequestId, recipient: U8aFixed, tokenAddress: U8aFixed, amount: u128, hash_: H256, ferryTip: u128], { chain: PalletRolldownMessagesChain, requestId: PalletRolldownMessagesRequestId, recipient: U8aFixed, tokenAddress: U8aFixed, amount: u128, hash_: H256, ferryTip: u128 }>;
+      RequestProcessedOnL2: AugmentedEvent<ApiType, [chain: u64, requestId: u128, status: Result<Null, PalletRolldownL1RequestProcessingError>], { chain: u64, requestId: u128, status: Result<Null, PalletRolldownL1RequestProcessingError> }>;
+      TxBatchCreated: AugmentedEvent<ApiType, [chain: u64, source: PalletRolldownBatchSource, assignee: SpRuntimeAccountAccountId20, batchId: u128, range: ITuple<[u128, u128]>], { chain: u64, source: PalletRolldownBatchSource, assignee: SpRuntimeAccountAccountId20, batchId: u128, range: ITuple<[u128, u128]> }>;
+      WithdrawalRequestCreated: AugmentedEvent<ApiType, [chain: u64, requestId: PalletRolldownMessagesRequestId, recipient: U8aFixed, tokenAddress: U8aFixed, amount: u128, hash_: H256, ferryTip: u128], { chain: u64, requestId: PalletRolldownMessagesRequestId, recipient: U8aFixed, tokenAddress: U8aFixed, amount: u128, hash_: H256, ferryTip: u128 }>;
       /**
        * Generic event
        **/
@@ -579,14 +579,14 @@ declare module '@polkadot/api-base/types/events' {
        * Paid the account the balance as liquid rewards
        **/
       Rewarded: AugmentedEvent<ApiType, [u32, SpRuntimeAccountAccountId20, u128]>;
-      SequencerJoinedActiveSet: AugmentedEvent<ApiType, [PalletRolldownMessagesChain, SpRuntimeAccountAccountId20]>;
+      SequencerJoinedActiveSet: AugmentedEvent<ApiType, [u64, SpRuntimeAccountAccountId20]>;
       /**
        * Notify about reward periods that has been paid (sequencer, payout rounds, any rewards left)
        **/
       SequencerRewardsDistributed: AugmentedEvent<ApiType, [SpRuntimeAccountAccountId20, PalletSequencerStakingPayoutRounds]>;
-      SequencersRemovedFromActiveSet: AugmentedEvent<ApiType, [PalletRolldownMessagesChain, Vec<SpRuntimeAccountAccountId20>]>;
-      StakeProvided: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, addedStake: u128, totalStake: u128], { chain: PalletRolldownMessagesChain, addedStake: u128, totalStake: u128 }>;
-      StakeRemoved: AugmentedEvent<ApiType, [chain: PalletRolldownMessagesChain, removedStake: u128], { chain: PalletRolldownMessagesChain, removedStake: u128 }>;
+      SequencersRemovedFromActiveSet: AugmentedEvent<ApiType, [u64, Vec<SpRuntimeAccountAccountId20>]>;
+      StakeProvided: AugmentedEvent<ApiType, [chain: u64, addedStake: u128, totalStake: u128], { chain: u64, addedStake: u128, totalStake: u128 }>;
+      StakeRemoved: AugmentedEvent<ApiType, [chain: u64, removedStake: u128], { chain: u64, removedStake: u128 }>;
       /**
        * Generic event
        **/
