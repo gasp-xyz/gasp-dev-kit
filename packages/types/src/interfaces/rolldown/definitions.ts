@@ -6,7 +6,7 @@ export default {
       params: [
         {
           name: "chain",
-          type: "Chain",
+          type: "u64",
         },
         {
           name: 'request_id',
@@ -40,7 +40,7 @@ export default {
       params: [
         {
           name: "chain",
-          type: "Chain",
+          type: "u64",
         },
         {
           name: "hash",
@@ -63,7 +63,7 @@ export default {
       params: [
         {
           name: "chain",
-          type: "Chain",
+          type: "u64",
         },
         {
           name: 'range',
@@ -82,7 +82,7 @@ export default {
       params: [
         {
           name: "chain",
-          type: "Chain",
+          type: "u64",
         },
         {
           name: 'range',
@@ -104,7 +104,7 @@ export default {
       params: [
         {
           name: "chain",
-          type: "Chain",
+          type: "u64",
         },
         {
           name: 'range',

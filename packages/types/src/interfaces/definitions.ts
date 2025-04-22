@@ -29,7 +29,7 @@ export default {
     },
     TokenId: "u32",
     L1Update: {
-      chain: "Chain",
+      chain: "u64",
       pendingDeposits: "Vec<Deposit>",
       pendingCancelResolutions: "Vec<CancelResolution>",
     },
@@ -47,9 +47,6 @@ export default {
     },
     Origin: {
       _enum: ['L1', 'L2']
-    },
-    Chain: {
-      _enum: ['Ethereum', 'Arbitrum', 'Base', 'Monad', 'MegaEth', 'Sonic']
     },
     CancelResolution: {
       requestId: "RequestId",
