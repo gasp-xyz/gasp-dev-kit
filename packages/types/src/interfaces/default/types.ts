@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Compact, Enum, Struct, U256, U8aFixed, Vec, bool, u128, u32 } from '@polkadot/types-codec';
+import type { Bytes, Compact, Enum, Struct, U256, U8aFixed, Vec, bool, u128, u32, u64 } from '@polkadot/types-codec';
 import type { EcdsaSignature, Ed25519Signature, Sr25519Signature } from '@polkadot/types/interfaces/extrinsics';
 import type { Balance, BlockNumber, Digest, H256, H512, Hash } from '@polkadot/types/interfaces/runtime';
 
@@ -11,17 +11,6 @@ export interface CancelResolution extends Struct {
   readonly l2RequestId: u128;
   readonly cancelJustified: bool;
   readonly timeStamp: U256;
-}
-
-/** @name Chain */
-export interface Chain extends Enum {
-  readonly isEthereum: boolean;
-  readonly isArbitrum: boolean;
-  readonly isBase: boolean;
-  readonly isMonad: boolean;
-  readonly isMegaEth: boolean;
-  readonly isSonic: boolean;
-  readonly type: 'Ethereum' | 'Arbitrum' | 'Base' | 'Monad' | 'MegaEth' | 'Sonic';
 }
 
 /** @name Deposit */
@@ -47,7 +36,7 @@ export interface Header extends Struct {
 
 /** @name L1Update */
 export interface L1Update extends Struct {
-  readonly chain: Chain;
+  readonly chain: u64;
   readonly pendingDeposits: Vec<Deposit>;
   readonly pendingCancelResolutions: Vec<CancelResolution>;
 }
