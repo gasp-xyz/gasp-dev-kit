@@ -725,6 +725,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * - `max_amount_in` - The maximum amount of sold asset in order to not fail on slippage, use RPC calls to calc expected value
        **/
       multiswapAssetBuy: AugmentedSubmittable<(swapPoolList: Vec<u32> | (u32 | AnyNumber | Uint8Array)[], assetIdOut: u32 | AnyNumber | Uint8Array, assetAmountOut: u128 | AnyNumber | Uint8Array, assetIdIn: u32 | AnyNumber | Uint8Array, maxAmountIn: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<u32>, u32, u128, u32, u128]>;
+      stableSwapUpdateEqAssets: AugmentedSubmittable<(assetId: u32 | AnyNumber | Uint8Array, eqAssetsUpdate: Vec<ITuple<[u32, bool]>> | ([u32 | AnyNumber | Uint8Array, bool | boolean | Uint8Array])[]) => SubmittableExtrinsic<ApiType>, [u32, Vec<ITuple<[u32, bool]>>]>;
       /**
        * Generic tx
        **/
