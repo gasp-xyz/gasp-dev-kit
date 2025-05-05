@@ -18,7 +18,10 @@ export interface Chain extends Enum {
   readonly isEthereum: boolean;
   readonly isArbitrum: boolean;
   readonly isBase: boolean;
-  readonly type: 'Ethereum' | 'Arbitrum' | 'Base';
+  readonly isMonad: boolean;
+  readonly isMegaEth: boolean;
+  readonly isSonic: boolean;
+  readonly type: 'Ethereum' | 'Arbitrum' | 'Base' | 'Monad' | 'MegaEth' | 'Sonic';
 }
 
 /** @name Deposit */
@@ -67,24 +70,6 @@ export interface MultiSignature extends Enum {
   readonly isEth: boolean;
   readonly asEth: EcdsaSignature;
   readonly type: 'Ed25519' | 'Sr25519' | 'Ecdsa' | 'Eth';
-}
-
-/** @name MultiswapBuyInfo */
-export interface MultiswapBuyInfo extends Struct {
-  readonly totalAmountIn: Balance;
-  readonly swapAmountIn: Balance;
-  readonly amountOut: Balance;
-  readonly fees: Balance;
-  readonly isLockless: bool;
-}
-
-/** @name MultiswapSellInfo */
-export interface MultiswapSellInfo extends Struct {
-  readonly totalAmountIn: Balance;
-  readonly swapAmountIn: Balance;
-  readonly amountOut: Balance;
-  readonly fees: Balance;
-  readonly isLockless: bool;
 }
 
 /** @name Origin */

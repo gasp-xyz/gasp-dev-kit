@@ -29,7 +29,7 @@ import type { AccountId, Balance, BlockNumber, H160, H256, H64, Hash, Header, In
 import type { MigrationStatusResult, ReadProof, RuntimeVersion, TraceBlockResponse } from '@polkadot/types/interfaces/state';
 import type { ApplyExtrinsicResult, ChainProperties, ChainType, Health, NetworkState, NodeRole, PeerInfo, SyncState } from '@polkadot/types/interfaces/system';
 import type { IExtrinsic, Observable } from '@polkadot/types/types';
-import type { Chain, L1Update, MultiswapBuyInfo, MultiswapSellInfo, RpcAssetMetadata, RpcPoolInfo, TokenId } from 'gasp-types/interfaces/default';
+import type { Chain, L1Update, RpcAssetMetadata, RpcPoolInfo, TokenId } from 'gasp-types/interfaces/default';
 
 export type __AugmentedRpc = AugmentedRpc<() => unknown>;
 
@@ -404,14 +404,6 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * 
        **/
-      get_multiswap_buy_info: AugmentedRpc<(swap_pool_list: Vec<TokenId> | (TokenId | AnyNumber | Uint8Array)[], asset_id_out: TokenId | AnyNumber | Uint8Array, asset_amount_out: Balance | AnyNumber | Uint8Array, asset_id_in: TokenId | AnyNumber | Uint8Array, max_amount_in: Balance | AnyNumber | Uint8Array) => Observable<MultiswapBuyInfo>>;
-      /**
-       * 
-       **/
-      get_multiswap_sell_info: AugmentedRpc<(swap_pool_list: Vec<TokenId> | (TokenId | AnyNumber | Uint8Array)[], asset_id_in: TokenId | AnyNumber | Uint8Array, asset_amount_in: Balance | AnyNumber | Uint8Array, asset_id_out: TokenId | AnyNumber | Uint8Array, min_amount_out: Balance | AnyNumber | Uint8Array) => Observable<MultiswapSellInfo>>;
-      /**
-       * 
-       **/
       get_pools: AugmentedRpc<(pool_id: Option<u32> | null | Uint8Array | u32 | AnyNumber) => Observable<Vec<RpcPoolInfo>>>;
       /**
        * 
@@ -500,15 +492,15 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * 
        **/
-      get_abi_encoded_l2_request: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, request_id: u128 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Bytes>>;
+      get_abi_encoded_l2_request: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | 'Base' | 'Monad' | 'MegaEth' | 'Sonic' | number | Uint8Array, request_id: u128 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Bytes>>;
       /**
        * 
        **/
-      get_merkle_proof: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, range: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array], tx_id: u128 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Vec<Bytes>>>;
+      get_merkle_proof: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | 'Base' | 'Monad' | 'MegaEth' | 'Sonic' | number | Uint8Array, range: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array], tx_id: u128 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Vec<Bytes>>>;
       /**
        * 
        **/
-      get_merkle_root: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, range: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array], at?: Hash | string | Uint8Array) => Observable<Bytes>>;
+      get_merkle_root: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | 'Base' | 'Monad' | 'MegaEth' | 'Sonic' | number | Uint8Array, range: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array], at?: Hash | string | Uint8Array) => Observable<Bytes>>;
       /**
        * 
        **/
@@ -516,11 +508,11 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * 
        **/
-      verify_merkle_proof: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, range: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array], tx_id: u128 | AnyNumber | Uint8Array, root: H256 | string | Uint8Array, proof: Vec<H256> | (H256 | string | Uint8Array)[], at?: Hash | string | Uint8Array) => Observable<bool>>;
+      verify_merkle_proof: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | 'Base' | 'Monad' | 'MegaEth' | 'Sonic' | number | Uint8Array, range: ITuple<[u128, u128]> | [u128 | AnyNumber | Uint8Array, u128 | AnyNumber | Uint8Array], tx_id: u128 | AnyNumber | Uint8Array, root: H256 | string | Uint8Array, proof: Vec<H256> | (H256 | string | Uint8Array)[], at?: Hash | string | Uint8Array) => Observable<bool>>;
       /**
        * 
        **/
-      verify_sequencer_update: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | 'Base' | number | Uint8Array, hash: H256 | string | Uint8Array, request_id: u128 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<bool>>;
+      verify_sequencer_update: AugmentedRpc<(chain: Chain | 'Ethereum' | 'Arbitrum' | 'Base' | 'Monad' | 'MegaEth' | 'Sonic' | number | Uint8Array, hash: H256 | string | Uint8Array, request_id: u128 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<bool>>;
     };
     rpc: {
       /**

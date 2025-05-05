@@ -39,64 +39,20 @@ permissions:
 
 env:
   INPUTS_BRANCH: ${{ github.event.inputs.branch || github.ref_name }}
+  CACHE_VERSION: 1
 
 jobs:
-  release-type-definitions:
+  release:
     runs-on: ubuntu-latest
+    outputs:
+      type-definitions-version: ${{ steps.show-versions.outputs.type-definitions-version }}
+      types-version: ${{ steps.show-versions.outputs.types-version }}
+      sdk-version: ${{ steps.show-versions.outputs.sdk-version }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ github.event.inputs.branch }}
-      - uses: nrwl/nx-set-shas@v4
-
-      - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "npm"
-          cache-dependency-path: "package-lock.json"
-
-      - run: npm ci
-      - run: npx nx run gasp-type-definitions:lint
-
-      - name: NPM version bump type definitions
-        working-directory: packages/type-definitions
-        run: |
-          # Branch name sanitization added to avoid issues with npm version command
-          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
-
-      - name: git add and commit new version
-        run: |
-          git config user.name mangatafinance
-          git config user.email solutions@mangata.finance
-          git add .
-          git commit -m "chore: updated type definitions to new prerelease version"
-          git push
-
-      - name: Build type definitions
-        run: npx nx run gasp-type-definitions:build
-
-      - name: Publish type definitions to NPM
-        working-directory: dist/packages/type-definitions
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
-
-          # Branch name sanitization added to avoid issues with npm version command
-          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public
-
-  release-types:
-    runs-on: ubuntu-latest
-    needs: [release-type-definitions]
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.ref }}
       - uses: nrwl/nx-set-shas@v4
 
       - name: Clone gasp-node repository
@@ -106,62 +62,103 @@ jobs:
           path: mangata-repo
           ref: ${{ github.event.inputs.nodeRepositoryRevision || env.INPUTS_BRANCH }}
 
-      - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "npm"
-          cache-dependency-path: "package-lock.json"
+      - name: Run the Node
+        working-directory: ${{ github.event.inputs.nodeCodebaseWorkingDirectory }}
+        env:
+          ROLLUP_NODE_VERSION: ${{ github.event.inputs.nodeDockerImageTag }}
+        run: |
+          # --no-build to ensure that we don't try to build the node from source if it can't be pulled from the registry
+          docker compose up -d --no-build
+          docker compose ps
 
       - name: Install WASM toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1.10.1
         with:
           toolchain: nightly
           target: wasm32-unknown-unknown
+      - run: cargo install websocat
 
-      - name: Install websocat
-        run: cargo install websocat
-
-      - name: Run the Node
-        working-directory: ${{ github.event.inputs.nodeCodebaseWorkingDirectory }}
-        env:
-          ROLLUP_NODE_VERSION: ${{ github.event.inputs.nodeDockerImageTag }}
-        run: |
-          echo "Starting nodes with image: ${ROLLUP_NODE_VERSION}"
-          docker compose up -d
-          docker ps
-
-      - name: Sleep for 1 minutes
-        run: sleep 60s
-
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-${{ env.CACHE_VERSION }}-nodejs-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.CACHE_VERSION }}-nodejs-
       - run: npm ci
-
-      - run: npx nx run gasp-types:generate-metadata-solochain
-      - run: npx nx run gasp-types:build-types
+      
+      - run: npx nx run gasp-type-definitions:lint
       - run: npx nx run gasp-types:lint
+      - run: npx nx run gasp-sdk:lint
+              
+      #########################################################
+      # Release type definitions
+      #########################################################
+      - name: '[gasp-type-definitions] NPM version bump'
+        working-directory: packages/type-definitions
+        run: |
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
+          npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
+  
+      - name: '[gasp-type-definitions] git add and commit new version'
+        run: |
+          git config user.name mangatafinance
+          git config user.email solutions@mangata.finance
+          git add .
+          git commit -m "chore: updated type definitions to new prerelease version"
+          git push
+  
+      - name: '[gasp-type-definitions] Build type definitions'
+        run: npx nx run gasp-type-definitions:build
+  
+      - name: '[gasp-type-definitions] Publish type definitions to NPM'
+        working-directory: dist/packages/type-definitions
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+  
+          # Branch name sanitization added to avoid issues with npm version command
+          # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
+          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public
 
-      - name: NPM version bump
+      #########################################################
+      # Release types
+      #########################################################
+      - name: '[gasp-types] Generate metadata for solochain'
+        run: npx nx run gasp-types:generate-metadata-solochain
+      - name: '[gasp-types] Build types'
+        run: npx nx run gasp-types:build-types
+      
+      - name: '[gasp-types] NPM version bump'
         working-directory: packages/types
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
-
-      - name: Remove Cloned Repository
+      
+      - name: '[gasp-types] Remove Cloned Repository'
         run: rm -rf mangata-repo
-
-      - name: git add and commit new version
+      
+      - name: '[gasp-types] git add and commit new version'
         run: |
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance
           git add .
           git commit -m "chore: updated to new prerelease version"
           git push origin ${{ env.INPUTS_BRANCH }}
-
-      - name: Build types
+      
+      - name: '[gasp-types] Build types'
         run: npx nx run gasp-types:build
-
-      - name: Publish to NPM
+      
+      - name: '[gasp-types] Publish to NPM'
         working-directory: dist/packages/types
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -170,97 +167,64 @@ jobs:
           
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
-          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public 
+          npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public
 
-  release-sdk:
-    runs-on: ubuntu-latest
-    needs: [release-type-definitions, release-types]
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
-
-      - uses: nrwl/nx-set-shas@v4
-
-      - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "npm"
-          cache-dependency-path: "package-lock.json"
-
-      - name: Type definitions version for branch
+      #########################################################
+      # Release sdk
+      #########################################################
+      - name: '[gasp-sdk] Type definitions version for branch'
         run: |
           branchTypeDefinitionsVersion=$(npm show gasp-type-definitions dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
           echo "BRANCH_TYPE_DEFINITIONS_VERSION=$branchTypeDefinitionsVersion" >> $GITHUB_ENV
-
-      - name: Types version for branch
+      
+      - name: '[gasp-sdk] Types version for branch'
         run: |
           branchTypesVersion=$(npm show gasp-types dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
           echo "BRANCH_TYPES_VERSION=$branchTypesVersion" >> $GITHUB_ENV
-
-      - name: Update types dependency version
+      
+      - name: '[gasp-sdk] Update types dependency version'
         working-directory: packages/sdk
         run: |
           sed -i "s/\"gasp-types\": \".*\"/\"gasp-types\": \"${{env.BRANCH_TYPES_VERSION}}\"/" package.json
-
-      - name: Update type definitions dependency version
+      
+      - name: '[gasp-sdk] Update type definitions dependency version'
         working-directory: packages/sdk
         run: |
           sed -i "s/\"gasp-type-definitions\": \".*\"/\"gasp-type-definitions\": \"${{env.BRANCH_TYPE_DEFINITIONS_VERSION}}\"/" package.json
-
-      - run: npm i
-
-      - run: npx nx run gasp-sdk:lint
-
-      - name: NPM version bump
+      
+      - name: '[gasp-sdk] NPM version bump'
         working-directory: packages/sdk
         run: |
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm version prerelease --preid="$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')"
-
-      - name: git add and commit new version
+      
+      - name: '[gasp-sdk] git add and commit new version'
         run: |
           git config user.name mangatafinance
           git config user.email solutions@mangata.finance 
           git add .
           git commit -m "chore: updated sdk to new prerelease version"
           git push
-
-      - name: Build sdk
+      
+      - name: '[gasp-sdk] Build sdk'
         run: npx nx run gasp-sdk:build
-
-      - name: Publish to NPM
+      
+      - name: '[gasp-sdk] Publish to NPM'
         working-directory: dist/packages/sdk
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
-
+      
           # Branch name sanitization added to avoid issues with npm version command
           # Example `ci/new-branch-1.0.0` -> `ci-new-branch-1-0-0`
           npm publish --tag "$(echo "${INPUTS_BRANCH}" | sed -E 's@[/\.]@-@g; s@_@-@g')" --access public
 
-  show-versions:
-    runs-on: ubuntu-latest
-    needs: [release-sdk, release-type-definitions, release-types]
-    outputs:
-      type-definitions-version: ${{ steps.show-versions.outputs.type-definitions-version }}
-      types-version: ${{ steps.show-versions.outputs.types-version }}
-      sdk-version: ${{ steps.show-versions.outputs.sdk-version }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
-      - name: Setup Node version and cache dependencies
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "npm"
-          cache-dependency-path: "package-lock.json"
-
-      - name: Show released versions
+      #########################################################
+      # Show released versions
+      #########################################################
+      - name: '[gasp-sdk] Show released versions'
         id: show-versions
         run: |
           echo "Version of gasp-type-definitions:"
@@ -277,7 +241,7 @@ jobs:
           SDK_VERSION=$(npm show gasp-sdk dist-tags."$(echo "${{ env.INPUTS_BRANCH  }}" | sed -E 's@[/\.]@-@g; s@_@-@g')")
           echo $SDK_VERSION
           echo "sdk-version=$SDK_VERSION" >> $GITHUB_OUTPUT
-
+      
           echo "## Released Versions" >> $GITHUB_STEP_SUMMARY
           echo "- gasp-type-definitions: $TYPE_DEF_VERSION" >> $GITHUB_STEP_SUMMARY
           echo "- gasp-types: $TYPES_VERSION" >> $GITHUB_STEP_SUMMARY
