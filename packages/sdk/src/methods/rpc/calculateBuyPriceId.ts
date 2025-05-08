@@ -18,10 +18,18 @@ export const calculateBuyPriceId = async (
     amount: amount.toString()
   });
   const api = await instancePromise;
-  const price = await api.rpc.xyk.calculate_buy_price_id(
-    soldTokenId,
+  let asset = (await api.query.xyk.liquidityAssets([soldTokenId, boughtTokenId]));
+  let pool = asset.isSome ? asset : (await api.query.xyk.liquidityAssets([boughtTokenId, soldTokenId]));
+
+  if (pool.isNone) {
+    throw new Error(`Pool does not exist for the specified token IDs: soldTokenId=${soldTokenId}, boughtTokenId=${boughtTokenId}.`);
+  }
+
+  let price = await api.rpc.market.calculate_buy_price(
+    pool.unwrap(),
     boughtTokenId,
     amount
   );
-  return new BN(price);
+
+  return new BN(price.unwrap());
 };
