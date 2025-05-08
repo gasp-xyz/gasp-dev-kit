@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-feature-gasp-node-multiswap-mods.43",
+  "version": "0.0.2-feature-gasp-node-multiswap-mods.44",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
