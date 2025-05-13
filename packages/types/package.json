@@ -1,6 +1,6 @@
 {
   "name": "gasp-types",
-  "version": "0.0.2-eth-rollup-develop.257",
+  "version": "0.0.2-chore-change-sonic-url-from-alchemy-to-tenderly.0",
   "description": "Polkadot.js type definitions for GASP Network",
   "author": "Gasp <solutions@gasp.xyz>",
   "repository": {
