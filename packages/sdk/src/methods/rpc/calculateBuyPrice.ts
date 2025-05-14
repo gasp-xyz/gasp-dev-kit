@@ -15,8 +15,23 @@ export const calculateBuyPrice = async (
     outputReserve: args.outputReserve.toString(),
     amount: args.amount.toString()
   });
-  const api = await instancePromise;
   const { inputReserve, outputReserve, amount } = args;
-  const price = await api.rpc.xyk.calculate_buy_price(inputReserve, outputReserve, amount)
-  return new BN(price);
+  try {
+    const afterFeePercentage = new BN(9970)
+    const inputReserveBN = new BN(inputReserve);
+    const output_reserve_saturated = new BN(outputReserve);
+    const buyAmountBN = new BN(amount);
+
+    const numerator = inputReserveBN.mul(buyAmountBN).muln(10000);
+    const denominator = output_reserve_saturated.sub(buyAmountBN).mul(afterFeePercentage);
+    const result = numerator.div(denominator).addn(1);
+    return result;
+  } catch (e) {
+    if (e instanceof Error) {
+        logger.warn(`calculateBuyPrice math error - returning default value. Error: ${e.message}`);
+    } else {
+        logger.warn('calculateBuyPrice math error - returning default value. Unknown error type.');
+    }
+    return new BN(0);
+  }
 };
