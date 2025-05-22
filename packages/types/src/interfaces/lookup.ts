@@ -1830,7 +1830,11 @@ export default {
         assetIdOut: 'u32',
         assetAmountOut: 'u128',
         assetIdIn: 'u32',
-        maxAmountIn: 'u128'
+        maxAmountIn: 'u128',
+      },
+      stable_swap_update_eq_assets: {
+        assetId: 'u32',
+        eqAssetsUpdate: 'Vec<(u32,bool)>'
       }
     }
   },

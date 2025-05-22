@@ -2025,7 +2025,12 @@ declare module '@polkadot/types/lookup' {
       readonly assetIdIn: u32;
       readonly maxAmountIn: u128;
     } & Struct;
-    readonly type: 'CreatePool' | 'MintLiquidity' | 'MintLiquidityFixedAmounts' | 'MintLiquidityUsingVestingNativeTokensByVestingIndex' | 'MintLiquidityUsingVestingNativeTokens' | 'BurnLiquidity' | 'MultiswapAsset' | 'MultiswapAssetBuy';
+    readonly isStableSwapUpdateEqAssets: boolean;
+    readonly asStableSwapUpdateEqAssets: {
+      readonly assetId: u32;
+      readonly eqAssetsUpdate: Vec<ITuple<[u32, bool]>>;
+    } & Struct;
+    readonly type: 'CreatePool' | 'MintLiquidity' | 'MintLiquidityFixedAmounts' | 'MintLiquidityUsingVestingNativeTokensByVestingIndex' | 'MintLiquidityUsingVestingNativeTokens' | 'BurnLiquidity' | 'MultiswapAsset' | 'MultiswapAssetBuy' | 'StableSwapUpdateEqAssets';
   }
 
   /** @name ParachainStakingCall (187) */
