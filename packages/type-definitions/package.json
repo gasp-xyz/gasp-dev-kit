@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-eth-rollup-develop.276",
+  "version": "0.0.2-chore-move-non-sensitive-to-app-file.0",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
