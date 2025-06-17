@@ -1,6 +1,6 @@
 {
   "name": "gasp-sdk",
-  "version": "0.0.2-eth-rollup-develop.278",
+  "version": "0.0.2-eth-rollup-develop.279",
   "description": "GASP SDK",
   "type": "module",
   "module": "./index.js",
@@ -23,10 +23,10 @@
     "@polkadot/api": "^11.1.1"
   },
   "devDependencies": {
-    "gasp-types": "0.0.2-eth-rollup-develop.277"
+    "gasp-types": "0.0.2-eth-rollup-develop.278"
   },
   "dependencies": {
-    "gasp-type-definitions": "0.0.2-eth-rollup-develop.282",
+    "gasp-type-definitions": "0.0.2-eth-rollup-develop.283",
     "big.js": "6.2.1",
     "tslib": "^2.3.0",
     "tslog": "4.8.2",
