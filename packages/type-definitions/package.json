@@ -1,6 +1,6 @@
 {
   "name": "gasp-type-definitions",
-  "version": "0.0.2-eth-rollup-develop.284",
+  "version": "0.0.2-feature-revert-key-changes.0",
   "description": "Type definitions for Gasp",
   "repository": {
     "type": "git",
